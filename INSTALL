@@ -1,0 +1,29 @@
+Transmogrify uses the cmake cross platform build system.
+Follow the instructions on `http://www.cmake.org` to install cmake.
+
+- Go to the build directory:
+
+    cd build
+
+- Use cmake to generate platform specific Makefile's.
+
+    cmake ../
+
+- Build the library.
+
+    make
+
+- Install the library.
+
+    make install
+
+To use the library use the include statement
+
+    #include <tmf>
+
+and add the following flag to your compiler/linker when building.
+
+    -ltmf
+
+Note that all functions are part of the `tmf` namespace.
+

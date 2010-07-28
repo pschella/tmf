@@ -1,0 +1,26 @@
+############################################################################
+#                                                                          #
+#                               TRANSMOGRIFY,                              #
+#                                                                          #
+#      a library for astronomical coordinate and time transformations.     #
+#                                                                          #
+############################################################################
+
+Transmogrify is a fast, accurate and easy to use C/C++ library for
+astronomical coordinate and time transformations.
+
+Currently implemented are functions to:
+
+* Convert between angles in degrees, radians and h, m, s notations.
+* Convert between dates in the Julian or Gregorian calendar and Julian days.
+* General purpose coordinate transformations, e.g. Cartesian, polar,
+  spherical and cylindrical.
+* Calculate nutation and obliquity of the ecliptic.
+* Calculate sidereal time (GMST, GAST and LAST).
+* Convert between equatorial and horizontal coordinates.
+
+Transmogrify is an Open Source project covered by the GNU General Public
+License. It was originally written by Pim Schellart.
+
+Please read the file INSTALL for installation instructions.
+

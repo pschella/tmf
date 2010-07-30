@@ -28,54 +28,71 @@
 // FORWARD REFERENCES
 //
 
-using namespace tmf;
 using namespace std;
 
 /*!
   \brief Conversion of equatorial coordinates to horizontal coordinates.
 
-  \param H hour angle
-  \param delta declination
-  \param a altitude
-  \param A azimuth
-  \param phi geographic latitude
+  Direct implementation of the method described in chapter 13 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  \param A azimuth, measured westward from the south
+  \param h altitude, positive above the horizon, negative below
+  \param H hour angle (e.g. last - alpha where alpha is the right ascension
+         and last the local apparent siderial time)
+  \param delta declination, positive if north of the celestial equator,
+         negative if south
+  \param observer's latitude, positive if in the northern hemisphere,
+         negative in the southern one
  */
-void horizontal2equatorial(double &H, double &delta,
-    const double &a, const double &A,
-    const double &phi)
+void tmf::horizontal2equatorial(double& A, double& h,
+    const double& H, const double& delta, const double& phi)
 {
+  const double sH = sin(H);
+  const double cH = cos(H);
+  const double sd = sin(delta);
+  const double cd = cos(delta);
+  const double td = tan(delta);
   const double sp = sin(phi);
   const double cp = cos(phi);
-  const double sa = sin(a);
-  const double ca = cos(a);
-  const double sA = sin(a);
-  const double cA = cos(a);
 
-  delta = asin(sp * sa - cp * ca * cA);
-  H = asin(-sA * ca / cos(delta));
+  A = atan(sH / (cH * sp - td * cp));
+
+  h = asin(sp * sd + cp * cd * cH);
 }
 
 /*!
   \brief Conversion of equatorial coordinates to horizontal coordinates.
 
-  \param a altitude
-  \param A azimuth
-  \param H hour angle
-  \param delta declination
-  \param phi geographic latitude
+  Direct implementation of the method described in chapter 13 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  \param H hour angle (e.g. last - alpha where alpha is the right ascension
+         and last the local apparent siderial time)
+  \param delta declination, positive if north of the celestial equator,
+         negative if south
+  \param A azimuth, measured westward from the south
+  \param h altitude, positive above the horizon, negative below
+  \param observer's latitude, positive if in the northern hemisphere,
+         negative in the southern one
  */
-void equatorial2horizontal(double &a, double &A,
-    const double &H, const double &delta,
-    const double &phi)
+void tmf::equatorial2horizontal(double& H, double& delta,
+    const double& A, const double& h, const double& phi)
 {
+  const double sA = sin(A);
+  const double cA = cos(A);
   const double sp = sin(phi);
   const double cp = cos(phi);
-  const double sd = sin(delta);
-  const double cd = cos(delta);
-  const double sH = sin(H);
-  const double cH = cos(H);
+  const double sh = sin(h);
+  const double ch = cos(h);
+  const double th = tan(h);
 
-  a = asin(sp * sd + cp * cd * cH);
-  A = asin(-cd * sH / cos(a));
+  H = atan(sA / (cA * sp + th * cp));
+
+  delta = asin(sp * sh - cp * ch * cA);
 }
 

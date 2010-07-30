@@ -30,44 +30,13 @@
 
 using namespace std;
 
-/*!
-  \brief Converts spherical coordinates to Cartesian coordinates
-
-  \param x x-coordinate
-  \param y y-coordinate
-  \param z z-coordinate
-  \param rho radius
-  \param theta inclination angle from z-axis
-  \param phi azimuth angle from x-axis
- */
-void tmf::spherical2cartesian(double& x, double& y, double& z,
-    const double& rho, const double& theta, const double& phi)
+void tmf::jd2mjd(double& mjd, const double& jd)
 {
-  const double st = sin(theta);
-  const double ct = cos(theta);
-  const double sp = sin(phi);
-  const double cp = cos(phi);
-
-  x = rho * st * cp;
-  y = rho * st * sp;
-  z = rho * cp;
+  mjd = jd - 2440000.5;
 }
 
-/*!
-  \brief Converts Cartesian coordinates to spherical coordinates
-
-  \param rho radius
-  \param theta inclination angle from z-axis
-  \param phi azimuth angle from x-axis
-  \param x x-coordinate
-  \param y y-coordinate
-  \param z z-coordinate
- */
-void tmf::cartesian2spherical(double& rho, double& theta, double& phi,
-    const double& x, const double& y, const double& z)
+void tmf::mjd2jd(double& jd, const double& mjd)
 {
-  rho = sqrt(x*x + y*y + z*z);
-  theta = acos(z/rho);
-  phi = atan2(y,x);
+  jd = mjd + 2440000.5;
 }
 

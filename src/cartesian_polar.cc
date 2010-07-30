@@ -28,7 +28,6 @@
 // FORWARD REFERENCES
 //
 
-using namespace tmf;
 using namespace std;
 
 /*!
@@ -39,8 +38,8 @@ using namespace std;
   \param r radius
   \param theta angle with x-axis
  */
-void polar2cartesian(double &x, double &y,
-    const double &r, const double &theta)
+void tmf::polar2cartesian(double& x, double& y,
+    const double& r, const double& theta)
 {
   x = r * cos(theta);
   y = r * sin(theta);
@@ -54,8 +53,8 @@ void polar2cartesian(double &x, double &y,
   \param x x-coordinate
   \param y y-coordinate
  */
-void cartesian2polar(double &r, double &theta,
-    const double &x, const double &y)
+void tmf::cartesian2polar(double& r, double& theta,
+    const double& x, const double& y)
 {
   r = sqrt(x*x + y*y);
   theta = atan2(y, x);

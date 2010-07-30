@@ -33,20 +33,65 @@
 
 namespace tmf
 {
-  void gregoriandate2jd(double &jd, const int &y, const int &m, const double &d);
+  /* angles.cc */
+  double hms2deg(const int& h, const int& m, const double& s);
 
-  void juliandate2jd(double &jd, const int &y, const int &m, const double &d);
+  double dms2deg(const int& d, const int& am, const double& as);
 
-  void date2jd(double &jd, const int &y, const int &m, const double &d);
+  void deg2hms(int& h, int& m, double& s, const double& d);
 
-  void jd2date(int &y, int &m, double &d, const double &jd);
+  void deg2dms(int& d, int& m, double& s, const double& d);
 
+  /* cartesian_logpolar.cc */
+  void logpolar2cartesian(double& x, double& y, const double& rho, const double& theta);
 
-  /* Inline functions */
+  void cartesian2logpolar(double& rho, double& theta, const double& x, const double& y);
 
-  inline void jd2mjd(double &mjd, const double &jd) { mjd = jd - 2440000.5; };
+  /* cartesian_polar.cc */
+  void polar2cartesian(double& x, double& y, const double& r, const double& theta);
 
-  inline void mjd2jd(double &jd, const double &mjd) { jd = mjd + 2440000.5; };
+  void cartesian2polar(double& r, double& theta, const double& x, const double& y);
+
+  /* cartesian_spherical.cc */
+  void spherical2cartesian(double& x, double& y, double& z, const double& rho, const double& theta, const double& phi);
+
+  void cartesian2spherical(double& rho, double& theta, double& phi, const double& x, const double& y, const double& z);
+
+  /* cylindrical_spherical.cc */
+  void spherical2cylindrical(double r, double h, const double& rho, const double& phi);
+
+  void spherical2cylindrical(double& rho, double& phi, const double& r, const double& h);
+
+  /* equatorial_horizontal.cc */
+  void horizontal2equatorial(double& A, double& h, const double& H, const double& delta, const double& phi);
+
+  void equatorial2horizontal(double& H, double& delta, const double& A, const double& h, const double& phi);
+
+  /* jd_date.cc */
+  double gregoriandate2jd(const int& y, const int& m, const double& d);
+
+  double juliandate2jd(const int& y, const int& m, const double& d);
+
+  double date2jd(const int& y, const int& m, const double& d);
+
+  void jd2date(int& y, int& m, double& d, const double& jd);
+
+  /* jd_mjd.cc */
+  void jd2mjd(double& mjd, const double& jd);
+
+  void mjd2jd(double& jd, const double& mjd);
+
+  /* nutation.cc */
+  void nutation(double& Dphi, double& Depsilon, const double& jde);
+
+  double meanobliquity(const double& jde);
+
+  /* sidereal_time.cc */
+  double gmst(const double& jd);
+
+  double gast(const double& jd, const double& jde);
+
+  double last(const double& jd, const double& jde, const double& L);
 } // End tmf
 
 #endif // TMF_H

@@ -28,7 +28,6 @@
 // FORWARD REFERENCES
 //
 
-using namespace tmf;
 using namespace std;
 
 /*!
@@ -39,8 +38,8 @@ using namespace std;
   \param rho radius
   \param theta angle with x-axis
  */
-void logpolar2cartesian(double &x, double &y,
-    const double &rho, const double &theta)
+void tmf::logpolar2cartesian(double& x, double& y,
+    const double& rho, const double& theta)
 {
   x = exp(rho) * cos(theta);
   y = exp(rho) * sin(theta);
@@ -54,8 +53,8 @@ void logpolar2cartesian(double &x, double &y,
   \param x x-coordinate
   \param y y-coordinate
  */
-void cartesian2logpolar(double &rho, double &theta,
-    const double &x, const double &y)
+void tmf::cartesian2logpolar(double& rho, double& theta,
+    const double& x, const double& y)
 {
   rho = log(sqrt(x*x + y*y));
   theta = atan(x / y);

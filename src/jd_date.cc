@@ -30,16 +30,18 @@
 //
 
 using namespace std;
+using namespace tmf;
 
 /*!
   \brief Convert date in Gregorian calendar to Julian day.
 
-  \param jd Julian day
+  \return jd Julian day
+
   \param y year
   \param m month
   \param d day (with fraction)
  */
-void tmf::gregoriandate2jd(double &jd, const int &y, const int &m, const double &d)
+double tmf::gregoriandate2jd(const int& y, const int& m, const double& d)
 {
   int Y;
   int M;
@@ -58,18 +60,19 @@ void tmf::gregoriandate2jd(double &jd, const int &y, const int &m, const double 
   int a = int(Y / 100);
   int b = 2-a+int(a/4);
 
-  jd = int(365.25 * (Y + 4716)) + int(30.6001 * (M + 1)) + d + b - 1524.5;
+  return int(365.25 * (Y + 4716)) + int(30.6001 * (M + 1)) + d + b - 1524.5;
 }
 
 /*!
   \brief Convert date in Julian calendar to Julian day.
 
-  \param jd Julian day
+  \return jd Julian day
+
   \param y year
   \param m month
   \param d day (with fraction)
  */
-void tmf::juliandate2jd(double &jd, const int &y, const int &m, const double &d)
+double tmf::juliandate2jd(const int& y, const int& m, const double& d)
 {
   int Y;
   int M;
@@ -87,48 +90,49 @@ void tmf::juliandate2jd(double &jd, const int &y, const int &m, const double &d)
 
   int a = int(Y / 100);
 
-  jd = int(365.25 * (Y + 4716)) + int(30.6001 * (M + 1)) + d - 1524.5;
+  return int(365.25 * (Y + 4716)) + int(30.6001 * (M + 1)) + d - 1524.5;
 }
 
 /*!
   \brief Convert date in Gregorian or Julian calendar to Julian day.
 
-  \param jd Julian day
+  \return jd Julian day
+
   \param y year
   \param m month
   \param d day (with fraction)
  */
-void tmf::date2jd(double &jd, const int &y, const int &m, const double &d)
+double tmf::date2jd(const int& y, const int& m, const double& d)
 {
   // Gregorian calendar
   if (y > 1582)
   {
-    gregoriandate2jd(jd, y, m, d);
+    return gregoriandate2jd(y, m, d);
   }
   // Julian calendar
   else if (y < 1582)
   {
-    juliandate2jd(jd, y, m, d);
+    return juliandate2jd(y, m, d);
   }
   // Gregorian calendar
   else if (m > 10)
   {
-    gregoriandate2jd(jd, y, m, d);
+    return gregoriandate2jd(y, m, d);
   }
   // Julian calendar
   else if (m < 10)
   {
-    juliandate2jd(jd, y, m, d);
+    return juliandate2jd(y, m, d);
   }
   // Gregorian calendar
   else if (d >= 15)
   {
-    gregoriandate2jd(jd, y, m, d);
+    return gregoriandate2jd(y, m, d);
   }
   // Julian calendar
   else if (d <= 4)
   {
-    juliandate2jd(jd, y, m, d);
+    return juliandate2jd(y, m, d);
   }
   // Invalid date
   else
@@ -145,7 +149,7 @@ void tmf::date2jd(double &jd, const int &y, const int &m, const double &d)
   \param d day (with fraction)
   \param jd Julian day
  */
-void tmf::jd2date(int &y, int &m, double &d, const double &jd)
+void tmf::jd2date(int& y, int& m, double& d, const double& jd)
 {
   int Z, A, alpha, B, C, D, E;
   double JD, F;

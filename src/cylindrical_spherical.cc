@@ -28,7 +28,6 @@
 // FORWARD REFERENCES
 //
 
-using namespace tmf;
 using namespace std;
 
 /*!
@@ -42,8 +41,8 @@ using namespace std;
   \param rho radius
   \param phi azimuth angle from x-axis
  */
-void spherical2cylindrical(double r, double h,
-    const double &rho, const double &phi)
+void tmf::spherical2cylindrical(double r, double h,
+    const double& rho, const double& phi)
 {
   r = rho * sin(phi);
   h = rho * cos(phi);
@@ -60,8 +59,8 @@ void spherical2cylindrical(double r, double h,
   \param r cylindrical radius
   \param h cylindrical height
  */
-void spherical2cylindrical(double &rho, double &phi,
-    const double &r, const double &h)
+void tmf::spherical2cylindrical(double& rho, double& phi,
+    const double& r, const double& h)
 {
   rho = sqrt(r*r + h*h);
   phi = atan(r/h);

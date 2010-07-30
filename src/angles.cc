@@ -18,6 +18,7 @@
 
 // SYSTEM INCLUDES
 #include <cmath>
+#include <iostream>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -31,62 +32,80 @@
 using namespace std;
 
 /*!
-  \brief Convert degrees, arcmin, arcsec to radians
+  \brief Convert hours, min, sec to degrees
 
-  \param r radians
-  \param d degrees
-  \param am arcminutes
-  \param as arcseconds
- */
-void dms2r(double &r, const int &d, const int &am, const double &as)
-{
-  r = (d + (am / 60.) + (as / 3600.)) * (M_PI / 180.);
-}
-
-/*!
-  \brief Convert radians to degrees, arcmin, arcsec
-
-  \param d degrees
-  \param am arcminutes
-  \param as arcseconds
-  \param r radians
- */
-void dms2r(int &d, int &am, double &as, double &r)
-{
-  const double D = r * (180. / M_PI);
-
-  d = int(D);
-  am = int((D - d) * 60);
-  as = (D - d - (am / 60.)) * 3600.;
-}
-
-/*!
-  \brief Convert hours, min, sec to radians
-
-  \param r radians
-  \param h degrees
-  \param m minutes
-  \param s seconds
- */
-void hms2r(double &r, const int &h, const int &m, const double &s)
-{
-  r = (h + m * 60. + s * 3600.) * (M_PI / 12.);
-}
-
-/*!
-  \brief Convert radians to hours, min, sec
+  \return deg degrees
 
   \param h degrees
   \param m minutes
   \param s seconds
-  \param r radians
  */
-void hms2r(int &h, int &m, double &s, double &r)
+double tmf::hms2deg(const int& h, const int& m, const double& s)
 {
-  const double H = r * (12. / M_PI);
+  return (h + m / 60. + s / 3600.) * (180. / 12.);
+}
+
+/*!
+  \brief Convert degrees, arcmin, arcsec to degrees
+
+  \return deg degrees
+
+  \param d degrees
+  \param am arcminutes
+  \param as arcseconds
+ */
+double tmf::dms2deg(const int& d, const int& am, const double& as)
+{
+  if (d >= 0)
+  {
+    return (d + (am / 60.) + (as / 3600.));
+  }
+  else
+  {
+    return (d - (am / 60.) - (as / 3600.));
+  }
+}
+
+/*!
+  \brief Convert degrees to hours, min, sec
+
+  Note, angles outside of the range [0, 360) are projected onto this range.
+
+  \param h hour
+  \param m minutes
+  \param s seconds
+  \param d degrees
+ */
+void tmf::deg2hms(int& h, int& m, double& s, const double& d)
+{
+  // Make sure D = [0, 360)
+  const double D = (d >= 0 ? fmod(d, 360.) : 360. + fmod(d, 360.));
+  const double H = D * 12. / 180.;
 
   h = int(H);
-  m = int((H - h) * 60);
+  m = int((H - h) * 60.);
   s = (H - h - (m / 60.)) * 3600.;
+}
+
+/*!
+  \brief Convert degrees to degrees, min, sec
+
+  Note, angles outside of the range [0, 360) are projected onto this range.
+
+  \param h hour
+  \param m minutes
+  \param s seconds
+  \param d degrees
+ */
+void tmf::deg2dms(int& d, int& m, double& s, const double& deg)
+{
+  const double D = abs(fmod(deg, 360.));
+  const int sgn = (deg >= 0) ? 1 : -1;
+
+  d = int(D);
+  m = int((D - d) * 60.);
+  s = (D - d - (m / 60.)) * 3600.;
+
+  d *= sgn;
 }
 

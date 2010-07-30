@@ -16,7 +16,7 @@ int main()
 
   std::cout<<"Y "<<y<<" M "<<m<<" D "<<d<<std::endl;
 
-  date2jd(jd, y, m, d);
+  jd = date2jd(y, m, d);
 
   std::cout.precision(9);
 

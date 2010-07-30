@@ -43,28 +43,28 @@ using namespace std;
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-void tmf::nutation(double Dphi, double Depsilon, const double jde)
+void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
 {
-  double arg = 0;
+  double arg = 0.0;
   const double T = (jde - 2451545.) / 36525.;
   const double T2 = T * T;
   const double T3 = T * T2;
 
   // Mean elongation of the Moon from the Sun
-  const double D = 297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.;
+  const double D = (297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.) * M_PI / 180.;
 
   // Mean anomaly of the Sun (Earth)
-  const double M = 357.52772 + 35999.050340 * T - 0.0001603 * T2 + T3 / 300000.;
+  const double M = (357.52772 + 35999.050340 * T - 0.0001603 * T2 + T3 / 300000.) * M_PI / 180.;
 
   // Mean anomaly of the Moon
-  const double Mm = 134.96298 + 477198.867398 * T - 0.0086972 * T2 + T3 / 56250.;
+  const double Mm = (134.96298 + 477198.867398 * T - 0.0086972 * T2 + T3 / 56250.) * M_PI / 180.;
 
   // Moon's argument of latitude
-  const double F = 93.27191 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.;
+  const double F = (93.27191 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.) * M_PI / 180.;
 
   /* Longitude of the ascending node of the Moon's mean orbit on the
      ecliptic, measured from the mean equinox of the date */
-  const double Omega = 125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.;
+  const double Omega = (125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.) * M_PI / 180.;
 
   /* Argument for trigonometric functions in terms of 
      multiples of D, M, Md, F, Omega */
@@ -227,13 +227,14 @@ void tmf::nutation(double Dphi, double Depsilon, const double jde)
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
-  \param epsilon_0 mean obliquity of the ecliptic
+  \return epsilon_0 mean obliquity of the ecliptic in seconds of arc
+
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-void tmf::meanobliquity(double epsilon_0, const double jde)
+double tmf::meanobliquity(const double& jde)
 {
-  epsilon_0 = 23. + (26. / 60.) + (21.448 / 3600.);
+  double epsilon_0 = (23. * 3600.) + (26. * 60.) + 21.448;
 
   const double T = (jde - 2451545.) / 36525.;
   const double U = T / 100;
@@ -258,5 +259,7 @@ void tmf::meanobliquity(double epsilon_0, const double jde)
     Ufac *= U;
     epsilon_0 += a[i]*Ufac;
   }
+
+  return epsilon_0;
 }
 

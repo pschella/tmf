@@ -31,6 +31,10 @@
 // FORWARD REFERENCES
 //
 
+// MACROS
+#define DEG2RAD(A) (A)*(M_PI/180.)
+#define RAD2DEG(A) (A)*(180./M_PI)
+
 namespace tmf
 {
   /* angles.cc */
@@ -63,9 +67,9 @@ namespace tmf
   void spherical2cylindrical(double& rho, double& phi, const double& r, const double& h);
 
   /* equatorial_horizontal.cc */
-  void horizontal2equatorial(double& A, double& h, const double& H, const double& delta, const double& phi);
+  void equatorial2horizontal(double& A, double& h, const double& H, const double& delta, const double& phi);
 
-  void equatorial2horizontal(double& H, double& delta, const double& A, const double& h, const double& phi);
+  void horizontal2equatorial(double& H, double& delta, const double& A, const double& h, const double& phi);
 
   /* jd_date.cc */
   double gregoriandate2jd(const int& y, const int& m, const double& d);

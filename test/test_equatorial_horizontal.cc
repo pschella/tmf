@@ -62,5 +62,28 @@ int main()
   cout.precision(5);
   cout << s << endl;
 
+  // Calculate Local Apparant Sidereal Time
+  double theta_L = last(ut, tt, L);
+  deg2hms(h, m, s, theta_L);
+
+  cout << h << " " << m << " " << s << endl;
+
+  deg2hms(h, m, s, alpha);
+
+  cout << h << " " << m << " " << s << endl;
+
+  double H = fmod(theta_L - alpha, 360);
+  H += 360;
+
+  cout.precision(9);
+  cout << "H " << H << endl;
+
+  // Calculate Altitude and Azimuth
+  double A = 0.;
+  double h2 = 0.;
+  equatorial2horizontal(A, h2, DEG2RAD(H), DEG2RAD(delta), DEG2RAD(phi));
+
+  cout.precision(5);
+  cout << "A " << RAD2DEG(A) << " h " << RAD2DEG(h2) << endl;
 }
 

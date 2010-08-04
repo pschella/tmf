@@ -47,7 +47,7 @@ using namespace std;
   \param observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf::horizontal2equatorial(double& A, double& h,
+void tmf::equatorial2horizontal(double& A, double& h,
     const double& H, const double& delta, const double& phi)
 {
   const double sH = sin(H);
@@ -80,7 +80,7 @@ void tmf::horizontal2equatorial(double& A, double& h,
   \param observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf::equatorial2horizontal(double& H, double& delta,
+void tmf::horizontal2equatorial(double& H, double& delta,
     const double& A, const double& h, const double& phi)
 {
   const double sA = sin(A);

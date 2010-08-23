@@ -63,17 +63,18 @@ int main()
   cout << s << endl;
 
   // Calculate Local Apparant Sidereal Time
-  double theta_L = last(ut, tt, L);
+  double theta_L = fmod(last(ut, tt, L), 360);
+  theta_L = theta_L < 0 ? theta_L + 360 : theta_L;
   deg2hms(h, m, s, theta_L);
 
-  cout << h << " " << m << " " << s << endl;
+  cout << "LAST " << h << " " << m << " " << s << endl;
 
   deg2hms(h, m, s, alpha);
 
   cout << h << " " << m << " " << s << endl;
 
-  double H = fmod(theta_L - alpha, 360);
-  H += 360;
+  double H = theta_L - alpha;
+  H = H < 0 ? H + 360 : H;
 
   cout.precision(9);
   cout << "H " << H << endl;
@@ -81,9 +82,22 @@ int main()
   // Calculate Altitude and Azimuth
   double A = 0.;
   double h2 = 0.;
-  equatorial2horizontal(A, h2, DEG2RAD(H), DEG2RAD(delta), DEG2RAD(phi));
+  equatorial2horizontal(A, h2, deg2rad(H), deg2rad(delta), deg2rad(phi));
 
   cout.precision(5);
-  cout << "A " << RAD2DEG(A) << " h " << RAD2DEG(h2) << endl;
+  cout << "A " << rad2deg(A) << " h " << rad2deg(h2) << endl;
+
+  // Test the inverse transformations
+  horizontal2equatorial(H, delta, A, h2, deg2rad(phi));
+
+  cout.precision(9);
+  cout << "H " << rad2deg(H) << endl;
+
+  alpha = theta_L - rad2deg(H);
+  alpha = alpha < 0 ? alpha + 360 : alpha;
+
+  delta = rad2deg(delta);
+
+  cout << "alpha " << alpha << " delta " << delta << endl;
 }
 

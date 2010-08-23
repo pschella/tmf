@@ -31,12 +31,13 @@
 // FORWARD REFERENCES
 //
 
-// MACROS
-#define DEG2RAD(A) (A)*(M_PI/180.)
-#define RAD2DEG(A) (A)*(180./M_PI)
-
 namespace tmf
 {
+  /* inlines (for increased speed) */
+  inline double deg2rad(const double& a) { return a * M_PI / 180; };
+
+  inline double rad2deg(const double& a) { return a * 180 / M_PI; };
+
   /* angles.cc */
   double hms2deg(const int& h, const int& m, const double& s);
 
@@ -45,6 +46,14 @@ namespace tmf
   void deg2hms(int& h, int& m, double& s, const double& d);
 
   void deg2dms(int& d, int& m, double& s, const double& d);
+
+  double hms2rad(const int& h, const int& m, const double& s);
+  
+  double dms2rad(const int& d, const int& am, const double& as);
+
+  void rad2hms(int& h, int& m, double& s, const double& r);
+
+  void rad2dms(int& d, int& m, double& s, const double& r);
 
   /* cartesian_logpolar.cc */
   void logpolar2cartesian(double& x, double& y, const double& rho, const double& theta);

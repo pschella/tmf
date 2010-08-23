@@ -92,15 +92,87 @@ void tmf::deg2hms(int& h, int& m, double& s, const double& d)
 
   Note, angles outside of the range [0, 360) are projected onto this range.
 
-  \param h hour
+  \param d degrees
   \param m minutes
   \param s seconds
-  \param d degrees
+  \param deg degrees
  */
 void tmf::deg2dms(int& d, int& m, double& s, const double& deg)
 {
   const double D = abs(fmod(deg, 360.));
   const int sgn = (deg >= 0) ? 1 : -1;
+
+  d = int(D);
+  m = int((D - d) * 60.);
+  s = (D - d - (m / 60.)) * 3600.;
+
+  d *= sgn;
+}
+
+/*!
+  \brief Convert hours, min, sec to radians
+
+  \return rad radians
+
+  \param h radians
+  \param m minutes
+  \param s seconds
+ */
+double tmf::hms2rad(const int& h, const int& m, const double& s)
+{
+  return (h + m / 60. + s / 3600.) * (M_PI / 12.);
+}
+
+/*!
+  \brief Convert degrees, arcmin, arcsec to radians
+
+  \return rad radians
+
+  \param d degrees
+  \param am arcminutes
+  \param as arcseconds
+ */
+double tmf::dms2rad(const int& d, const int& am, const double& as)
+{
+  if (d >= 0)
+  {
+    return deg2rad((d + (am / 60.) + (as / 3600.)));
+  }
+  else
+  {
+    return deg2rad((d - (am / 60.) - (as / 3600.)));
+  }
+}
+
+/*!
+  \brief Convert radians to hours, min, sec
+
+  \param h hour
+  \param m minutes
+  \param s seconds
+  \param r radians
+ */
+void tmf::rad2hms(int& h, int& m, double& s, const double& r)
+{
+  const double H = r * 12. / M_PI;
+
+  h = int(H);
+  m = int((H - h) * 60.);
+  s = (H - h - (m / 60.)) * 3600.;
+}
+
+/*!
+  \brief Convert radians to degrees, min, sec
+
+  \param d radians
+  \param m minutes
+  \param s seconds
+  \param r radians
+ */
+void tmf::rad2dms(int& d, int& m, double& s, const double& r)
+{
+  const double D = abs(rad2deg(r));
+  const int sgn = (r >= 0) ? 1 : -1;
 
   d = int(D);
   m = int((D - d) * 60.);

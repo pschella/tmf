@@ -4,17 +4,20 @@ project (TMF)
 ## Minimum required version of CMake to configure the project
 cmake_minimum_required (VERSION 2.8)
 
-## list of source files
+## List of source files
 FILE (GLOB tmf_sources src/*.cc)
 
-## list of header files
+## List of header files
 FILE (GLOB tmf_headers src/*.h)
 
 ## Includes
 include_directories (src)
 
-## build the library
-add_library (tmf ${tmf_sources})
+## Build the library
+add_library (tmf SHARED ${tmf_sources})
+
+## Library versioning
+set_target_properties (tmf PROPERTIES VERSION 1.0)
 
 ## Install libray
 install (TARGETS tmf
@@ -27,7 +30,7 @@ install (FILES ${tmf_headers}
   )
 
 ## Tests
-option (BUILD_TESTS "Build tests" NO)
+option (BUILD_TESTS "Build tests" YES)
 
 if (BUILD_TESTS)
     add_subdirectory (test)

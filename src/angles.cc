@@ -18,7 +18,6 @@
 
 // SYSTEM INCLUDES
 #include <cmath>
-#include <iostream>
 
 // PROJECT INCLUDES
 #include <tmf.h>

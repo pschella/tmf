@@ -20,6 +20,7 @@
 #define TMF_H
 
 // SYSTEM INCLUDES
+#include <exception>
 #include <cmath>
 
 // PROJECT INCLUDES
@@ -33,6 +34,11 @@
 
 namespace tmf
 {
+  /* exception handling */
+  class Error : public std::exception {};
+
+  class InputError : public Error {};
+  
   /* inlines (for increased speed) */
   inline double deg2rad(const double& a) { return a * M_PI / 180; };
 

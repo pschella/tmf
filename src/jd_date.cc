@@ -18,7 +18,6 @@
 
 // SYSTEM INCLUDES
 #include <cmath>
-#include <iostream>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -137,7 +136,7 @@ double tmf::date2jd(const int& y, const int& m, const double& d)
   // Invalid date
   else
   {
-    cerr<<"Invalid date"<<endl;
+    throw (InputError());
   }
 }
 

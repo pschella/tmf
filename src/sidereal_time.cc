@@ -17,7 +17,6 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <iostream>
 #include <cmath>
 
 // PROJECT INCLUDES

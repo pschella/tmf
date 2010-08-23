@@ -30,7 +30,7 @@ install (FILES ${tmf_headers}
   )
 
 ## Tests
-option (BUILD_TESTS "Build tests" YES)
+option (BUILD_TESTS "Build tests" NO)
 
 if (BUILD_TESTS)
     add_subdirectory (test)

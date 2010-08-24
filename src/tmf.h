@@ -61,6 +61,10 @@ namespace tmf
 
   void rad2dms(int& d, int& m, double& s, const double& r);
 
+  double rad2circle(const double& phi);
+
+  double deg2circle(const double& phi);
+
   /* cartesian_logpolar.cc */
   void logpolar2cartesian(double& x, double& y, const double& rho, const double& theta);
 
@@ -111,6 +115,12 @@ namespace tmf
   double gast(const double& jd, const double& jde);
 
   double last(const double& jd, const double& jde, const double& L);
+
+  /* equatorial_galactic.cc */
+  void equatorial2galactic(double& l, double& b, const double& alpha, const double& delta);
+
+  void galactic2equatorial(double& alpha, double& delta, const double& l, const double& b);
+
 } // End tmf
 
 #endif // TMF_H

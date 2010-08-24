@@ -180,3 +180,31 @@ void tmf::rad2dms(int& d, int& m, double& s, const double& r)
   d *= sgn;
 }
 
+/*!
+  \brief Project an angle onto the range [0,2*pi)
+
+  \param phi angle in radians
+
+  \returns angle in range [0,2*pi)
+ */
+double tmf::rad2circle(const double& phi)
+{
+  double p = fmod(phi, 2*M_PI);
+  
+  return p < 0 ? 2*M_PI + p : p;
+}
+
+/*!
+  \brief Project an angle onto the range [0,360)
+
+  \param phi angle in radians
+
+  \returns angle in range [0,360)
+ */
+double tmf::deg2circle(const double& phi)
+{
+  double p = fmod(phi, 360.);
+  
+  return p < 0 ? 360. + p : p;
+}
+

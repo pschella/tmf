@@ -14,7 +14,7 @@ FILE (GLOB tmf_headers src/*.h)
 include_directories (src)
 
 ## Build the library
-add_library (tmf SHARED ${tmf_sources})
+add_library (tmf ${tmf_sources})
 
 ## Library versioning
 set_target_properties (tmf PROPERTIES VERSION 1.0)

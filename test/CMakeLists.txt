@@ -2,6 +2,7 @@ set (tests
     test_jd_date
     test_angles
     test_equatorial_horizontal
+    test_equatorial_galactic
     )
 
 foreach (test ${tests})

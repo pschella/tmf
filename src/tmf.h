@@ -130,9 +130,10 @@ namespace tmf
 
   void galactic2equatorial(double& alpha, double& delta, const double& l, const double& b);
 
-  /* utc_tai.cc */
-  int utcmtai(const double& utc);
+  /* utc.cc */
+  int tai_utc(const double& utc);
 
+  double tt_utc(const double& utc);
 } // End tmf
 
 #endif // TMF_H

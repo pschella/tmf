@@ -67,6 +67,7 @@ BOOST_PYTHON_MODULE(pytmf)
     def("last", last);
     def("equatorial2galactic", equatorial2galactic);
     def("galactic2equatorial", galactic2equatorial);
-    def("utcmtai", utcmtai);
+    def("tai_utc", tai_utc);
+    def("tt_utc", tt_utc);
 }
 

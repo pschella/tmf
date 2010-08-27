@@ -42,7 +42,7 @@ using namespace tmf;
 
   \return TAI - UTC in seconds
  */
-int tmf::utcmtai(const double& utc)
+int tmf::tai_utc(const double& utc)
 {
   const int n = 24;
 
@@ -83,5 +83,19 @@ int tmf::utcmtai(const double& utc)
 
   // before 2441499.5 TAI - UTC = 10s
   return 10 + i;
+}
+
+/*!
+  \brief Calculate TT - UTC in seconds
+
+  For dates before July 1 1972 a fixed value of 10s + TT - TAI is returned.
+
+  \param utc Universal Time Coordinated as Julian day
+
+  \return TT - UTC in seconds
+ */
+double tmf::tt_utc(const double& utc)
+{
+  return 32.184 + static_cast<double>(tai_utc(utc));
 }
 

@@ -18,6 +18,8 @@
 
 // SYSTEM INCLUDES
 #include <cmath>
+#include <string>
+#include <sstream>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -206,5 +208,51 @@ double tmf::deg2circle(const double& phi)
   double p = fmod(phi, 360.);
   
   return p < 0 ? 360. + p : p;
+}
+
+/*!
+  \brief Convert angle in radians to string representation in hh mm ss.s
+
+  \param phi angle in radians
+  \param prec precision / number of decimal places for the seconds field
+ */
+string tmf::rad2hmsrepr(const double& phi, int prec)
+{
+  int h = 0;
+  int m = 0;
+  double s = 0.0;
+
+  rad2hms(h, m, s, phi);
+
+  ostringstream strs;
+
+  strs << h << " " << m << " ";
+  strs.precision(prec);
+  strs << s;
+
+  return strs.str();
+}
+
+/*!
+  \brief Convert angle in radians to string representation in deg mm ss.s
+
+  \param phi angle in radians
+  \param prec precision / number of decimal places for the seconds field
+ */
+string tmf::rad2dmsrepr(const double& phi, int prec)
+{
+  int d = 0;
+  int m = 0;
+  double s = 0.0;
+
+  rad2dms(d, m, s, phi);
+
+  ostringstream strs;
+
+  strs << d << " " << m << " ";
+  strs.precision(prec);
+  strs << s;
+
+  return strs.str();
 }
 

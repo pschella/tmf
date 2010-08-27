@@ -22,6 +22,7 @@
 // SYSTEM INCLUDES
 #include <exception>
 #include <cmath>
+#include <string>
 
 // PROJECT INCLUDES
 //
@@ -44,6 +45,10 @@ namespace tmf
 
   inline double rad2deg(const double& a) { return a * 180 / M_PI; };
 
+  inline double jd2mjd(const double& jd) { return jd - 2400000.5; };
+
+  inline double mjd2jd(const double& mjd) { return mjd + 2400000.5; };
+
   /* angles.cc */
   double hms2deg(const int& h, const int& m, const double& s);
 
@@ -64,6 +69,15 @@ namespace tmf
   double rad2circle(const double& phi);
 
   double deg2circle(const double& phi);
+
+  std::string rad2hmsrepr(const double& phi, int prec = 4);
+
+  std::string rad2dmsrepr(const double& phi, int prec = 4);
+
+  /* epoch.cc */
+  void j20002b1950(double& alpha_B, double& delta_B, const double& alpha_J, const double& delta_J);
+
+  void b19502j2000(double& alpha_J, double& delta_J, const double& alpha_B, const double& delta_B);
 
   /* cartesian_logpolar.cc */
   void logpolar2cartesian(double& x, double& y, const double& rho, const double& theta);
@@ -99,11 +113,6 @@ namespace tmf
 
   void jd2date(int& y, int& m, double& d, const double& jd);
 
-  /* jd_mjd.cc */
-  void jd2mjd(double& mjd, const double& jd);
-
-  void mjd2jd(double& jd, const double& mjd);
-
   /* nutation.cc */
   void nutation(double& Dphi, double& Depsilon, const double& jde);
 
@@ -120,6 +129,9 @@ namespace tmf
   void equatorial2galactic(double& l, double& b, const double& alpha, const double& delta);
 
   void galactic2equatorial(double& alpha, double& delta, const double& l, const double& b);
+
+  /* utc_tai.cc */
+  int utcmtai(const double& utc);
 
 } // End tmf
 

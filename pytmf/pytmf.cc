@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <boost/python.hpp>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -28,15 +28,45 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
+using namespace tmf;
 
-void tmf::jd2mjd(double& mjd, const double& jd)
+BOOST_PYTHON_MODULE(pytmf)
 {
-  mjd = jd - 2440000.5;
-}
-
-void tmf::mjd2jd(double& jd, const double& mjd)
-{
-  jd = mjd + 2440000.5;
+    using namespace boost::python;
+    def("deg2rad", deg2rad);
+    def("rad2deg", rad2deg);
+    def("jd2mjd", jd2mjd);
+    def("mjd2jd", mjd2jd);
+    def("hms2deg", hms2deg);
+    def("deg2hms", deg2hms);
+    def("deg2dms", deg2dms);
+    def("hms2rad", hms2rad);
+    def("dms2rad", dms2rad);
+    def("rad2hms", rad2hms);
+    def("rad2dms", rad2dms);
+    def("rad2circle", rad2circle);
+    def("deg2circle", deg2circle);
+    def("rad2hmsrepr", rad2hmsrepr);
+    def("rad2dmsrepr", rad2hmsrepr);
+    def("j20002b1950", j20002b1950);
+    def("b19502j2000", b19502j2000);
+    def("logpolar2cartesian", logpolar2cartesian);
+    def("cartesian2logpolar", cartesian2logpolar);
+    def("spherical2cartesian", spherical2cartesian);
+    def("cartesian2spherical", cartesian2spherical);
+    def("equatorial2horizontal", equatorial2horizontal);
+    def("horizontal2equatorial", horizontal2equatorial);
+    def("gregoriandate2jd", gregoriandate2jd);
+    def("juliandate2jd", juliandate2jd);
+    def("date2jd", date2jd);
+    def("jd2date", jd2date);
+    def("nutation", nutation);
+    def("meanobliquity", meanobliquity);
+    def("gmst", gmst);
+    def("gast", gast);
+    def("last", last);
+    def("equatorial2galactic", equatorial2galactic);
+    def("galactic2equatorial", galactic2equatorial);
+    def("utcmtai", utcmtai);
 }
 

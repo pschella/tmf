@@ -36,3 +36,10 @@ if (BUILD_TESTS)
     add_subdirectory (test)
 endif (BUILD_TESTS)
 
+## Python bindings
+option (BUILD_PYTMF "Build pytmf" NO)
+
+if (BUILD_PYTMF)
+    add_subdirectory (pytmf)
+endif (BUILD_PYTMF)
+

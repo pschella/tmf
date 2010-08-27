@@ -33,6 +33,16 @@ using namespace std;
 /*!
   \brief Get Nutation and Obliquity of the Ecliptic at given instant
 
+  The nutation is due to the action of the Moon and can be described as
+  a sum of periodic terms.
+  Nutation is partioned into a component parallel to and one perpendicular
+  to the ecliptic.
+  The component allong the ecliptic is called the ``nutation in longitude''
+  and affects the celestial longitude of all heavenly bodies.
+  The component perpendicular to the ecliptic is called the ``nutation of
+  obliquity'' and affects the obliquity of the equator to the ecliptic,
+  it does not affect the longitude of heavenly bodies.
+
   Direct implementation of the method described in chapter 22 of
   Astronomical Algorithms by Jean Meeus, second edition, 2005
   Published by: Willman-Bell Inc.

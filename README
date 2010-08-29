@@ -18,6 +18,8 @@ Currently implemented are functions to:
 * Calculate nutation and obliquity of the ecliptic.
 * Calculate sidereal time (GMST, GAST and LAST).
 * Convert between equatorial and horizontal coordinates.
+* Convert between equatorial and galactic coordinates.
+* Convert directions between J2000 and B1950 epochs.
 
 Transmogrify is an Open Source project covered by the GNU General Public
 License. It was originally written by Pim Schellart.

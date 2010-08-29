@@ -97,7 +97,7 @@ namespace tmf
   /* cylindrical_spherical.cc */
   void spherical2cylindrical(double r, double h, const double& rho, const double& phi);
 
-  void spherical2cylindrical(double& rho, double& phi, const double& r, const double& h);
+  void cylindrical2spherical(double& rho, double& phi, const double& r, const double& h);
 
   /* equatorial_horizontal.cc */
   void equatorial2horizontal(double& A, double& h, const double& H, const double& delta, const double& phi);

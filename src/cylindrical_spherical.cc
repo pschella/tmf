@@ -59,7 +59,7 @@ void tmf::spherical2cylindrical(double r, double h,
   \param r cylindrical radius
   \param h cylindrical height
  */
-void tmf::spherical2cylindrical(double& rho, double& phi,
+void tmf::cylindrical2spherical(double& rho, double& phi,
     const double& r, const double& h)
 {
   rho = sqrt(r*r + h*h);

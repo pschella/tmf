@@ -35,7 +35,8 @@ int main()
   cout << s <<endl;
 
   // Calculate precession and nutation of the ecliptic
-  double tt = gregoriandate2jd(1987, 4, 10. + ((19. + 21. / 60. + 55.9 / 3600.) / 24.));
+  double dtt = tt_utc(date2jd(1987, 4, 10. + ((19. + 21. / 60.) / 24.)));
+  double tt = gregoriandate2jd(1987, 4, 10. + ((19. + 21. / 60. + dtt / 3600.) / 24.));
 
   cout.precision(9);
   cout << "JD(TT) " << tt << endl;

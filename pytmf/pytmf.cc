@@ -183,7 +183,8 @@ namespace pytmf
 
   tuple jd2date(const double& jd)
   {
-    double y, m, d;
+    int y, m;
+    double d;
 
     tmf::jd2date(y, m, d, jd);
 
@@ -249,7 +250,7 @@ BOOST_PYTHON_MODULE(pytmf)
     def("date2jd", tmf::date2jd);
     def("jd2date", pytmf::jd2date);
     def("nutation", pytmf::nutation);
-    def("meanobliquity", pytmf::meanobliquity);
+    def("meanobliquity", tmf::meanobliquity);
     def("gmst", tmf::gmst);
     def("gast", tmf::gast);
     def("last", tmf::last);

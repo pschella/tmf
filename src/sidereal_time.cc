@@ -34,7 +34,14 @@ using namespace tmf;
 /*!
   \brief Get Greanwich Mean Sidereal Time (GMST) in degrees from UT1.
 
-  \return theta Greanwich Mean Sidereal Time in degrees
+  Direct implementation of the method described in chapter 12 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  Coefficients converted to radians with identical numerical precission
+
+  \return theta Greanwich Mean Sidereal Time in radians
 
   \param jd Julian Date of UT1
  */
@@ -42,13 +49,18 @@ double tmf::gmst(const double& jd)
 {
   const double T = (jd - 2451545.) / 36525.;
 
-  return 280.46061837 + 360.98564736629 * (jd - 2451545.0) + 0.000387933 * T * T - (T * T * T / 38710000.);
+  return 4.8949612127 + 6.3003880989850 * (jd - 2451545.0) + 0.00000677071 * T * T - (T * T * T / 675616.95);
 }
 
 /*!
   \brief Get Greenwich Apparent Sidereal Time (GAST) in degrees from UT1.
 
-  \return theta Greenwich Apparent Sidereal Time in degrees
+  Direct implementation of the method described in chapter 12 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  \return theta Greenwich Apparent Sidereal Time in radians
 
   \param jd Julian Date of UT1
   \param jde Julian Date of TD (or equivalently TT)
@@ -64,21 +76,22 @@ double tmf::gast(const double& jd, const double& jde)
   // Get nutation and deviaton for obliquity of the ecliptic
   nutation(Dphi, Depsilon, jde);
 
-  // Correct Dphi to arc seconds
-  Dphi /= 10000;
-
-  // Correct for effect of nutation and correct to radians
-  epsilon += (Depsilon / 10000);
-  epsilon *= M_PI / (180 * 3600);
+  // Correct for effect of nutation
+  epsilon += Depsilon;
 
   // Get Greenwhich Mean Siderial Time and add equation of the equinoxes
-  return gmst(jd) + Dphi * cos(epsilon) / 3600;
+  return gmst(jd) + Dphi * cos(epsilon);
 }
 
 /*!
   \brief Get Local Apparent Sidereal Time (LAST) in degrees from UT1.
 
-  \return theta Local Aparrent Sidereal Time in degrees
+  Direct implementation of the method described in chapter 12 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  \return theta Local Aparrent Sidereal Time in radians
 
   \param jd Julian Date of UT1
   \param jde Julian Date of TD (or equivalently TT)

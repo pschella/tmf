@@ -58,7 +58,7 @@ void tmf::equatorial2horizontal(double& A, double& h,
   const double sp = sin(phi);
   const double cp = cos(phi);
 
-  A = atan(sH / (cH * sp - td * cp));
+  A = atan2(sH, (cH * sp - td * cp));
 
   h = asin(sp * sd + cp * cd * cH);
 }
@@ -91,7 +91,7 @@ void tmf::horizontal2equatorial(double& H, double& delta,
   const double ch = cos(h);
   const double th = tan(h);
 
-  H = atan(sA / (cA * sp + th * cp));
+  H = atan2(sA, (cA * sp + th * cp));
 
   delta = asin(sp * sh - cp * ch * cA);
 }

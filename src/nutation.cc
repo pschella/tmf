@@ -48,8 +48,8 @@ using namespace std;
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
-  \param Dphi nutation in longitude
-  \param Depsilon nutation in obliquity of the ecliptic
+  \param Dphi nutation in longitude in radians
+  \param Depsilon nutation in obliquity of the ecliptic in radians
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
@@ -227,6 +227,9 @@ void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
     Dphi += c[i][0] * sin(arg);
     Depsilon += c[i][1] * cos(arg);
   }
+
+  Dphi = deg2rad(Dphi / 3.6e7);
+  Depsilon = deg2rad(Depsilon / 3.6e7);
 }
 
 /*!
@@ -237,7 +240,7 @@ void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
-  \return epsilon_0 mean obliquity of the ecliptic in seconds of arc
+  \return epsilon_0 mean obliquity of the ecliptic in radians
 
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
@@ -270,6 +273,6 @@ double tmf::meanobliquity(const double& jde)
     epsilon_0 += a[i]*Ufac;
   }
 
-  return epsilon_0;
+  return deg2rad(epsilon_0 / 3600);
 }
 

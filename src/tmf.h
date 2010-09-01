@@ -134,6 +134,12 @@ namespace tmf
   int tai_utc(const double& utc);
 
   double tt_utc(const double& utc);
+
+  /* equatorial_ecliptic.cc */
+  void equatorial2ecliptic(double& lambda, double& beta, const double& alpha, const double& delta, const double& jde);
+
+  void ecliptic2equatorial(double& alpha, double& delta, const double& lambda, const double& beta, const double& jde);
+
 } // End tmf
 
 #endif // TMF_H

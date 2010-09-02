@@ -56,7 +56,7 @@ namespace tmf
 
   void deg2hms(int& h, int& m, double& s, const double& d);
 
-  void deg2dms(int& d, int& m, double& s, const double& d);
+  void deg2dms(int& d, int& m, double& s, const double& deg);
 
   double hms2rad(const int& h, const int& m, const double& s);
   

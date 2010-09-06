@@ -40,6 +40,19 @@ endif (BUILD_TESTS)
 option (BUILD_PYTMF "Build pytmf" NO)
 
 if (BUILD_PYTMF)
-    add_subdirectory (pytmf)
+    # Find Python
+    include (FindPythonLibs)
+
+    # Find Python site-packages directory for installation
+    execute_process ( COMMAND python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE )
+
+    # Find Boost Python
+    find_package (Boost COMPONENTS python)
+
+    if (Boost_FOUND AND PYTHONLIBS_FOUND)
+        add_subdirectory (pytmf)
+    else (Boost_FOUND AND PYTHONLIBS_FOUND)
+        message (WARNING "Unable to build pytmf missing dependencies.")
+    endif (Boost_FOUND AND PYTHONLIBS_FOUND)
 endif (BUILD_PYTMF)
 

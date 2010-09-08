@@ -10,13 +10,23 @@ target_link_libraries(pytmf
     ${PYTHON_LIBRARIES}
     )
 
-set_target_properties(pytmf
-    PROPERTIES
-    PREFIX ""
-    SUFFIX ".so"
-    COMPILE_FLAGS "-DPYTHON -fpermissive"
-    LINK_FLAGS "-fPIC -flat_namespace"
-    )
+if (APPLE)
+    set_target_properties(pytmf
+        PROPERTIES
+        PREFIX ""
+        SUFFIX ".so"
+        COMPILE_FLAGS "-DPYTHON -fpermissive"
+        LINK_FLAGS "-fPIC -flat_namespace"
+        )
+else (APPLE)
+    set_target_properties(pytmf
+        PROPERTIES
+        PREFIX ""
+        SUFFIX ".so"
+        COMPILE_FLAGS "-DPYTHON"
+        LINK_FLAGS "-fPIC -shared -Wl"
+        )
+endif (APPLE)
 
 install (TARGETS pytmf
     DESTINATION ${PYTHON_SITE_PACKAGES}

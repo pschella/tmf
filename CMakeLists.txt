@@ -16,6 +16,9 @@ include_directories (src)
 ## Build the library
 add_library (tmf ${tmf_sources})
 
+## Add definitions
+add_definitions (-fPIC)
+
 ## Library versioning
 set_target_properties (tmf PROPERTIES VERSION 1.0)
 

@@ -140,6 +140,8 @@ namespace tmf
 
   void ecliptic2equatorial(double& alpha, double& delta, const double& lambda, const double& beta, const double& jde);
 
+  /* itrf_local.cc */
+  void itrf2local(double &E, double &N, double& U, const double& x, const double& y, const double& z, const double& ref_x, const double& ref_y, const double& ref_z, const double& ref_lon, const double& ref_lat);
 } // End tmf
 
 #endif // TMF_H

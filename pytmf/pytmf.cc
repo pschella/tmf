@@ -217,6 +217,17 @@ namespace pytmf
 
     return make_tuple(alpha, delta);
   }
+
+  tuple itrf2local(const double& x, const double& y, const double& z,
+    const double& ref_x, const double& ref_y, const double& ref_z,
+    const double& ref_lon, const double& ref_lat)
+  {
+    double E, N, U;
+
+    tmf::itrf2local(E, N, U, x, y, z, ref_x, ref_y, ref_z, ref_lon, ref_lat);
+
+    return make_tuple(E, N, U);
+  }
 }
 
 BOOST_PYTHON_MODULE(pytmf)
@@ -258,5 +269,6 @@ BOOST_PYTHON_MODULE(pytmf)
     def("galactic2equatorial", pytmf::galactic2equatorial);
     def("tai_utc", tmf::tai_utc);
     def("tt_utc", tmf::tt_utc);
+    def("itrf2local", tmf::itrf2local);
 }
 

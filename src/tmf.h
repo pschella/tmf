@@ -104,6 +104,10 @@ namespace tmf
 
   void horizontal2equatorial(double& H, double& delta, const double& A, const double& h, const double& phi);
 
+  void radec2azel(double &A, double &h, const double &alpha, const double &delta, const double &utc, const double &ut1_utc, const double &L, const double &phi);
+
+  void azel2radec(double &alpha, double &delta, const double &A, const double &h, const double &utc, const double &ut1_utc, const double &L, const double &phi);
+
   /* jd_date.cc */
   double gregoriandate2jd(const int& y, const int& m, const double& d);
 

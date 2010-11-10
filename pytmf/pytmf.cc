@@ -181,6 +181,24 @@ namespace pytmf
     return make_tuple(H, delta);
   }
 
+  tuple radec2azel(const double &alpha, const double &delta, const double &utc, const double &ut1_utc, const double &L, const double &phi)
+  {
+    double A, h;
+    
+    tmf::radec2azel(A, h, alpha, delta, utc, ut1_utc, L, phi);
+
+    return make_tuple(A, h);
+  }
+
+  tuple azel2radec(const double &A, const double &h, const double &utc, const double &ut1_utc, const double &L, const double &phi)
+  {
+    double alpha, delta;
+
+    tmf::azel2radec(alpha, delta, A, h, utc, ut1_utc, L, phi);
+
+    return make_tuple(alpha, delta);
+  }
+
   tuple jd2date(const double& jd)
   {
     int y, m;
@@ -256,6 +274,8 @@ BOOST_PYTHON_MODULE(pytmf)
     def("cartesian2spherical", pytmf::cartesian2spherical);
     def("equatorial2horizontal", pytmf::equatorial2horizontal);
     def("horizontal2equatorial", pytmf::horizontal2equatorial);
+    def("radec2azel", pytmf::radec2azel);
+    def("azel2radec", pytmf::azel2radec);
     def("gregoriandate2jd", tmf::gregoriandate2jd);
     def("juliandate2jd", tmf::juliandate2jd);
     def("date2jd", tmf::date2jd);

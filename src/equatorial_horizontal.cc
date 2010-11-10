@@ -96,3 +96,51 @@ void tmf::horizontal2equatorial(double& H, double& delta,
   delta = asin(sp * sh - cp * ch * cA);
 }
 
+void tmf::radec2azel(double &A, double &h, const double &alpha, const double &delta, const double &utc, const double &ut1_utc, const double &L, const double &phi)
+{
+  // Constants
+  const int SECONDS_PER_DAY = 24 * 3600;
+
+  // Variables
+  double H;
+
+  // Calculate Terestrial Time (TT)
+  const double tt = utc + tmf::tt_utc(utc) / SECONDS_PER_DAY;
+
+  // Calculate Universal Time (UT1)
+  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
+
+  // Calculate Local Apparant Sidereal Time (LAST)
+  const double theta_L = tmf::last(ut1, tt, L);
+
+  // Calculate hour angle
+  H = tmf::rad2circle(theta_L - alpha);
+
+  // Convert from equatorial to horizontal coordinates
+  tmf::equatorial2horizontal(A, h, H, delta, phi);
+}
+
+void tmf::azel2radec(double &alpha, double &delta, const double &A, const double &h, const double &utc, const double &ut1_utc, const double &L, const double &phi)
+{
+  // Constants
+  const int SECONDS_PER_DAY = 24 * 3600;
+
+  // Variables
+  double H;
+
+  // Calculate Terestrial Time (TT)
+  const double tt = utc + tmf::tt_utc(utc) / SECONDS_PER_DAY;
+
+  // Calculate Universal Time (UT1)
+  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
+
+  // Calculate Local Apparant Sidereal Time (LAST)
+  const double theta_L = tmf::last(ut1, tt, L);
+
+  // Convert from equatorial to horizontal coordinates
+  tmf::horizontal2equatorial(H, delta, A, h, phi);
+
+  // Calculate right ascention
+  alpha = tmf::rad2circle(theta_L - H);
+}
+

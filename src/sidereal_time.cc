@@ -91,17 +91,20 @@ double tmf::gast(const double& jd, const double& jde)
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
+  Modified slightly to measure longitude positive east in accordance with
+  IAU convention instead of positive west.
+
   \return theta Local Aparrent Sidereal Time in radians
 
   \param jd Julian Date of UT1
   \param jde Julian Date of TD (or equivalently TT)
-  \param L observer's longitude (positive west, negative east
+  \param L observer's longitude (positive east, negative west
          from Greenwich)
  */
 double tmf::last(const double& jd, const double& jde, const double& L)
 {
   /* Get Greenwich Apparent Siderial Time
      and correct for observer's longitude */
-  return gast(jd, jde) - L;
+  return gast(jd, jde) + L;
 }
 

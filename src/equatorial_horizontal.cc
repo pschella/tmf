@@ -38,7 +38,10 @@ using namespace std;
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
-  \param A azimuth, measured westward from the south
+  Modified slightly to calculate azimuth westward from north instead of
+  south.
+
+  \param A azimuth, measured westward from the north
   \param h altitude, positive above the horizon, negative below
   \param H hour angle (e.g. last - alpha where alpha is the right ascension
          and last the local apparent siderial time)
@@ -58,7 +61,7 @@ void tmf::equatorial2horizontal(double& A, double& h,
   const double sp = sin(phi);
   const double cp = cos(phi);
 
-  A = atan2(sH, (cH * sp - td * cp));
+  A = atan2(sH, (cH * sp - td * cp)) - M_PI;
 
   h = asin(sp * sd + cp * cd * cH);
 }
@@ -71,11 +74,14 @@ void tmf::equatorial2horizontal(double& A, double& h,
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
+  Modified slightly to calculate azimuth westward from north instead of
+  south.
+
   \param H hour angle (e.g. last - alpha where alpha is the right ascension
          and last the local apparent siderial time)
   \param delta declination, positive if north of the celestial equator,
          negative if south
-  \param A azimuth, measured westward from the south
+  \param A azimuth, measured westward from the north
   \param h altitude, positive above the horizon, negative below
   \param observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
@@ -83,8 +89,8 @@ void tmf::equatorial2horizontal(double& A, double& h,
 void tmf::horizontal2equatorial(double& H, double& delta,
     const double& A, const double& h, const double& phi)
 {
-  const double sA = sin(A);
-  const double cA = cos(A);
+  const double sA = sin(A-M_PI);
+  const double cA = cos(A-M_PI);
   const double sp = sin(phi);
   const double cp = cos(phi);
   const double sh = sin(h);

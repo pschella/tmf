@@ -39,6 +39,10 @@ namespace tmf
   class Error : public std::exception {};
 
   class InputError : public Error {};
+
+  /* constants */
+  const int SPEED_OF_LIGHT = 299792458;
+  const int SECONDS_PER_DAY = 24 * 3600;
   
   /* inlines (for increased speed) */
   inline double deg2rad(const double& a) { return a * M_PI / 180; };

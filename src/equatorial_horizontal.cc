@@ -47,7 +47,7 @@ using namespace std;
          and last the local apparent siderial time)
   \param delta declination, positive if north of the celestial equator,
          negative if south
-  \param observer's latitude, positive if in the northern hemisphere,
+  \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
 void tmf::equatorial2horizontal(double& A, double& h,
@@ -83,7 +83,7 @@ void tmf::equatorial2horizontal(double& A, double& h,
          negative if south
   \param A azimuth, measured westward from the north
   \param h altitude, positive above the horizon, negative below
-  \param observer's latitude, positive if in the northern hemisphere,
+  \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
 void tmf::horizontal2equatorial(double& H, double& delta,
@@ -102,19 +102,44 @@ void tmf::horizontal2equatorial(double& H, double& delta,
   delta = asin(sp * sh - cp * ch * cA);
 }
 
+/*!
+  \brief Convenience function for conversion of equatorial coordinates to horizontal coordinates.
+
+  Use this function for quick and easy conversion of a few coordinates.
+  For many conversions sharing the same time and location please use the
+  sub functions to avoid unnessesary calculations.
+
+  Direct implementation of the method described in chapter 13 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  Modified slightly to calculate azimuth westward from north instead of
+  south.
+
+  \param A azimuth, measured westward from the north
+  \param h altitude, positive above the horizon, negative below
+  \param alpha right ascension
+  \param delta declination, positive if north of the celestial equator,
+         negative if south
+  \param utc (universal time coordinated) as Julian day
+  \param ut1_utc difference UT1-UTC (as obtained from IERS bullitin A)
+         if 0 a maximum error of 0.9 seconds is made.
+  \param L observer's longitude (positive east, negative west
+         from Greenwich)
+  \param phi observer's latitude, positive if in the northern hemisphere,
+         negative in the southern one
+ */
 void tmf::radec2azel(double &A, double &h, const double &alpha, const double &delta, const double &utc, const double &ut1_utc, const double &L, const double &phi)
 {
-  // Constants
-  const int SECONDS_PER_DAY = 24 * 3600;
-
   // Variables
   double H;
 
   // Calculate Terestrial Time (TT)
-  const double tt = utc + tmf::tt_utc(utc) / SECONDS_PER_DAY;
+  const double tt = utc + tmf::tt_utc(utc) / tmf::SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
-  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
+  const double ut1 = utc + ut1_utc / tmf::SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
   const double theta_L = tmf::last(ut1, tt, L);
@@ -126,19 +151,44 @@ void tmf::radec2azel(double &A, double &h, const double &alpha, const double &de
   tmf::equatorial2horizontal(A, h, H, delta, phi);
 }
 
+/*!
+  \brief Convenience function for conversion of horizontal coordinates to equatorial coordinates.
+
+  Use this function for quick and easy conversion of a few coordinates.
+  For many conversions sharing the same time and location please use the
+  sub functions to avoid unnessesary calculations.
+
+  Direct implementation of the method described in chapter 13 of
+  Astronomical Algorithms by Jean Meeus, second edition, 2005
+  Published by: Willman-Bell Inc.
+  ISBN 0-943396-61-1
+
+  Modified slightly to calculate azimuth westward from north instead of
+  south.
+
+  \param alpha right ascension
+  \param delta declination, positive if north of the celestial equator,
+         negative if south
+  \param A azimuth, measured westward from the north
+  \param h altitude, positive above the horizon, negative below
+  \param utc (universal time coordinated) as Julian day
+  \param ut1_utc difference UT1-UTC (as obtained from IERS bullitin A)
+         if 0 a maximum error of 0.9 seconds is made.
+  \param L observer's longitude (positive east, negative west
+         from Greenwich)
+  \param phi observer's latitude, positive if in the northern hemisphere,
+         negative in the southern one
+ */
 void tmf::azel2radec(double &alpha, double &delta, const double &A, const double &h, const double &utc, const double &ut1_utc, const double &L, const double &phi)
 {
-  // Constants
-  const int SECONDS_PER_DAY = 24 * 3600;
-
   // Variables
   double H;
 
   // Calculate Terestrial Time (TT)
-  const double tt = utc + tmf::tt_utc(utc) / SECONDS_PER_DAY;
+  const double tt = utc + tmf::tt_utc(utc) / tmf::SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
-  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
+  const double ut1 = utc + ut1_utc / tmf::SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
   const double theta_L = tmf::last(ut1, tt, L);

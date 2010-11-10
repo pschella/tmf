@@ -48,7 +48,7 @@ namespace pytmf
     int d, am;
     double as;
 
-    tmf::deg2hms(d, am, as, deg);
+    tmf::deg2dms(d, am, as, deg);
 
     return make_tuple(d, am, as);
   }
@@ -58,7 +58,7 @@ namespace pytmf
     int h, m;
     double s;
 
-    tmf::deg2hms(h, m, s, r);
+    tmf::rad2hms(h, m, s, r);
 
     return make_tuple(h, m, s);
   }
@@ -68,7 +68,7 @@ namespace pytmf
     int d, m;
     double s;
 
-    tmf::deg2hms(d, m, s, r);
+    tmf::rad2dms(d, m, s, r);
 
     return make_tuple(d, m, s);
   }

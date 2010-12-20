@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -28,35 +28,43 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
-
 /*!
-  \brief Converts polar coordinates to Cartesian coordinates
+  \brief Converts spherical coordinates to Cartesian coordinates
 
   \param x x-coordinate
   \param y y-coordinate
-  \param r radius
-  \param theta angle with x-axis
+  \param z z-coordinate
+  \param rho radius
+  \param theta inclination angle from z-axis
+  \param phi azimuth angle from x-axis
  */
-void tmf::polar2cartesian(double& x, double& y,
-    const double& r, const double& theta)
+void spherical2cartesian(double* x, double* y, double* z,
+    const double rho, const double theta, const double phi)
 {
-  x = r * cos(theta);
-  y = r * sin(theta);
+  const double st = sin(theta);
+  const double sp = sin(phi);
+  const double cp = cos(phi);
+
+  *x = rho * st * cp;
+  *y = rho * st * sp;
+  *z = rho * cp;
 }
 
 /*!
-  \brief Converts Cartesian coordinates to polar coordinates
+  \brief Converts Cartesian coordinates to spherical coordinates
 
-  \param r radius
-  \param theta angle with x-axis
+  \param rho radius
+  \param theta inclination angle from z-axis
+  \param phi azimuth angle from x-axis
   \param x x-coordinate
   \param y y-coordinate
+  \param z z-coordinate
  */
-void tmf::cartesian2polar(double& r, double& theta,
-    const double& x, const double& y)
+void cartesian2spherical(double* rho, double* theta, double* phi,
+    const double x, const double y, const double z)
 {
-  r = sqrt(x*x + y*y);
-  theta = atan2(y, x);
+  *rho = sqrt(x*x + y*y + z*z);
+  *theta = acos(z / *rho);
+  *phi = atan2(y,x);
 }
 

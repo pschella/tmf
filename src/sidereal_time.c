@@ -17,7 +17,8 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <stdlib.h>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,9 +28,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
-using namespace tmf;
 
 /*!
   \brief Get Greanwich Mean Sidereal Time (GMST) in degrees from UT1.
@@ -45,7 +43,7 @@ using namespace tmf;
 
   \param jd Julian Date of UT1
  */
-double tmf::gmst(const double& jd)
+double gmst(const double jd)
 {
   const double T = (jd - 2451545.) / 36525.;
 
@@ -65,10 +63,10 @@ double tmf::gmst(const double& jd)
   \param jd Julian Date of UT1
   \param jde Julian Date of TD (or equivalently TT)
  */
-double tmf::gast(const double& jd, const double& jde)
+double gast(const double jd, const double jde)
 {
-  double Dphi = 0.0;
-  double Depsilon = 0.0;
+  double *Dphi = NULL;
+  double *Depsilon = NULL;
 
   // Get mean obliquity of the ecliptic
   double epsilon = meanobliquity(jde);
@@ -77,10 +75,10 @@ double tmf::gast(const double& jd, const double& jde)
   nutation(Dphi, Depsilon, jde);
 
   // Correct for effect of nutation
-  epsilon += Depsilon;
+  epsilon += *Depsilon;
 
   // Get Greenwhich Mean Siderial Time and add equation of the equinoxes
-  return gmst(jd) + Dphi * cos(epsilon);
+  return gmst(jd) + *Dphi * cos(epsilon);
 }
 
 /*!
@@ -101,7 +99,7 @@ double tmf::gast(const double& jd, const double& jde)
   \param L observer's longitude (positive east, negative west
          from Greenwich)
  */
-double tmf::last(const double& jd, const double& jde, const double& L)
+double last(const double jd, const double jde, const double L)
 {
   /* Get Greenwich Apparent Siderial Time
      and correct for observer's longitude */

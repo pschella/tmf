@@ -17,7 +17,8 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <stdlib.h>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,8 +28,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
 
 /*!
   \brief Conversion of equatorial coordinates to horizontal coordinates.
@@ -50,8 +49,8 @@ using namespace std;
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf::equatorial2horizontal(double& A, double& h,
-    const double& H, const double& delta, const double& phi)
+void equatorial2horizontal(double* A, double* h,
+    const double H, const double delta, const double phi)
 {
   const double sH = sin(H);
   const double cH = cos(H);
@@ -61,9 +60,9 @@ void tmf::equatorial2horizontal(double& A, double& h,
   const double sp = sin(phi);
   const double cp = cos(phi);
 
-  A = atan2(sH, (cH * sp - td * cp)) - M_PI;
+  *A = atan2(sH, (cH * sp - td * cp)) - M_PI;
 
-  h = asin(sp * sd + cp * cd * cH);
+  *h = asin(sp * sd + cp * cd * cH);
 }
 
 /*!
@@ -86,8 +85,8 @@ void tmf::equatorial2horizontal(double& A, double& h,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf::horizontal2equatorial(double& H, double& delta,
-    const double& A, const double& h, const double& phi)
+void horizontal2equatorial(double* H, double* delta,
+    const double A, const double h, const double phi)
 {
   const double sA = sin(A-M_PI);
   const double cA = cos(A-M_PI);
@@ -97,9 +96,9 @@ void tmf::horizontal2equatorial(double& H, double& delta,
   const double ch = cos(h);
   const double th = tan(h);
 
-  H = atan2(sA, (cA * sp + th * cp));
+  *H = atan2(sA, (cA * sp + th * cp));
 
-  delta = asin(sp * sh - cp * ch * cA);
+  *delta = asin(sp * sh - cp * ch * cA);
 }
 
 /*!
@@ -130,25 +129,22 @@ void tmf::horizontal2equatorial(double& H, double& delta,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf::radec2azel(double &A, double &h, const double &alpha, const double &delta, const double &utc, const double &ut1_utc, const double &L, const double &phi)
+void radec2azel(double* A, double* h, const double alpha, const double delta, const double utc, const double ut1_utc, const double L, const double phi)
 {
-  // Variables
-  double H;
-
   // Calculate Terestrial Time (TT)
-  const double tt = utc + tmf::tt_utc(utc) / tmf::SECONDS_PER_DAY;
+  const double tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
-  const double ut1 = utc + ut1_utc / tmf::SECONDS_PER_DAY;
+  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
-  const double theta_L = tmf::last(ut1, tt, L);
+  const double theta_L = last(ut1, tt, L);
 
   // Calculate hour angle
-  H = tmf::rad2circle(theta_L - alpha);
+  const double H = rad2circle(theta_L - alpha);
 
   // Convert from equatorial to horizontal coordinates
-  tmf::equatorial2horizontal(A, h, H, delta, phi);
+  equatorial2horizontal(A, h, H, delta, phi);
 }
 
 /*!
@@ -179,24 +175,24 @@ void tmf::radec2azel(double &A, double &h, const double &alpha, const double &de
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf::azel2radec(double &alpha, double &delta, const double &A, const double &h, const double &utc, const double &ut1_utc, const double &L, const double &phi)
+void azel2radec(double* alpha, double* delta, const double A, const double h, const double utc, const double ut1_utc, const double L, const double phi)
 {
   // Variables
-  double H;
+  double *H = NULL;
 
   // Calculate Terestrial Time (TT)
-  const double tt = utc + tmf::tt_utc(utc) / tmf::SECONDS_PER_DAY;
+  const double tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
-  const double ut1 = utc + ut1_utc / tmf::SECONDS_PER_DAY;
+  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
-  const double theta_L = tmf::last(ut1, tt, L);
+  const double theta_L = last(ut1, tt, L);
 
   // Convert from equatorial to horizontal coordinates
-  tmf::horizontal2equatorial(H, delta, A, h, phi);
+  horizontal2equatorial(H, delta, A, h, phi);
 
   // Calculate right ascention
-  alpha = tmf::rad2circle(theta_L - H);
+  *alpha = rad2circle(theta_L - *H);
 }
 

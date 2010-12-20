@@ -4,8 +4,13 @@ project (TMF)
 ## Minimum required version of CMake to configure the project
 cmake_minimum_required (VERSION 2.8)
 
+## Default flags
+set (CMAKE_BUILD_TYPE Release)
+set (CMAKE_C_FLAGS_DEBUG "-g -Wall -Werror")
+set (CMAKE_C_FLAGS_RELEASE "-O2 -Wall -Werror")
+
 ## List of source files
-FILE (GLOB tmf_sources src/*.cc)
+FILE (GLOB tmf_sources src/*.c)
 
 ## List of header files
 FILE (GLOB tmf_headers src/*.h)
@@ -32,27 +37,10 @@ install (FILES ${tmf_headers}
   DESTINATION include
   )
 
-## Tests
-option (BUILD_TESTS "Build tests" NO)
+## Bindings
+include (FindSWIG)
 
-if (BUILD_TESTS)
-    add_subdirectory (test)
-endif (BUILD_TESTS)
-
-## Python bindings
-
-# Find Python
-include (FindPythonLibs)
-
-# Find Python site-packages directory for installation
-execute_process ( COMMAND python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE )
-
-# Find Boost Python
-find_package (Boost COMPONENTS python)
-
-if (Boost_FOUND AND PYTHONLIBS_FOUND)
-    add_subdirectory (pytmf)
-else (Boost_FOUND AND PYTHONLIBS_FOUND)
-    message (WARNING "Unable to build pytmf missing dependencies.")
-endif (Boost_FOUND AND PYTHONLIBS_FOUND)
+if (${SWIG_FOUND})
+  add_subdirectory (bindings)
+endif (${SWIG_FOUND})
 

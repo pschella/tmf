@@ -17,9 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
-#include <string>
-#include <sstream>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -30,7 +28,13 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
+double deg2rad(const double a) { return a * M_PI / 180.; };
+
+double rad2deg(const double a) { return a * 180. / M_PI; };
+
+double jd2mjd(const double jd) { return jd - 2400000.5; };
+
+double mjd2jd(const double mjd) { return mjd + 2400000.5; };
 
 /*!
   \brief Convert hours, min, sec to degrees
@@ -41,7 +45,7 @@ using namespace std;
   \param m minutes
   \param s seconds
  */
-double tmf::hms2deg(const int& h, const int& m, const double& s)
+double hms2deg(const int h, const int m, const double s)
 {
   return (h + m / 60. + s / 3600.) * (180. / 12.);
 }
@@ -55,7 +59,7 @@ double tmf::hms2deg(const int& h, const int& m, const double& s)
   \param am arcminutes
   \param as arcseconds
  */
-double tmf::dms2deg(const int& d, const int& am, const double& as)
+double dms2deg(const int d, const int am, const double as)
 {
   if (d >= 0)
   {
@@ -77,15 +81,15 @@ double tmf::dms2deg(const int& d, const int& am, const double& as)
   \param s seconds
   \param d degrees
  */
-void tmf::deg2hms(int& h, int& m, double& s, const double& d)
+void deg2hms(int* h, int* m, double* s, const double d)
 {
   // Make sure D = [0, 360)
   const double D = (d >= 0 ? fmod(d, 360.) : 360. + fmod(d, 360.));
   const double H = D * 12. / 180.;
 
-  h = int(H);
-  m = int((H - h) * 60.);
-  s = (H - h - (m / 60.)) * 3600.;
+  *h = (int)H;
+  *m = (int)((H - *h) * 60.);
+  *s = (H - *h - (*m / 60.)) * 3600.;
 }
 
 /*!
@@ -98,16 +102,16 @@ void tmf::deg2hms(int& h, int& m, double& s, const double& d)
   \param s seconds
   \param deg degrees
  */
-void tmf::deg2dms(int& d, int& m, double& s, const double& deg)
+void deg2dms(int* d, int* m, double* s, const double deg)
 {
-  const double D = abs(fmod(deg, 360.));
+  const double D = fabs(fmod(deg, 360.));
   const int sgn = (deg >= 0) ? 1 : -1;
 
-  d = int(D);
-  m = int((D - d) * 60.);
-  s = (D - d - (m / 60.)) * 3600.;
+  *d = (int)D;
+  *m = (int)((D - *d) * 60.);
+  *s = (D - *d - (*m / 60.)) * 3600.;
 
-  d *= sgn;
+  *d *= sgn;
 }
 
 /*!
@@ -119,7 +123,7 @@ void tmf::deg2dms(int& d, int& m, double& s, const double& deg)
   \param m minutes
   \param s seconds
  */
-double tmf::hms2rad(const int& h, const int& m, const double& s)
+double hms2rad(const int h, const int m, const double s)
 {
   return (h + m / 60. + s / 3600.) * (M_PI / 12.);
 }
@@ -133,7 +137,7 @@ double tmf::hms2rad(const int& h, const int& m, const double& s)
   \param am arcminutes
   \param as arcseconds
  */
-double tmf::dms2rad(const int& d, const int& am, const double& as)
+double dms2rad(const int d, const int am, const double as)
 {
   if (d >= 0)
   {
@@ -153,13 +157,13 @@ double tmf::dms2rad(const int& d, const int& am, const double& as)
   \param s seconds
   \param r radians
  */
-void tmf::rad2hms(int& h, int& m, double& s, const double& r)
+void rad2hms(int* h, int* m, double* s, const double r)
 {
   const double H = r * 12. / M_PI;
 
-  h = int(H);
-  m = int((H - h) * 60.);
-  s = (H - h - (m / 60.)) * 3600.;
+  *h = (int)H;
+  *m = (int)((H - *h) * 60.);
+  *s = (H - *h - (*m / 60.)) * 3600.;
 }
 
 /*!
@@ -170,16 +174,16 @@ void tmf::rad2hms(int& h, int& m, double& s, const double& r)
   \param s seconds
   \param r radians
  */
-void tmf::rad2dms(int& d, int& m, double& s, const double& r)
+void rad2dms(int* d, int* m, double* s, const double r)
 {
-  const double D = abs(rad2deg(r));
+  const double D = fabs(rad2deg(r));
   const int sgn = (r >= 0) ? 1 : -1;
 
-  d = int(D);
-  m = int((D - d) * 60.);
-  s = (D - d - (m / 60.)) * 3600.;
+  *d = (int)D;
+  *m = (int)((D - *d) * 60.);
+  *s = (D - *d - (*m / 60.)) * 3600.;
 
-  d *= sgn;
+  *d *= sgn;
 }
 
 /*!
@@ -189,7 +193,7 @@ void tmf::rad2dms(int& d, int& m, double& s, const double& r)
 
   \returns angle in range [0,2*pi)
  */
-double tmf::rad2circle(const double& phi)
+double rad2circle(const double phi)
 {
   double p = fmod(phi, 2*M_PI);
   
@@ -203,56 +207,10 @@ double tmf::rad2circle(const double& phi)
 
   \returns angle in range [0,360)
  */
-double tmf::deg2circle(const double& phi)
+double deg2circle(const double phi)
 {
   double p = fmod(phi, 360.);
   
   return p < 0 ? 360. + p : p;
-}
-
-/*!
-  \brief Convert angle in radians to string representation in hh mm ss.s
-
-  \param phi angle in radians
-  \param prec precision / number of decimal places for the seconds field
- */
-string tmf::rad2hmsrepr(const double& phi, int prec)
-{
-  int h = 0;
-  int m = 0;
-  double s = 0.0;
-
-  rad2hms(h, m, s, phi);
-
-  ostringstream strs;
-
-  strs << h << " " << m << " ";
-  strs.precision(prec);
-  strs << s;
-
-  return strs.str();
-}
-
-/*!
-  \brief Convert angle in radians to string representation in deg mm ss.s
-
-  \param phi angle in radians
-  \param prec precision / number of decimal places for the seconds field
- */
-string tmf::rad2dmsrepr(const double& phi, int prec)
-{
-  int d = 0;
-  int m = 0;
-  double s = 0.0;
-
-  rad2dms(d, m, s, phi);
-
-  ostringstream strs;
-
-  strs << d << " " << m << " ";
-  strs.precision(prec);
-  strs << s;
-
-  return strs.str();
 }
 

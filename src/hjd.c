@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -28,40 +28,33 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
-using namespace tmf;
-
 /*!
-  \brief Convert coordinates from ITRF to local Cartesian.
+  \brief Convert Julian day to the Heliocentric frame by correcting for the
+  projected light travel time between the Earth and the Sun.
 
-  \param E easterly
-  \param N northerly
-  \param U upper
-  \param x ITRF x
-  \param y ITRF y
-  \param z ITRF z
-  \param ref_x reference x position in ITRF
-  \param ref_y reference y position in ITRF
-  \param ref_z reference z position in ITRF
-  \param ref_lon reference longitude in radians
-  \param ref_lat reference latitude in radians
+  \return hjd Julian day
+
+  \param jd year
+  \param alpha right ascension
+  \param delta declination, positive if north of the celestial equator,
+  \param utc (universal time coordinated) as Julian day
+  \param ut1_utc difference UT1-UTC (as obtained from IERS bullitin A)
+         if 0 a maximum error of 0.9 seconds is made.
+  \param L observer's longitude (positive east, negative west
+         from Greenwich)
+  \param phi observer's latitude, positive if in the northern hemisphere,
+         negative in the southern one
  */
-void tmf::itrf2local(double &E, double &N, double& U,
-    const double& x, const double& y, const double& z,
-    const double& ref_x, const double& ref_y, const double& ref_z,
-    const double& ref_lon, const double& ref_lat)
+double jd2hjd(const double jd, const double alpha, const double delta, const double utc, const double ut1_utc, const double L, const double phi)
 {
-  const double dx=x-ref_x;
-  const double dy=y-ref_y;
-  const double dz=z-ref_z;
+  // Calculate Earth - Sun distance
+  const double r = 1.;
 
-  const double sln = sin(ref_lon);
-  const double cln = cos(ref_lon);
-  const double slt = sin(ref_lat);
-  const double clt = cos(ref_lat);
+  // Calculate right ascension and declination of the sun
+  const double alpha_sun = 0.;
+  const double delta_sun = 0.;
 
-  E = -sln * dx + cln * dy;
-  N = -slt * cln * dx - slt * sln * dy + clt * dz;
-  U =  clt * cln * dx + clt * sln * dy + slt * dz;
+  return jd - (r / SPEED_OF_LIGHT) * (sin(delta) * sin(delta_sun)
+      + cos(delta) * cos(delta_sun) * cos(alpha - alpha_sun));
 }
 

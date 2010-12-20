@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,8 +27,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
 
 /*!
   \brief Convert equatorial coordinates from epoch J2000 to B1950
@@ -43,8 +41,8 @@ using namespace std;
   \param alpha_J right ascension reffered to the J2000 standard epoch
   \param delta_J declination reffered to the J2000 standard epoch
  */
-void tmf::j20002b1950(double& alpha_B, double& delta_B,
-    const double& alpha_J, const double& delta_J)
+void j20002b1950(double* alpha_B, double* delta_B,
+    const double alpha_J, const double delta_J)
 {
   // Rotation matrix J2000 -> B1950
   const double Rjb[3][3] = {
@@ -76,8 +74,8 @@ void tmf::j20002b1950(double& alpha_B, double& delta_B,
   };
 
   // Extract right ascension and declination
-  alpha_B = rad2circle(atan2(s[1], s[0]));
-  delta_B = asin(s[2]);
+  *alpha_B = rad2circle(atan2(s[1], s[0]));
+  *delta_B = asin(s[2]);
 }
 
 /*!
@@ -93,8 +91,8 @@ void tmf::j20002b1950(double& alpha_B, double& delta_B,
   \param alpha_B right ascension reffered to the B1950 standard epoch
   \param delta_B declination reffered to the B1950 standard epoch
  */
-void tmf::b19502j2000(double& alpha_J, double& delta_J,
-    const double& alpha_B, const double& delta_B)
+void b19502j2000(double* alpha_J, double* delta_J,
+    const double alpha_B, const double delta_B)
 {
   // Rotation matrix B1950 -> J2000
   const double Rbj[3][3] = {
@@ -126,7 +124,7 @@ void tmf::b19502j2000(double& alpha_J, double& delta_J,
   };
 
   // Extract right ascension and declination
-  alpha_J = rad2circle(atan2(s[1], s[0]));
-  delta_J = asin(s[2]);
+  *alpha_J = rad2circle(atan2(s[1], s[0]));
+  *delta_J = asin(s[2]);
 }
 

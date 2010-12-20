@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -28,35 +28,33 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
-
 /*!
-  \brief Converts logpolarho coordinates to Cartesian coordinates
+  \brief Converts polar coordinates to Cartesian coordinates
 
   \param x x-coordinate
   \param y y-coordinate
-  \param rho radius
+  \param r radius
   \param theta angle with x-axis
  */
-void tmf::logpolar2cartesian(double& x, double& y,
-    const double& rho, const double& theta)
+void polar2cartesian(double* x, double* y,
+    const double r, const double theta)
 {
-  x = exp(rho) * cos(theta);
-  y = exp(rho) * sin(theta);
+  *x = r * cos(theta);
+  *y = r * sin(theta);
 }
 
 /*!
-  \brief Converts Cartesian coordinates to logpolarho coordinates
+  \brief Converts Cartesian coordinates to polar coordinates
 
-  \param rho radius
+  \param r radius
   \param theta angle with x-axis
   \param x x-coordinate
   \param y y-coordinate
  */
-void tmf::cartesian2logpolar(double& rho, double& theta,
-    const double& x, const double& y)
+void cartesian2polar(double* r, double* theta,
+    const double x, const double y)
 {
-  rho = log(sqrt(x*x + y*y));
-  theta = atan(x / y);
+  *r = sqrt(x*x + y*y);
+  *theta = atan2(y, x);
 }
 

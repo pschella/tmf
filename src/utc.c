@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,9 +27,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
-using namespace tmf;
 
 /*!
   \brief Calculate TAI - UTC in seconds
@@ -42,12 +39,10 @@ using namespace tmf;
 
   \return TAI - UTC in seconds
  */
-int tmf::tai_utc(const double& utc)
+int tai_utc(const double utc)
 {
-  const int n = 24;
-
   // Leap second table from the IERS Earth Orientation Centre bulletin C
-  const double ls[n] = {
+  const double ls[24] = {
       2441499.5,  // 1972  Jul.   1              - 1s
       2441683.5,  // 1973  Jan.   1              - 1s
       2442048.5,  // 1974  Jan.   1              - 1s
@@ -76,7 +71,7 @@ int tmf::tai_utc(const double& utc)
 
   // Loop through the leap seconds table
   int i = 0;
-  while (i<n && utc>ls[i])
+  while (i<24 && utc>ls[i])
   {
     i++;
   }
@@ -94,8 +89,8 @@ int tmf::tai_utc(const double& utc)
 
   \return TT - UTC in seconds
  */
-double tmf::tt_utc(const double& utc)
+double tt_utc(const double utc)
 {
-  return 32.184 + static_cast<double>(tai_utc(utc));
+  return 32.184 + (double)(tai_utc(utc));
 }
 

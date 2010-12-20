@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,8 +27,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
 
 /*!
   \brief Get Nutation and Obliquity of the Ecliptic at given instant
@@ -53,8 +51,9 @@ using namespace std;
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
+void nutation(double* Dphi, double* Depsilon, const double jde)
 {
+  int i = 0;
   double arg = 0.0;
   const double T = (jde - 2451545.) / 36525.;
   const double T2 = T * T;
@@ -213,10 +212,10 @@ void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
   };
 
   // Calculate sum over sine and cosine for Dph and Depsilon respectively
-  Dphi = 0.0;
-  Depsilon = 0.0;
+  *Dphi = 0.0;
+  *Depsilon = 0.0;
 
-  for (int i=0; i<63; i++)
+  for (i=0; i<63; i++)
   {
     arg = mul[i][0] * D  + \
           mul[i][1] * M  + \
@@ -224,12 +223,12 @@ void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
           mul[i][3] * F  + \
           mul[i][4] * Omega;
 
-    Dphi += c[i][0] * sin(arg);
-    Depsilon += c[i][1] * cos(arg);
+    *Dphi += c[i][0] * sin(arg);
+    *Depsilon += c[i][1] * cos(arg);
   }
 
-  Dphi = deg2rad(Dphi / 3.6e7);
-  Depsilon = deg2rad(Depsilon / 3.6e7);
+  *Dphi = deg2rad(*Dphi / 3.6e7);
+  *Depsilon = deg2rad(*Depsilon / 3.6e7);
 }
 
 /*!
@@ -245,10 +244,11 @@ void tmf::nutation(double& Dphi, double& Depsilon, const double& jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-double tmf::meanobliquity(const double& jde)
+double meanobliquity(const double jde)
 {
   double epsilon_0 = (23. * 3600.) + (26. * 60.) + 21.448;
 
+  int i = 0;
   const double T = (jde - 2451545.) / 36525.;
   const double U = T / 100;
   const double a[10] = {
@@ -267,7 +267,7 @@ double tmf::meanobliquity(const double& jde)
   // Ufac = { U, U^2, U^3, ... , U^10 }
   double Ufac = 1.0;
 
-  for (int i=0; i<10; i++)
+  for (i=0; i<10; i++)
   {
     Ufac *= U;
     epsilon_0 += a[i]*Ufac;

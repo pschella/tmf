@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -28,46 +28,37 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
-
 /*!
-  \brief Converts spherical coordinates to Cartesian coordinates
+  \brief Convert coordinates from ITRF to local Cartesian.
 
-  \param x x-coordinate
-  \param y y-coordinate
-  \param z z-coordinate
-  \param rho radius
-  \param theta inclination angle from z-axis
-  \param phi azimuth angle from x-axis
+  \param E easterly
+  \param N northerly
+  \param U upper
+  \param x ITRF x
+  \param y ITRF y
+  \param z ITRF z
+  \param ref_x reference x position in ITRF
+  \param ref_y reference y position in ITRF
+  \param ref_z reference z position in ITRF
+  \param ref_lon reference longitude in radians
+  \param ref_lat reference latitude in radians
  */
-void tmf::spherical2cartesian(double& x, double& y, double& z,
-    const double& rho, const double& theta, const double& phi)
+void itrf2local(double* E, double* N, double* U,
+    const double x, const double y, const double z,
+    const double ref_x, const double ref_y, const double ref_z,
+    const double ref_lon, const double ref_lat)
 {
-  const double st = sin(theta);
-  const double ct = cos(theta);
-  const double sp = sin(phi);
-  const double cp = cos(phi);
+  const double dx=x-ref_x;
+  const double dy=y-ref_y;
+  const double dz=z-ref_z;
 
-  x = rho * st * cp;
-  y = rho * st * sp;
-  z = rho * cp;
-}
+  const double sln = sin(ref_lon);
+  const double cln = cos(ref_lon);
+  const double slt = sin(ref_lat);
+  const double clt = cos(ref_lat);
 
-/*!
-  \brief Converts Cartesian coordinates to spherical coordinates
-
-  \param rho radius
-  \param theta inclination angle from z-axis
-  \param phi azimuth angle from x-axis
-  \param x x-coordinate
-  \param y y-coordinate
-  \param z z-coordinate
- */
-void tmf::cartesian2spherical(double& rho, double& theta, double& phi,
-    const double& x, const double& y, const double& z)
-{
-  rho = sqrt(x*x + y*y + z*z);
-  theta = acos(z/rho);
-  phi = atan2(y,x);
+  *E = -sln * dx + cln * dy;
+  *N = -slt * cln * dx - slt * sln * dy + clt * dz;
+  *U =  clt * cln * dx + clt * sln * dy + slt * dz;
 }
 

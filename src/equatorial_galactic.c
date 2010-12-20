@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,8 +27,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
 
 /*!
   \brief Conversion of equatorial coordinates to galactic coordinates.
@@ -43,19 +41,19 @@ using namespace std;
   \param alpha right ascension in radians (B1950.0 equinox)
   \param delta declination in radians (B1950.0 equinox)
  */
-void tmf::equatorial2galactic(double& l, double& b,
-    const double& alpha, const double& delta)
+void equatorial2galactic(double* l, double* b,
+    const double alpha, const double delta)
 {
   const double sdp = sin(deg2rad(27.4));
   const double cdp = cos(deg2rad(27.4));
   const double sap = sin(deg2rad(192.25) - alpha);
   const double cap = cos(deg2rad(192.25) - alpha);
 
-  l = deg2rad(303.) - atan2(sap, (cap * sdp - tan(delta) * cdp));
-  b = asin(sin(delta) * sdp + cos(delta) * cdp * cap);
+  *l = deg2rad(303.) - atan2(sap, (cap * sdp - tan(delta) * cdp));
+  *b = asin(sin(delta) * sdp + cos(delta) * cdp * cap);
 
   // Ensure l is in the range [0,2*pi)
-  l = rad2circle(l);
+  *l = rad2circle(*l);
 }
 
 /*!
@@ -71,18 +69,18 @@ void tmf::equatorial2galactic(double& l, double& b,
   \param l galactic longitude in radians
   \param b galactic latitutde in radians
  */
-void tmf::galactic2equatorial(double& alpha, double& delta,
-    const double& l, const double& b)
+void galactic2equatorial(double* alpha, double* delta,
+    const double l, const double b)
 {
   const double sdp = sin(deg2rad(27.4));
   const double cdp = cos(deg2rad(27.4));
   const double sap = sin(l - deg2rad(123.));
   const double cap = cos(l - deg2rad(123.));
 
-  alpha = deg2rad(12.25) + atan2(sap, (cap * sdp - tan(b) * cdp));
-  delta = asin(sin(b) * sdp + cos(b) * cdp * cap);
+  *alpha = deg2rad(12.25) + atan2(sap, (cap * sdp - tan(b) * cdp));
+  *delta = asin(sin(b) * sdp + cos(b) * cdp * cap);
 
   // Ensure alpha is in the range [0,2*pi)
-  alpha = rad2circle(alpha);
+  *alpha = rad2circle(*alpha);
 }
 

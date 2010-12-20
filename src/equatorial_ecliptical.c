@@ -17,7 +17,8 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <stdlib.h>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -27,8 +28,6 @@
 
 // FORWARD REFERENCES
 //
-
-using namespace std;
 
 /*!
   \brief Conversion of equatorial coordinates to ecliptical coordinates.
@@ -46,12 +45,12 @@ using namespace std;
   \param delta declination in radians (B1950.0 equinox)
   \param jde Julian Date of TD (or equivalently TT)
  */
-void tmf::equatorial2ecliptic(double& lambda, double& beta,
-    const double& alpha, const double& delta,
-    const double& jde)
+void equatorial2ecliptic(double* lambda, double* beta,
+    const double alpha, const double delta,
+    const double jde)
 {
-  double Dphi = 0.0;
-  double Depsilon = 0.0;
+  double* Dphi = NULL;
+  double* Depsilon = NULL;
 
   // Get mean obliquity of the ecliptic
   double epsilon = meanobliquity(jde);
@@ -60,18 +59,17 @@ void tmf::equatorial2ecliptic(double& lambda, double& beta,
   nutation(Dphi, Depsilon, jde);
 
   // Correct for effect of nutation
-  epsilon += Depsilon;
+  epsilon += *Depsilon;
 
   const double se = sin(epsilon);
-  const double ce = cos(epsilon);
   const double sa = sin(alpha);
   const double ca = cos(alpha);
   const double sd = sin(delta);
   const double cd = cos(delta);
   const double td = tan(delta);
 
-  lambda = atan2(sa * cd + td * se, ca);
-  beta = asin(sd * ca - cd * se * sa);
+  *lambda = atan2(sa * cd + td * se, ca);
+  *beta = asin(sd * ca - cd * se * sa);
 }
 
 /*!
@@ -90,12 +88,12 @@ void tmf::equatorial2ecliptic(double& lambda, double& beta,
          ecliptic, negative if south in radians
   \param jde Julian Date of TD (or equivalently TT)
  */
-void tmf::ecliptic2equatorial(double& alpha, double& delta,
-    const double& lambda, const double& beta,
-    const double& jde)
+void ecliptic2equatorial(double* alpha, double* delta,
+    const double lambda, const double beta,
+    const double jde)
 {
-  double Dphi = 0.0;
-  double Depsilon = 0.0;
+  double* Dphi = NULL;
+  double* Depsilon = NULL;
 
   // Get mean obliquity of the ecliptic
   double epsilon = meanobliquity(jde);
@@ -104,7 +102,7 @@ void tmf::ecliptic2equatorial(double& alpha, double& delta,
   nutation(Dphi, Depsilon, jde);
 
   // Correct for effect of nutation
-  epsilon += Depsilon;
+  epsilon += *Depsilon;
 
   const double se = sin(epsilon);
   const double ce = cos(epsilon);
@@ -114,7 +112,7 @@ void tmf::ecliptic2equatorial(double& alpha, double& delta,
   const double cb = cos(beta);
   const double tb = tan(beta);
 
-  alpha = atan2(sl * ce - tb * se, cl);
-  delta = asin(sb * ce + cb * se * sl);
+  *alpha = atan2(sl * ce - tb * se, cl);
+  *delta = asin(sb * ce + cb * se * sl);
 }
 

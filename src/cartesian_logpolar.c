@@ -17,7 +17,7 @@
  **************************************************************************/
 
 // SYSTEM INCLUDES
-#include <cmath>
+#include <math.h>
 
 // PROJECT INCLUDES
 #include <tmf.h>
@@ -28,41 +28,33 @@
 // FORWARD REFERENCES
 //
 
-using namespace std;
-
 /*!
-  \brief Converts spherical coordinates to cylindrical coordinates
-  
-  Note that theta (the inclination angle from z-axis) is the same in both
-  systems.
+  \brief Converts logpolar coordinates to Cartesian coordinates
 
-  \param r cylindrical radius
-  \param h cylindrical height
+  \param x x-coordinate
+  \param y y-coordinate
   \param rho radius
-  \param phi azimuth angle from x-axis
+  \param theta angle with x-axis
  */
-void tmf::spherical2cylindrical(double r, double h,
-    const double& rho, const double& phi)
+void logpolar2cartesian(double* x, double* y,
+    const double rho, const double theta)
 {
-  r = rho * sin(phi);
-  h = rho * cos(phi);
+  *x = exp(rho) * cos(theta);
+  *y = exp(rho) * sin(theta);
 }
 
 /*!
-  \brief Converts cylindrical coordinates to spherical coordinates
-
-  Note that theta (the inclination angle from z-axis) is the same in both
-  systems.
+  \brief Converts Cartesian coordinates to logpolar coordinates
 
   \param rho radius
-  \param phi azimuth angle from x-axis
-  \param r cylindrical radius
-  \param h cylindrical height
+  \param theta angle with x-axis
+  \param x x-coordinate
+  \param y y-coordinate
  */
-void tmf::cylindrical2spherical(double& rho, double& phi,
-    const double& r, const double& h)
+void cartesian2logpolar(double* rho, double* theta,
+    const double x, const double y)
 {
-  rho = sqrt(r*r + h*h);
-  phi = atan(r/h);
+  *rho = log(sqrt(x*x + y*y));
+  *theta = atan(x / y);
 }
 

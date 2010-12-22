@@ -61,14 +61,7 @@ double hms2deg(const int h, const int m, const double s)
  */
 double dms2deg(const int d, const int am, const double as)
 {
-  if (d >= 0)
-  {
-    return (d + (am / 60.) + (as / 3600.));
-  }
-  else
-  {
-    return (d - (am / 60.) - (as / 3600.));
-  }
+  return (d + (am / 60.) + (as / 3600.));
 }
 
 /*!
@@ -95,23 +88,18 @@ void deg2hms(int* h, int* m, double* s, const double d)
 /*!
   \brief Convert degrees to degrees, min, sec
 
-  Note, angles outside of the range [0, 360) are projected onto this range.
-
   \param d degrees
   \param m minutes
   \param s seconds
   \param deg degrees
  */
-void deg2dms(int* d, int* m, double* s, const double deg)
+void deg2dms(int* d, int* m, double* s, double deg)
 {
-  const double D = fabs(fmod(deg, 360.));
-  const int sgn = (deg >= 0) ? 1 : -1;
-
-  *d = (int)D;
-  *m = (int)((D - *d) * 60.);
-  *s = (D - *d - (*m / 60.)) * 3600.;
-
-  *d *= sgn;
+  *d = (int)deg;
+  deg -= *d;
+  *m = (int)(deg * 60.);
+  deg -= *m / 60.;
+  *s = deg * 3600.;
 }
 
 /*!
@@ -139,14 +127,7 @@ double hms2rad(const int h, const int m, const double s)
  */
 double dms2rad(const int d, const int am, const double as)
 {
-  if (d >= 0)
-  {
-    return deg2rad((d + (am / 60.) + (as / 3600.)));
-  }
-  else
-  {
-    return deg2rad((d - (am / 60.) - (as / 3600.)));
-  }
+  return deg2rad((d + (am / 60.) + (as / 3600.)));
 }
 
 /*!
@@ -169,6 +150,8 @@ void rad2hms(int* h, int* m, double* s, const double r)
 /*!
   \brief Convert radians to degrees, min, sec
 
+  Note, angles outside of the range [0, 2*pi) are projected onto this range.
+
   \param d radians
   \param m minutes
   \param s seconds
@@ -176,14 +159,13 @@ void rad2hms(int* h, int* m, double* s, const double r)
  */
 void rad2dms(int* d, int* m, double* s, const double r)
 {
-  const double D = fabs(rad2deg(r));
-  const int sgn = (r >= 0) ? 1 : -1;
+  double deg = rad2deg(r);
 
-  *d = (int)D;
-  *m = (int)((D - *d) * 60.);
-  *s = (D - *d - (*m / 60.)) * 3600.;
-
-  *d *= sgn;
+  *d = (int)deg;
+  deg -= *d;
+  *m = (int)(deg * 60.);
+  deg -= *m / 60.;
+  *s = deg * 3600.;
 }
 
 /*!

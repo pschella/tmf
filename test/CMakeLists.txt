@@ -1,6 +1,7 @@
 if (${TMF_WITH_TESTS})
   set (tests
       test_equatorial_horizontal
+      test_nutation_obliquity
       )
   
   foreach (test ${tests})

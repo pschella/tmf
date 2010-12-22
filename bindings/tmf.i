@@ -11,107 +11,111 @@
 /* Generate wrappers for the following functions */
 
 /* angles.c */
-double deg2rad(const double a);
+double deg2rad(double a);
 
-double rad2deg(const double a);
+double rad2deg(double a);
 
-double jd2mjd(const double jd);
+double jd2mjd(double jd);
 
-double mjd2jd(const double mjd);
+double mjd2jd(double mjd);
 
-double hms2deg(const int h, const int m, const double s);
+double hms2deg(int h, int m, double s);
 
-double dms2deg(const int d, const int am, const double as);
+double dms2deg(int d, int am, double as);
 
-void deg2hms(int* OUTPUT, int* OUTPUT, double* OUTPUT, const double d);
+void deg2hms(int* OUTPUT, int* OUTPUT, double* OUTPUT, double d);
 
-void deg2dms(int* OUTPUT, int* OUTPUT, double* OUTPUT, const double deg);
+void deg2dms(int* OUTPUT, int* OUTPUT, double* OUTPUT, double deg);
 
-double hms2rad(const int h, const int m, const double s);
+double hms2rad(int h, int m, double s);
 
-double dms2rad(const int d, const int am, const double as);
+double dms2rad(int d, int am, double as);
 
-void rad2hms(int* OUTPUT, int* OUTPUT, double* OUTPUT, const double r);
+void rad2hms(int* OUTPUT, int* OUTPUT, double* OUTPUT, double r);
 
-void rad2dms(int* OUTPUT, int* OUTPUT, double* OUTPUT, const double r);
+void rad2dms(int* OUTPUT, int* OUTPUT, double* OUTPUT, double r);
 
-double rad2circle(const double phi);
+double rad2circle(double phi);
 
-double deg2circle(const double phi);
+double deg2circle(double phi);
 
 /* epoch.c */
-void j20002b1950(double* OUTPUT, double* OUTPUT, const double alpha_J, const double delta_J);
+void j20002b1950(double* OUTPUT, double* OUTPUT, double alpha_J, double delta_J);
 
-void b19502j2000(double* OUTPUT, double* OUTPUT, const double alpha_B, const double delta_B);
+void b19502j2000(double* OUTPUT, double* OUTPUT, double alpha_B, double delta_B);
 
 /* cartesian_logpolar.c */
-void logpolar2cartesian(double* OUTPUT, double* OUTPUT, const double rho, const double theta);
+void logpolar2cartesian(double* OUTPUT, double* OUTPUT, double rho, double theta);
 
-void cartesian2logpolar(double* OUTPUT, double* OUTPUT, const double x, const double y);
+void cartesian2logpolar(double* OUTPUT, double* OUTPUT, double x, double y);
 
 /* cartesian_polar.c */
-void polar2cartesian(double* OUTPUT, double* OUTPUT, const double r, const double theta);
+void polar2cartesian(double* OUTPUT, double* OUTPUT, double r, double theta);
 
-void cartesian2polar(double* OUTPUT, double* OUTPUT, const double x, const double y);
+void cartesian2polar(double* OUTPUT, double* OUTPUT, double x, double y);
 
 /* cartesian_spherical.c */
-void spherical2cartesian(double* OUTPUT, double* OUTPUT, double* OUTPUT, const double rho, const double theta, const double phi);
+void spherical2cartesian(double* OUTPUT, double* OUTPUT, double* OUTPUT, double rho, double theta, double phi);
 
-void cartesian2spherical(double* OUTPUT, double* OUTPUT, double* OUTPUT, const double x, const double y, const double z);
+void cartesian2spherical(double* OUTPUT, double* OUTPUT, double* OUTPUT, double x, double y, double z);
 
 /* cylindrical_spherical.c */
-void spherical2cylindrical(double* OUTPUT, double* OUTPUT, const double rho, const double phi);
+void spherical2cylindrical(double* OUTPUT, double* OUTPUT, double rho, double phi);
 
-void cylindrical2spherical(double* OUTPUT, double* OUTPUT, const double r, const double h);
+void cylindrical2spherical(double* OUTPUT, double* OUTPUT, double r, double h);
 
 /* equatorial_horizontal.c */
-void equatorial2horizontal(double* OUTPUT, double* OUTPUT, const double H, const double delta, const double phi);
+void equatorial2horizontal(double* OUTPUT, double* OUTPUT, double H, double delta, double phi);
 
-void horizontal2equatorial(double* OUTPUT, double* OUTPUT, const double A, const double h, const double phi);
+void horizontal2equatorial(double* OUTPUT, double* OUTPUT, double A, double h, double phi);
 
-void radec2azel(double* OUTPUT, double* OUTPUT, const double alpha, const double delta, const double utc, const double ut1_utc, const double L, const double phi);
+void radec2azel(double* OUTPUT, double* OUTPUT, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
 
-void azel2radec(double* OUTPUT, double* OUTPUT, const double A, const double h, const double utc, const double ut1_utc, const double L, const double phi);
+void azel2radec(double* OUTPUT, double* OUTPUT, double A, double h, double utc, double ut1_utc, double L, double phi);
 
 /* jd_date.c */
-double gregoriandate2jd(const int y, const int m, const double d);
+double gregoriandate2jd(int y, int m, double d);
 
-double juliandate2jd(const int y, const int m, const double d);
+double juliandate2jd(int y, int m, double d);
 
-double date2jd(const int y, const int m, const double d);
+double date2jd(int y, int m, double d);
 
-void jd2date(int* OUTPUT, int* OUTPUT, double* OUTPUT, const double jd);
+void jd2date(int* OUTPUT, int* OUTPUT, double* OUTPUT, double jd);
 
 /* nutation.c */
-void nutation(double* OUTPUT, double* OUTPUT, const double jde);
+double nutation(double jde);
 
-double meanobliquity(const double jde);
+double obliquity(double jde);
+
+double meanobliquity(double jde);
+
+double trueobliquity(double jde);
 
 /* sidereal_time.c */
-double gmst(const double jd);
+double gmst(double jd);
 
-double gast(const double jd, const double jde);
+double gast(double jd, double jde);
 
-double last(const double jd, const double jde, const double L);
+double last(double jd, double jde, double L);
 
 /* equatorial_galactic.c */
-void equatorial2galactic(double* OUTPUT, double* OUTPUT, const double alpha, const double delta);
+void equatorial2galactic(double* OUTPUT, double* OUTPUT, double alpha, double delta);
 
-void galactic2equatorial(double* OUTPUT, double* OUTPUT, const double l, const double b);
+void galactic2equatorial(double* OUTPUT, double* OUTPUT, double l, double b);
 
 /* utc.c */
-int tai_utc(const double utc);
+int tai_utc(double utc);
 
-double tt_utc(const double utc);
+double tt_utc(double utc);
 
 /* equatorial_ecliptic.c */
-void equatorial2ecliptic(double* OUTPUT, double* OUTPUT, const double alpha, const double delta, const double jde);
+void equatorial2ecliptic(double* OUTPUT, double* OUTPUT, double alpha, double delta, double jde);
 
-void ecliptic2equatorial(double* OUTPUT, double* OUTPUT, const double lambda, const double beta, const double jde);
+void ecliptic2equatorial(double* OUTPUT, double* OUTPUT, double lambda, double beta, double jde);
 
 /* itrf_local.c */
-void itrf2local(double* OUTPUT, double* OUTPUT, double* OUTPUT, const double x, const double y, const double z, const double ref_x, const double ref_y, const double ref_z, const double ref_lon, const double ref_lat);
+void itrf2local(double* OUTPUT, double* OUTPUT, double* OUTPUT, double x, double y, double z, double ref_x, double ref_y, double ref_z, double ref_lon, double ref_lat);
 
 /* hjd.c */
-double jd2hjd(const double jd, const double alpha, const double delta, const double utc, const double ut1_utc, const double L, const double phi);
+double jd2hjd(double jd, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
 

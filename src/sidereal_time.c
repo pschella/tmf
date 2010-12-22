@@ -65,17 +65,11 @@ double gmst(const double jd)
  */
 double gast(const double jd, const double jde)
 {
-  double Dphi = 0;
-  double Depsilon = 0;
+  // Get true obliquity of the ecliptic
+  const double epsilon = trueobliquity(jde);
 
-  // Get mean obliquity of the ecliptic
-  double epsilon = meanobliquity(jde);
-
-  // Get nutation and deviaton for obliquity of the ecliptic
-  nutation(&Dphi, &Depsilon, jde);
-
-  // Correct for effect of nutation
-  epsilon += Depsilon;
+  // Get nutation of the ecliptic
+  const double Dphi = nutation(jde);
 
   // Get Greenwhich Mean Siderial Time and add equation of the equinoxes
   return gmst(jd) + Dphi * cos(epsilon);

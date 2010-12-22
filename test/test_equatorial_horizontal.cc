@@ -11,7 +11,7 @@ using namespace std;
 int main()
 {
   double alpha = hms2rad(23, 9, 16.641);
-  double delta = dms2rad(-6, 43, 11.61);
+  double delta = dms2rad(-6, -43, -11.61);
   double L = dms2rad(77, 3, 56);
   double phi = dms2rad(38, 55, 17);
   int d, h, m;
@@ -44,7 +44,8 @@ int main()
   cout.precision(9);
   cout << "JD(TT) " << tt << endl;
 
-  nutation(&Dphi, &Depsilon, tt);
+  Dphi = nutation(tt);
+  Depsilon = obliquity(tt);
 
   epsilon = meanobliquity(ut) + Depsilon;
 
@@ -58,9 +59,7 @@ int main()
   cout << s << endl;
 
   // Calculate Greenwich Apparent Siderial Time
-  cout << "bla" << endl;
   double theta_0 = rad2circle(gast(ut, tt));
-  cout << "blaat" << endl;
   rad2hms(&h, &m, &s, theta_0);
 
   cout.precision(2);

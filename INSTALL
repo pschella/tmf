@@ -19,11 +19,36 @@ Follow the instructions on `http://www.cmake.org` to install cmake.
 
 To use the library use the include statement
 
-    #include <tmf>
+    #include <tmf.h>
 
 and add the following flag to your compiler/linker when building.
 
     -ltmf
 
-Note that all functions are part of the `tmf` namespace.
+Note that to use the functions from C++ you need to include the header
+as follows.
+
+extern "C"
+{
+#include <tmf.h>
+}
+
+################################ OPTIONAL ################################
+
+To build the SWIG bindings you need to have SWIG installed as well as the libraries for the target language.
+
+Then simply run:
+
+    ccmake .
+
+in the build directory and turn on the option for the target language.
+Then follow these steps again.
+
+- Build the library.
+
+    make
+
+- Install the bindings.
+
+    make install
 

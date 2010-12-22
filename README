@@ -6,7 +6,7 @@
 #                                                                          #
 ############################################################################
 
-Transmogrify is a fast, accurate and easy to use C/C++ library for
+Transmogrify is a fast, accurate and easy to use C library for
 astronomical coordinate and time transformations.
 
 Currently implemented are functions to:
@@ -17,9 +17,11 @@ Currently implemented are functions to:
   spherical and cylindrical.
 * Calculate nutation and obliquity of the ecliptic.
 * Calculate sidereal time (GMST, GAST and LAST).
-* Convert between equatorial and horizontal coordinates.
+* Convert between equatorial and horizontal (azimuth/elevation) coordinates.
 * Convert between equatorial and galactic coordinates.
 * Convert directions between J2000 and B1950 epochs.
+
+Also provided are SWIG generated bindings to allow all functions to be called from other languages (currently Python and Perl).
 
 Transmogrify is an Open Source project covered by the GNU General Public
 License. It was originally written by Pim Schellart.

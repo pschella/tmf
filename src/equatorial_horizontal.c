@@ -178,7 +178,7 @@ void radec2azel(double* A, double* h, const double alpha, const double delta, co
 void azel2radec(double* alpha, double* delta, const double A, const double h, const double utc, const double ut1_utc, const double L, const double phi)
 {
   // Variables
-  double *H = NULL;
+  double H = 0; 
 
   // Calculate Terestrial Time (TT)
   const double tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
@@ -190,9 +190,9 @@ void azel2radec(double* alpha, double* delta, const double A, const double h, co
   const double theta_L = last(ut1, tt, L);
 
   // Convert from equatorial to horizontal coordinates
-  horizontal2equatorial(H, delta, A, h, phi);
+  horizontal2equatorial(&H, delta, A, h, phi);
 
   // Calculate right ascention
-  *alpha = rad2circle(theta_L - *H);
+  *alpha = rad2circle(theta_L - H);
 }
 

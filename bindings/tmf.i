@@ -1,4 +1,4 @@
-%module tmf
+%module(docstring="Transmogrify is a fast, accurate and easy to use C/C++ library for astronomical coordinate and time transformations.") tmf
 %include "typemaps.i"
 %{
 /* Includes the header in the wrapper code */

@@ -1,13 +1,12 @@
-set (tests
-    test_jd_date
-    test_angles
-    test_equatorial_horizontal
-    test_equatorial_galactic
-    )
-
-foreach (test ${tests})
+if (${TMF_WITH_TESTS})
+  set (tests
+      test_equatorial_horizontal
+      )
+  
+  foreach (test ${tests})
     add_executable (${test} ${test}.cc)
-
+  
     target_link_libraries (${test} tmf)
-endforeach (test ${tests})
+  endforeach (test ${tests})
+endif (${TMF_WITH_TESTS})
 

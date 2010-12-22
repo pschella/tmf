@@ -1,9 +1,12 @@
 #include <iostream>
 #include <cmath>
+
+extern "C"
+{
 #include "../src/tmf.h"
+}
 
 using namespace std;
-using namespace tmf;
 
 int main()
 {
@@ -26,7 +29,7 @@ int main()
   // Calculate GMST
   double theta = rad2circle(gmst(ut));
 
-  rad2hms(h, m, s, theta);
+  rad2hms(&h, &m, &s, theta);
 
   cout << "GMST " << theta;
   cout.precision(2);
@@ -41,11 +44,11 @@ int main()
   cout.precision(9);
   cout << "JD(TT) " << tt << endl;
 
-  nutation(Dphi, Depsilon, tt);
+  nutation(&Dphi, &Depsilon, tt);
 
   epsilon = meanobliquity(ut) + Depsilon;
 
-  rad2dms(d, m, s, epsilon);
+  rad2dms(&d, &m, &s, epsilon);
 
   cout.precision(4);
   cout << "Dphi " << rad2deg(Dphi) * 3600 << " epsilon ";
@@ -55,8 +58,10 @@ int main()
   cout << s << endl;
 
   // Calculate Greenwich Apparent Siderial Time
+  cout << "bla" << endl;
   double theta_0 = rad2circle(gast(ut, tt));
-  rad2hms(h, m, s, theta_0);
+  cout << "blaat" << endl;
+  rad2hms(&h, &m, &s, theta_0);
 
   cout.precision(2);
   cout << "GAST " << theta_0 << " = " << h << " " << m << " ";
@@ -66,10 +71,10 @@ int main()
   // Calculate Local Apparant Sidereal Time
   double theta_L = rad2circle(last(ut, tt, L));
 
-  rad2hms(h, m, s, theta_L);
+  rad2hms(&h, &m, &s, theta_L);
   cout << "LAST " << h << " " << m << " " << s << endl;
 
-  rad2hms(h, m, s, alpha);
+  rad2hms(&h, &m, &s, alpha);
   cout << h << " " << m << " " << s << endl;
 
   // Calculate hour angle
@@ -81,13 +86,13 @@ int main()
   // Calculate Altitude and Azimuth
   double A = 0.;
   double h2 = 0.;
-  equatorial2horizontal(A, h2, H, delta, phi);
+  equatorial2horizontal(&A, &h2, H, delta, phi);
 
   cout.precision(5);
   cout << "A " << rad2deg(A) << " h " << rad2deg(h2) << endl;
 
   // Test the inverse transformations
-  horizontal2equatorial(H, delta, A, h2, phi);
+  horizontal2equatorial(&H, &delta, A, h2, phi);
 
   cout.precision(9);
   cout << "H " << rad2deg(H) << endl;

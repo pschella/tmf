@@ -49,17 +49,17 @@ void equatorial2ecliptic(double* lambda, double* beta,
     const double alpha, const double delta,
     const double jde)
 {
-  double* Dphi = NULL;
-  double* Depsilon = NULL;
+  double Dphi = 0;
+  double Depsilon = 0;
 
   // Get mean obliquity of the ecliptic
   double epsilon = meanobliquity(jde);
 
   // Get nutation and deviaton for obliquity of the ecliptic
-  nutation(Dphi, Depsilon, jde);
+  nutation(&Dphi, &Depsilon, jde);
 
   // Correct for effect of nutation
-  epsilon += *Depsilon;
+  epsilon += Depsilon;
 
   const double se = sin(epsilon);
   const double sa = sin(alpha);
@@ -92,17 +92,17 @@ void ecliptic2equatorial(double* alpha, double* delta,
     const double lambda, const double beta,
     const double jde)
 {
-  double* Dphi = NULL;
-  double* Depsilon = NULL;
+  double Dphi = 0;
+  double Depsilon = 0;
 
   // Get mean obliquity of the ecliptic
   double epsilon = meanobliquity(jde);
 
   // Get nutation and deviaton for obliquity of the ecliptic
-  nutation(Dphi, Depsilon, jde);
+  nutation(&Dphi, &Depsilon, jde);
 
   // Correct for effect of nutation
-  epsilon += *Depsilon;
+  epsilon += Depsilon;
 
   const double se = sin(epsilon);
   const double ce = cos(epsilon);

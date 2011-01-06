@@ -16,8 +16,8 @@
  *  along with this library. If not, see <http://www.gnu.org/licenses/>.  *
  **************************************************************************/
 
-#ifndef TMF_H
-#define TMF_H
+#ifndef __TMF_H__
+#define __TMF_H__
 
 // SYSTEM INCLUDES
 #include <math.h>
@@ -137,8 +137,11 @@ void ecliptic2equatorial(double* alpha, double* delta, double lambda, double bet
 /* itrf_local.c */
 void itrf2local(double* E, double* N, double* U, double x, double y, double z, double ref_x, double ref_y, double ref_z, double ref_lon, double ref_lat);
 
+/* distance.c */
+double angularseparation(double a1, double d1, double a2, double d2);
+
 /* hjd.c */
 double jd2hjd(double jd, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
 
-#endif // TMF_H
+#endif // __TMF_H__
 

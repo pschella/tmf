@@ -1,12 +1,10 @@
 #include <iostream>
 #include <cmath>
 
-extern "C"
-{
-#include "../src/tmf.h"
-}
+#include "../src/ctmf.h"
 
 using namespace std;
+using namespace tmf;
 
 int main()
 {

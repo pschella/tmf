@@ -116,6 +116,9 @@ void ecliptic2equatorial(double* OUTPUT, double* OUTPUT, double lambda, double b
 /* itrf_local.c */
 void itrf2local(double* OUTPUT, double* OUTPUT, double* OUTPUT, double x, double y, double z, double ref_x, double ref_y, double ref_z, double ref_lon, double ref_lat);
 
+/* distance.c */
+double angularseparation(double a1, double d1, double a2, double d2);
+
 /* hjd.c */
 double jd2hjd(double jd, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
 

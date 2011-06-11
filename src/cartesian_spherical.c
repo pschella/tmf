@@ -44,10 +44,11 @@ void spherical2cartesian(double* x, double* y, double* z,
   const double st = sin(theta);
   const double sp = sin(phi);
   const double cp = cos(phi);
+  const double ct = cos(theta);
 
   *x = rho * st * cp;
   *y = rho * st * sp;
-  *z = rho * cp;
+  *z = rho * ct;
 }
 
 /*!

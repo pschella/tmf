@@ -45,19 +45,19 @@
   \param delta declination in radians (B1950.0 equinox)
   \param jde Julian Date of TD (or equivalently TT)
  */
-void equatorial2ecliptic(double* lambda, double* beta,
-    const double alpha, const double delta,
-    const double jde)
+void equatorial2ecliptic(real_t* lambda, real_t* beta,
+    const real_t alpha, const real_t delta,
+    const real_t jde)
 {
   // Get true obliquity of the ecliptic
-  double epsilon = trueobliquity(jde);
+  real_t epsilon = trueobliquity(jde);
 
-  const double se = sin(epsilon);
-  const double sa = sin(alpha);
-  const double ca = cos(alpha);
-  const double sd = sin(delta);
-  const double cd = cos(delta);
-  const double td = tan(delta);
+  const real_t se = sin(epsilon);
+  const real_t sa = sin(alpha);
+  const real_t ca = cos(alpha);
+  const real_t sd = sin(delta);
+  const real_t cd = cos(delta);
+  const real_t td = tan(delta);
 
   *lambda = atan2(sa * cd + td * se, ca);
   *beta = asin(sd * ca - cd * se * sa);
@@ -79,20 +79,20 @@ void equatorial2ecliptic(double* lambda, double* beta,
          ecliptic, negative if south in radians
   \param jde Julian Date of TD (or equivalently TT)
  */
-void ecliptic2equatorial(double* alpha, double* delta,
-    const double lambda, const double beta,
-    const double jde)
+void ecliptic2equatorial(real_t* alpha, real_t* delta,
+    const real_t lambda, const real_t beta,
+    const real_t jde)
 {
   // Get true obliquity of the ecliptic
-  double epsilon = trueobliquity(jde);
+  real_t epsilon = trueobliquity(jde);
 
-  const double se = sin(epsilon);
-  const double ce = cos(epsilon);
-  const double sl = sin(lambda);
-  const double cl = cos(lambda);
-  const double sb = sin(beta);
-  const double cb = cos(beta);
-  const double tb = tan(beta);
+  const real_t se = sin(epsilon);
+  const real_t ce = cos(epsilon);
+  const real_t sl = sin(lambda);
+  const real_t cl = cos(lambda);
+  const real_t sb = sin(beta);
+  const real_t cb = cos(beta);
+  const real_t tb = tan(beta);
 
   *alpha = atan2(sl * ce - tb * se, cl);
   *delta = asin(sb * ce + cb * se * sl);

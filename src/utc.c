@@ -39,10 +39,10 @@
 
   \return TAI - UTC in seconds
  */
-int tai_utc(const double utc)
+int tai_utc(const real_t utc)
 {
   // Leap second table from the IERS Earth Orientation Centre bulletin C
-  const double ls[24] = {
+  const real_t ls[24] = {
       2441499.5,  // 1972  Jul.   1              - 1s
       2441683.5,  // 1973  Jan.   1              - 1s
       2442048.5,  // 1974  Jan.   1              - 1s
@@ -89,8 +89,8 @@ int tai_utc(const double utc)
 
   \return TT - UTC in seconds
  */
-double tt_utc(const double utc)
+real_t tt_utc(const real_t utc)
 {
-  return 32.184 + (double)(tai_utc(utc));
+  return 32.184 + (real_t)(tai_utc(utc));
 }
 

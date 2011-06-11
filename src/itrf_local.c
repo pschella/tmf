@@ -43,19 +43,19 @@
   \param ref_lon reference longitude in radians
   \param ref_lat reference latitude in radians
  */
-void itrf2local(double* E, double* N, double* U,
-    const double x, const double y, const double z,
-    const double ref_x, const double ref_y, const double ref_z,
-    const double ref_lon, const double ref_lat)
+void itrf2local(real_t* E, real_t* N, real_t* U,
+    const real_t x, const real_t y, const real_t z,
+    const real_t ref_x, const real_t ref_y, const real_t ref_z,
+    const real_t ref_lon, const real_t ref_lat)
 {
-  const double dx=x-ref_x;
-  const double dy=y-ref_y;
-  const double dz=z-ref_z;
+  const real_t dx=x-ref_x;
+  const real_t dy=y-ref_y;
+  const real_t dz=z-ref_z;
 
-  const double sln = sin(ref_lon);
-  const double cln = cos(ref_lon);
-  const double slt = sin(ref_lat);
-  const double clt = cos(ref_lat);
+  const real_t sln = sin(ref_lon);
+  const real_t cln = cos(ref_lon);
+  const real_t slt = sin(ref_lat);
+  const real_t clt = cos(ref_lat);
 
   *E = -sln * dx + cln * dy;
   *N = -slt * cln * dx - slt * sln * dy + clt * dz;

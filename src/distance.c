@@ -54,18 +54,18 @@
   \param d2 either declination (delta) or ecliptical latitude (beta) of
             second object in radians
  */
-double angularseparation(const double a1, const double d1, const double a2, const double d2)
+real_t angularseparation(const real_t a1, const real_t d1, const real_t a2, const real_t d2)
 {
-  const double cd1 = cos(d1);
-  const double sd1 = sin(d1);
-  const double cd2 = cos(d2);
-  const double sd2 = sin(d2);
-  const double c21 = cos(a2 - a1);
-  const double s21 = sin(a2 - a1);
+  const real_t cd1 = cos(d1);
+  const real_t sd1 = sin(d1);
+  const real_t cd2 = cos(d2);
+  const real_t sd2 = sin(d2);
+  const real_t c21 = cos(a2 - a1);
+  const real_t s21 = sin(a2 - a1);
 
-  const double x = cd1 * sd2 - sd1 * cd2 * c21;
-  const double y = cd2 * s21;
-  const double z = sd1 * sd2 + cd1 * cd2 * c21;
+  const real_t x = cd1 * sd2 - sd1 * cd2 * c21;
+  const real_t y = cd2 * s21;
+  const real_t z = sd1 * sd2 + cd1 * cd2 * c21;
 
   return atan2(sqrt(x*x + y*y), z);
 }

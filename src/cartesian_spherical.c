@@ -38,13 +38,13 @@
   \param theta inclination angle from z-axis
   \param phi azimuth angle from x-axis
  */
-void spherical2cartesian(double* x, double* y, double* z,
-    const double rho, const double theta, const double phi)
+void spherical2cartesian(real_t* x, real_t* y, real_t* z,
+    const real_t rho, const real_t theta, const real_t phi)
 {
-  const double st = sin(theta);
-  const double sp = sin(phi);
-  const double cp = cos(phi);
-  const double ct = cos(theta);
+  const real_t st = sin(theta);
+  const real_t sp = sin(phi);
+  const real_t cp = cos(phi);
+  const real_t ct = cos(theta);
 
   *x = rho * st * cp;
   *y = rho * st * sp;
@@ -61,8 +61,8 @@ void spherical2cartesian(double* x, double* y, double* z,
   \param y y-coordinate
   \param z z-coordinate
  */
-void cartesian2spherical(double* rho, double* theta, double* phi,
-    const double x, const double y, const double z)
+void cartesian2spherical(real_t* rho, real_t* theta, real_t* phi,
+    const real_t x, const real_t y, const real_t z)
 {
   *rho = sqrt(x*x + y*y + z*z);
   *theta = acos(z / *rho);

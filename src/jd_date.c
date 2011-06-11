@@ -37,7 +37,7 @@
   \param m month
   \param d day (with fraction)
  */
-double gregoriandate2jd(const int y, const int m, const double d)
+real_t gregoriandate2jd(const int y, const int m, const real_t d)
 {
   int Y;
   int M;
@@ -68,7 +68,7 @@ double gregoriandate2jd(const int y, const int m, const double d)
   \param m month
   \param d day (with fraction)
  */
-double juliandate2jd(const int y, const int m, const double d)
+real_t juliandate2jd(const int y, const int m, const real_t d)
 {
   int Y;
   int M;
@@ -96,9 +96,9 @@ double juliandate2jd(const int y, const int m, const double d)
   \param m month
   \param d day (with fraction)
  */
-double date2jd(const int y, const int m, const double d)
+real_t date2jd(const int y, const int m, const real_t d)
 {
-  double jd = 0;
+  real_t jd = 0;
 
   // Gregorian calendar
   if (y > 1582)
@@ -142,10 +142,10 @@ double date2jd(const int y, const int m, const double d)
   \param d day (with fraction)
   \param jd Julian day
  */
-void jd2date(int* y, int* m, double* d, const double jd)
+void jd2date(int* y, int* m, real_t* d, const real_t jd)
 {
   int Z, A, alpha, B, C, D, E;
-  double JD, F;
+  real_t JD, F;
 
   JD = jd+0.5;
 

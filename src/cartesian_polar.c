@@ -36,8 +36,8 @@
   \param r radius
   \param theta angle with x-axis
  */
-void polar2cartesian(double* x, double* y,
-    const double r, const double theta)
+void polar2cartesian(real_t* x, real_t* y,
+    const real_t r, const real_t theta)
 {
   *x = r * cos(theta);
   *y = r * sin(theta);
@@ -51,8 +51,8 @@ void polar2cartesian(double* x, double* y,
   \param x x-coordinate
   \param y y-coordinate
  */
-void cartesian2polar(double* r, double* theta,
-    const double x, const double y)
+void cartesian2polar(real_t* r, real_t* theta,
+    const real_t x, const real_t y)
 {
   *r = sqrt(x*x + y*y);
   *theta = atan2(y, x);

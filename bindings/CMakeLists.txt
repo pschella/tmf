@@ -1,7 +1,16 @@
-# Bindings for various languages
-option (TMF_WITH_PYTHON_BINDINGS ON)
-option (TMF_WITH_PERL_BINDINGS ON)
+option (TMF_WITH_PYTHON_BINDINGS "Build TMF Python bindings." ON)
 
-add_subdirectory (python)
-add_subdirectory (perl)
+find_package(SWIG)
+find_package(PythonLibs)
+
+if (${TMF_WITH_PYTHON_BINDINGS} AND ${PYTHONLIBS_FOUND})
+  include(${SWIG_USE_FILE})
+  
+  include_directories(${PYTHON_INCLUDE_PATH})
+  
+  swig_add_module(pytmf python pytmf.i)
+  swig_link_libraries(pytmf ${PYTHON_LIBRARIES} tmf)
+elseif (${TMF_WITH_PYTHON_BINDINGS} AND NOT ${PYTHONLIBS_FOUND})
+  message (STATUS "Cannot find Python libraries, Python bindings will NOT be build.")
+endif (${TMF_WITH_PYTHON_BINDINGS} AND ${PYTHONLIBS_FOUND})
 

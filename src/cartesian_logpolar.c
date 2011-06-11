@@ -36,8 +36,8 @@
   \param rho radius
   \param theta angle with x-axis
  */
-void logpolar2cartesian(double* x, double* y,
-    const double rho, const double theta)
+void logpolar2cartesian(real_t* x, real_t* y,
+    const real_t rho, const real_t theta)
 {
   *x = exp(rho) * cos(theta);
   *y = exp(rho) * sin(theta);
@@ -51,8 +51,8 @@ void logpolar2cartesian(double* x, double* y,
   \param x x-coordinate
   \param y y-coordinate
  */
-void cartesian2logpolar(double* rho, double* theta,
-    const double x, const double y)
+void cartesian2logpolar(real_t* rho, real_t* theta,
+    const real_t x, const real_t y)
 {
   *rho = log(sqrt(x*x + y*y));
   *theta = atan(x / y);

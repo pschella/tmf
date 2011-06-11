@@ -49,16 +49,16 @@
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void equatorial2horizontal(double* A, double* h,
-    const double H, const double delta, const double phi)
+void equatorial2horizontal(real_t* A, real_t* h,
+    const real_t H, const real_t delta, const real_t phi)
 {
-  const double sH = sin(H);
-  const double cH = cos(H);
-  const double sd = sin(delta);
-  const double cd = cos(delta);
-  const double td = tan(delta);
-  const double sp = sin(phi);
-  const double cp = cos(phi);
+  const real_t sH = sin(H);
+  const real_t cH = cos(H);
+  const real_t sd = sin(delta);
+  const real_t cd = cos(delta);
+  const real_t td = tan(delta);
+  const real_t sp = sin(phi);
+  const real_t cp = cos(phi);
 
   *A = atan2(sH, (cH * sp - td * cp)) - M_PI;
 
@@ -85,16 +85,16 @@ void equatorial2horizontal(double* A, double* h,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void horizontal2equatorial(double* H, double* delta,
-    const double A, const double h, const double phi)
+void horizontal2equatorial(real_t* H, real_t* delta,
+    const real_t A, const real_t h, const real_t phi)
 {
-  const double sA = sin(A-M_PI);
-  const double cA = cos(A-M_PI);
-  const double sp = sin(phi);
-  const double cp = cos(phi);
-  const double sh = sin(h);
-  const double ch = cos(h);
-  const double th = tan(h);
+  const real_t sA = sin(A-M_PI);
+  const real_t cA = cos(A-M_PI);
+  const real_t sp = sin(phi);
+  const real_t cp = cos(phi);
+  const real_t sh = sin(h);
+  const real_t ch = cos(h);
+  const real_t th = tan(h);
 
   *H = atan2(sA, (cA * sp + th * cp));
 
@@ -129,19 +129,19 @@ void horizontal2equatorial(double* H, double* delta,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void radec2azel(double* A, double* h, const double alpha, const double delta, const double utc, const double ut1_utc, const double L, const double phi)
+void radec2azel(real_t* A, real_t* h, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Calculate Terestrial Time (TT)
-  const double tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
+  const real_t tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
-  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
+  const real_t ut1 = utc + ut1_utc / SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
-  const double theta_L = last(ut1, tt, L);
+  const real_t theta_L = last(ut1, tt, L);
 
   // Calculate hour angle
-  const double H = rad2circle(theta_L - alpha);
+  const real_t H = rad2circle(theta_L - alpha);
 
   // Convert from equatorial to horizontal coordinates
   equatorial2horizontal(A, h, H, delta, phi);
@@ -175,19 +175,19 @@ void radec2azel(double* A, double* h, const double alpha, const double delta, co
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void azel2radec(double* alpha, double* delta, const double A, const double h, const double utc, const double ut1_utc, const double L, const double phi)
+void azel2radec(real_t* alpha, real_t* delta, const real_t A, const real_t h, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Variables
-  double H = 0; 
+  real_t H = 0; 
 
   // Calculate Terestrial Time (TT)
-  const double tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
+  const real_t tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
-  const double ut1 = utc + ut1_utc / SECONDS_PER_DAY;
+  const real_t ut1 = utc + ut1_utc / SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
-  const double theta_L = last(ut1, tt, L);
+  const real_t theta_L = last(ut1, tt, L);
 
   // Convert from equatorial to horizontal coordinates
   horizontal2equatorial(&H, delta, A, h, phi);

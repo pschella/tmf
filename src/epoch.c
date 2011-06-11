@@ -41,25 +41,25 @@
   \param alpha_J right ascension reffered to the J2000 standard epoch
   \param delta_J declination reffered to the J2000 standard epoch
  */
-void j20002b1950(double* alpha_B, double* delta_B,
-    const double alpha_J, const double delta_J)
+void j20002b1950(real_t* alpha_B, real_t* delta_B,
+    const real_t alpha_J, const real_t delta_J)
 {
   // Rotation matrix J2000 -> B1950
-  const double Rjb[3][3] = {
+  const real_t Rjb[3][3] = {
     { 9.99925421e-01, 1.11805983e-02, 4.85870406e-03},
     {-1.11813727e-02, 9.99937199e-01,-2.69609221e-05},
     {-4.85874763e-03,-2.72312417e-05, 9.99987696e-01}
   };
 
   // Calculate sines and cosines for increased speed and clarity
-  const double sa = sin(alpha_J);
-  const double ca = cos(alpha_J);
-  const double sd = sin(delta_J);
-  const double cd = cos(delta_J);
+  const real_t sa = sin(alpha_J);
+  const real_t ca = cos(alpha_J);
+  const real_t sd = sin(delta_J);
+  const real_t cd = cos(delta_J);
 
   /* Calculate new vector:
      (cos(alpha_B)*cos(delta_B), sin(alpha_B)*cos(delta_B), sin(delta_B) */
-  const double s[3]= {
+  const real_t s[3]= {
     Rjb[0][0] * ca * cd + \
     Rjb[0][1] * sa * cd + \
     Rjb[0][2] * sd,
@@ -91,25 +91,25 @@ void j20002b1950(double* alpha_B, double* delta_B,
   \param alpha_B right ascension reffered to the B1950 standard epoch
   \param delta_B declination reffered to the B1950 standard epoch
  */
-void b19502j2000(double* alpha_J, double* delta_J,
-    const double alpha_B, const double delta_B)
+void b19502j2000(real_t* alpha_J, real_t* delta_J,
+    const real_t alpha_B, const real_t delta_B)
 {
   // Rotation matrix B1950 -> J2000
-  const double Rbj[3][3] = {
+  const real_t Rbj[3][3] = {
     { 9.99925951e-01,-1.11806049e-02,-4.85870550e-03},
     { 1.11813779e-02, 9.99937782e-01,-2.73680983e-05},
     { 4.85875211e-03,-2.70945233e-05, 9.99988696e-01}
   };
 
   // Calculate sines and cosines for increased speed and clarity
-  const double sa = sin(alpha_B);
-  const double ca = cos(alpha_B);
-  const double sd = sin(delta_B);
-  const double cd = cos(delta_B);
+  const real_t sa = sin(alpha_B);
+  const real_t ca = cos(alpha_B);
+  const real_t sd = sin(delta_B);
+  const real_t cd = cos(delta_B);
 
   /* Calculate new vector:
      (cos(alpha_J)*cos(delta_J), sin(alpha_J)*cos(delta_J), sin(delta_J) */
-  const double s[3]= {
+  const real_t s[3]= {
     Rbj[0][0] * ca * cd + \
     Rbj[0][1] * sa * cd + \
     Rbj[0][2] * sd,

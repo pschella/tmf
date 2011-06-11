@@ -21,7 +21,7 @@ Currently implemented are functions to:
 * Convert between equatorial and galactic coordinates.
 * Convert directions between J2000 and B1950 epochs.
 
-Also provided are SWIG generated bindings to allow all functions to be called from other languages (currently Python and Perl).
+Also provided are SWIG generated bindings to allow all functions to be called from other languages (currently Python only).
 
 Transmogrify is an Open Source project covered by the GNU General Public
 License. It was originally written by Pim Schellart.

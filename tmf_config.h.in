@@ -16,45 +16,23 @@
  *  along with this library. If not, see <http://www.gnu.org/licenses/>.  *
  **************************************************************************/
 
-// SYSTEM INCLUDES
-#include <math.h>
+#ifndef __TMF_CONFIG_H__
+#define __TMF_CONFIG_H__
 
-// PROJECT INCLUDES
-#include <tmf.h>
+// Version information
+#define TMF_VERSION "${TMF_VERSION}"
+#define TMF_VERSION_MAJOR ${TMF_VERSION_MAJOR}
+#define TMF_VERSION_MINOR ${TMF_VERSION_MINOR}
+#define TMF_VERSION_PATCH ${TMF_VERSION_PATCH}
 
-// LOCAL INCLUDES
-//
+// Single or double precision library
+#cmakedefine TMF_SINGLE_PRECISION
 
-// FORWARD REFERENCES
-//
+#ifdef TMF_SINGLE_PRECISION
+typedef float real_t;
+#else
+typedef double real_t;
+#endif
 
-/*!
-  \brief Convert Julian day to the Heliocentric frame by correcting for the
-  projected light travel time between the Earth and the Sun.
-
-  \return hjd Julian day
-
-  \param jd year
-  \param alpha right ascension
-  \param delta declination, positive if north of the celestial equator,
-  \param utc (universal time coordinated) as Julian day
-  \param ut1_utc difference UT1-UTC (as obtained from IERS bullitin A)
-         if 0 a maximum error of 0.9 seconds is made.
-  \param L observer's longitude (positive east, negative west
-         from Greenwich)
-  \param phi observer's latitude, positive if in the northern hemisphere,
-         negative in the southern one
- */
-real_t jd2hjd(const real_t jd, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
-{
-  // Calculate Earth - Sun distance
-  const real_t r = 1.;
-
-  // Calculate right ascension and declination of the sun
-  const real_t alpha_sun = 0.;
-  const real_t delta_sun = 0.;
-
-  return jd - (r / SPEED_OF_LIGHT) * (sin(delta) * sin(delta_sun)
-      + cos(delta) * cos(delta_sun) * cos(alpha - alpha_sun));
-}
+#endif // __TMF_CONFIG_H__
 

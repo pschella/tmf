@@ -23,6 +23,7 @@
 #include <math.h>
 
 // PROJECT INCLUDES
+#include <tmf_config.h>
 #include <constants.h>
 
 // LOCAL INCLUDES
@@ -32,116 +33,116 @@
 //
 
 /* angles.c */
-double deg2rad(double a);
+real_t deg2rad(real_t a);
 
-double rad2deg(double a);
+real_t rad2deg(real_t a);
 
-double jd2mjd(double jd);
+real_t jd2mjd(real_t jd);
 
-double mjd2jd(double mjd);
+real_t mjd2jd(real_t mjd);
 
-double hms2deg(int h, int m, double s);
+real_t hms2deg(int h, int m, real_t s);
 
-double dms2deg(int d, int am, double as);
+real_t dms2deg(int d, int am, real_t as);
 
-void deg2hms(int* h, int* m, double* s, double d);
+void deg2hms(int* h, int* m, real_t* s, real_t d);
 
-void deg2dms(int* d, int* m, double* s, double deg);
+void deg2dms(int* d, int* m, real_t* s, real_t deg);
 
-double hms2rad(int h, int m, double s);
+real_t hms2rad(int h, int m, real_t s);
 
-double dms2rad(int d, int am, double as);
+real_t dms2rad(int d, int am, real_t as);
 
-void rad2hms(int* h, int* m, double* s, double r);
+void rad2hms(int* h, int* m, real_t* s, real_t r);
 
-void rad2dms(int* d, int* m, double* s, double r);
+void rad2dms(int* d, int* m, real_t* s, real_t r);
 
-double rad2circle(double phi);
+real_t rad2circle(real_t phi);
 
-double deg2circle(double phi);
+real_t deg2circle(real_t phi);
 
 /* epoch.c */
-void j20002b1950(double* alpha_B, double* delta_B, double alpha_J, double delta_J);
+void j20002b1950(real_t* alpha_B, real_t* delta_B, real_t alpha_J, real_t delta_J);
 
-void b19502j2000(double* alpha_J, double* delta_J, double alpha_B, double delta_B);
+void b19502j2000(real_t* alpha_J, real_t* delta_J, real_t alpha_B, real_t delta_B);
 
 /* cartesian_logpolar.c */
-void logpolar2cartesian(double* x, double* y, double rho, double theta);
+void logpolar2cartesian(real_t* x, real_t* y, real_t rho, real_t theta);
 
-void cartesian2logpolar(double* rho, double* theta, double x, double y);
+void cartesian2logpolar(real_t* rho, real_t* theta, real_t x, real_t y);
 
 /* cartesian_polar.c */
-void polar2cartesian(double* x, double* y, double r, double theta);
+void polar2cartesian(real_t* x, real_t* y, real_t r, real_t theta);
 
-void cartesian2polar(double* r, double* theta, double x, double y);
+void cartesian2polar(real_t* r, real_t* theta, real_t x, real_t y);
 
 /* cartesian_spherical.c */
-void spherical2cartesian(double* x, double* y, double* z, double rho, double theta, double phi);
+void spherical2cartesian(real_t* x, real_t* y, real_t* z, real_t rho, real_t theta, real_t phi);
 
-void cartesian2spherical(double* rho, double* theta, double* phi, double x, double y, double z);
+void cartesian2spherical(real_t* rho, real_t* theta, real_t* phi, real_t x, real_t y, real_t z);
 
 /* cylindrical_spherical.c */
-void spherical2cylindrical(double* r, double* h, double rho, double phi);
+void spherical2cylindrical(real_t* r, real_t* h, real_t rho, real_t phi);
 
-void cylindrical2spherical(double* rho, double* phi, double r, double h);
+void cylindrical2spherical(real_t* rho, real_t* phi, real_t r, real_t h);
 
 /* equatorial_horizontal.c */
-void equatorial2horizontal(double* A, double* h, double H, double delta, double phi);
+void equatorial2horizontal(real_t* A, real_t* h, real_t H, real_t delta, real_t phi);
 
-void horizontal2equatorial(double* H, double* delta, double A, double h, double phi);
+void horizontal2equatorial(real_t* H, real_t* delta, real_t A, real_t h, real_t phi);
 
-void radec2azel(double* A, double* h, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
+void radec2azel(real_t* A, real_t* h, real_t alpha, real_t delta, real_t utc, real_t ut1_utc, real_t L, real_t phi);
 
-void azel2radec(double* alpha, double* delta, double A, double h, double utc, double ut1_utc, double L, double phi);
+void azel2radec(real_t* alpha, real_t* delta, real_t A, real_t h, real_t utc, real_t ut1_utc, real_t L, real_t phi);
 
 /* jd_date.c */
-double gregoriandate2jd(int y, int m, double d);
+real_t gregoriandate2jd(int y, int m, real_t d);
 
-double juliandate2jd(int y, int m, double d);
+real_t juliandate2jd(int y, int m, real_t d);
 
-double date2jd(int y, int m, double d);
+real_t date2jd(int y, int m, real_t d);
 
-void jd2date(int* y, int* m, double* d, double jd);
+void jd2date(int* y, int* m, real_t* d, real_t jd);
 
 /* nutation.c */
-double nutation(double jde);
+real_t nutation(real_t jde);
 
-double obliquity(double jde);
+real_t obliquity(real_t jde);
 
-double meanobliquity(double jde);
+real_t meanobliquity(real_t jde);
 
-double trueobliquity(double jde);
+real_t trueobliquity(real_t jde);
 
 /* sidereal_time.c */
-double gmst(double jd);
+real_t gmst(real_t jd);
 
-double gast(double jd, double jde);
+real_t gast(real_t jd, real_t jde);
 
-double last(double jd, double jde, double L);
+real_t last(real_t jd, real_t jde, real_t L);
 
 /* equatorial_galactic.c */
-void equatorial2galactic(double* l, double* b, double alpha, double delta);
+void equatorial2galactic(real_t* l, real_t* b, real_t alpha, real_t delta);
 
-void galactic2equatorial(double* alpha, double* delta, double l, double b);
+void galactic2equatorial(real_t* alpha, real_t* delta, real_t l, real_t b);
 
 /* utc.c */
-int tai_utc(double utc);
+int tai_utc(real_t utc);
 
-double tt_utc(double utc);
+real_t tt_utc(real_t utc);
 
 /* equatorial_ecliptic.c */
-void equatorial2ecliptic(double* lambda, double* beta, double alpha, double delta, double jde);
+void equatorial2ecliptic(real_t* lambda, real_t* beta, real_t alpha, real_t delta, real_t jde);
 
-void ecliptic2equatorial(double* alpha, double* delta, double lambda, double beta, double jde);
+void ecliptic2equatorial(real_t* alpha, real_t* delta, real_t lambda, real_t beta, real_t jde);
 
 /* itrf_local.c */
-void itrf2local(double* E, double* N, double* U, double x, double y, double z, double ref_x, double ref_y, double ref_z, double ref_lon, double ref_lat);
+void itrf2local(real_t* E, real_t* N, real_t* U, real_t x, real_t y, real_t z, real_t ref_x, real_t ref_y, real_t ref_z, real_t ref_lon, real_t ref_lat);
 
 /* distance.c */
-double angularseparation(double a1, double d1, double a2, double d2);
+real_t angularseparation(real_t a1, real_t d1, real_t a2, real_t d2);
 
 /* hjd.c */
-double jd2hjd(double jd, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
+real_t jd2hjd(real_t jd, real_t alpha, real_t delta, real_t utc, real_t ut1_utc, real_t L, real_t phi);
 
 #endif // __TMF_H__
 

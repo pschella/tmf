@@ -49,30 +49,30 @@
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-double nutation(const double jde)
+real_t nutation(const real_t jde)
 {
   int i = 0;
-  double Dphi = 0.0;
-  double arg = 0.0;
-  const double T = (jde - 2451545.) / 36525.;
-  const double T2 = T * T;
-  const double T3 = T * T2;
+  real_t Dphi = 0.0;
+  real_t arg = 0.0;
+  const real_t T = (jde - 2451545.) / 36525.;
+  const real_t T2 = T * T;
+  const real_t T3 = T * T2;
 
   // Mean elongation of the Moon from the Sun
-  const double D = (297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.) * M_PI / 180.;
+  const real_t D = (297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.) * M_PI / 180.;
 
   // Mean anomaly of the Sun (Earth)
-  const double M = (357.52772 + 35999.050340 * T - 0.0001603 * T2 + T3 / 300000.) * M_PI / 180.;
+  const real_t M = (357.52772 + 35999.050340 * T - 0.0001603 * T2 + T3 / 300000.) * M_PI / 180.;
 
   // Mean anomaly of the Moon
-  const double Mm = (134.96298 + 477198.867398 * T - 0.0086972 * T2 + T3 / 56250.) * M_PI / 180.;
+  const real_t Mm = (134.96298 + 477198.867398 * T - 0.0086972 * T2 + T3 / 56250.) * M_PI / 180.;
 
   // Moon's argument of latitude
-  const double F = (93.27191 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.) * M_PI / 180.;
+  const real_t F = (93.27191 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.) * M_PI / 180.;
 
   /* Longitude of the ascending node of the Moon's mean orbit on the
      ecliptic, measured from the mean equinox of the date */
-  const double Omega = (125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.) * M_PI / 180.;
+  const real_t Omega = (125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.) * M_PI / 180.;
 
   /* Argument for trigonometric functions in terms of 
      multiples of D, M, Md, F, Omega */
@@ -143,7 +143,7 @@ double nutation(const double jde)
   };
 
   /* Coefficients of sine and cosine for Dphi in units of 0''.00001 */
-  const double c[63] = {
+  const real_t c[63] = {
     -171996 - 174.2 * T,
        -13187 - 1.6 * T,
         -2274 - 0.2 * T,
@@ -245,30 +245,30 @@ double nutation(const double jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-double obliquity(const double jde)
+real_t obliquity(const real_t jde)
 {
   int i = 0;
-  double Depsilon = 0.0;
-  double arg = 0.0;
-  const double T = (jde - 2451545.) / 36525.;
-  const double T2 = T * T;
-  const double T3 = T * T2;
+  real_t Depsilon = 0.0;
+  real_t arg = 0.0;
+  const real_t T = (jde - 2451545.) / 36525.;
+  const real_t T2 = T * T;
+  const real_t T3 = T * T2;
 
   // Mean elongation of the Moon from the Sun
-  const double D = (297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.) * M_PI / 180.;
+  const real_t D = (297.85036 + 445267.111480 * T - 0.0019142 * T2 + T3 / 189474.) * M_PI / 180.;
 
   // Mean anomaly of the Sun (Earth)
-  const double M = (357.52772 + 35999.050340 * T - 0.0001603 * T2 + T3 / 300000.) * M_PI / 180.;
+  const real_t M = (357.52772 + 35999.050340 * T - 0.0001603 * T2 + T3 / 300000.) * M_PI / 180.;
 
   // Mean anomaly of the Moon
-  const double Mm = (134.96298 + 477198.867398 * T - 0.0086972 * T2 + T3 / 56250.) * M_PI / 180.;
+  const real_t Mm = (134.96298 + 477198.867398 * T - 0.0086972 * T2 + T3 / 56250.) * M_PI / 180.;
 
   // Moon's argument of latitude
-  const double F = (93.27191 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.) * M_PI / 180.;
+  const real_t F = (93.27191 + 483202.017538 * T - 0.0036825 * T2 + T3 / 327270.) * M_PI / 180.;
 
   /* Longitude of the ascending node of the Moon's mean orbit on the
      ecliptic, measured from the mean equinox of the date */
-  const double Omega = (125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.) * M_PI / 180.;
+  const real_t Omega = (125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.) * M_PI / 180.;
 
   /* Argument for trigonometric functions in terms of 
      multiples of D, M, Md, F, Omega */
@@ -314,7 +314,7 @@ double obliquity(const double jde)
   };
 
   /* Coefficients of sine and cosine for Depsilon in units of 0''.00001 */
-  const double c[38] = {
+  const real_t c[38] = {
      92025 + 8.9 * T,
       5736 - 3.1 * T,
        977 - 0.5 * T,
@@ -383,14 +383,14 @@ double obliquity(const double jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-double meanobliquity(const double jde)
+real_t meanobliquity(const real_t jde)
 {
-  double epsilon_0 = (23. * 3600.) + (26. * 60.) + 21.448;
+  real_t epsilon_0 = (23. * 3600.) + (26. * 60.) + 21.448;
 
   int i = 0;
-  const double T = (jde - 2451545.) / 36525.;
-  const double U = T / 100;
-  const double a[10] = {
+  const real_t T = (jde - 2451545.) / 36525.;
+  const real_t U = T / 100;
+  const real_t a[10] = {
     -4680.93,
     -1.55,
      1999.25,
@@ -404,7 +404,7 @@ double meanobliquity(const double jde)
   };
 
   // Ufac = { U, U^2, U^3, ... , U^10 }
-  double Ufac = 1.0;
+  real_t Ufac = 1.0;
 
   for (i=0; i<10; i++)
   {
@@ -428,10 +428,10 @@ double meanobliquity(const double jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-double trueobliquity(const double jde)
+real_t trueobliquity(const real_t jde)
 {
-  const double epsilon_0 = meanobliquity(jde);
-  const double Depsilon = obliquity(jde);
+  const real_t epsilon_0 = meanobliquity(jde);
+  const real_t Depsilon = obliquity(jde);
 
   return epsilon_0 + Depsilon;
 }

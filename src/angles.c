@@ -28,13 +28,13 @@
 // FORWARD REFERENCES
 //
 
-double deg2rad(const double a) { return a * M_PI / 180.; };
+real_t deg2rad(const real_t a) { return a * M_PI / 180.; };
 
-double rad2deg(const double a) { return a * 180. / M_PI; };
+real_t rad2deg(const real_t a) { return a * 180. / M_PI; };
 
-double jd2mjd(const double jd) { return jd - 2400000.5; };
+real_t jd2mjd(const real_t jd) { return jd - 2400000.5; };
 
-double mjd2jd(const double mjd) { return mjd + 2400000.5; };
+real_t mjd2jd(const real_t mjd) { return mjd + 2400000.5; };
 
 /*!
   \brief Convert hours, min, sec to degrees
@@ -45,7 +45,7 @@ double mjd2jd(const double mjd) { return mjd + 2400000.5; };
   \param m minutes
   \param s seconds
  */
-double hms2deg(const int h, const int m, const double s)
+real_t hms2deg(const int h, const int m, const real_t s)
 {
   return (h + m / 60. + s / 3600.) * (180. / 12.);
 }
@@ -59,7 +59,7 @@ double hms2deg(const int h, const int m, const double s)
   \param am arcminutes
   \param as arcseconds
  */
-double dms2deg(const int d, const int am, const double as)
+real_t dms2deg(const int d, const int am, const real_t as)
 {
   return (d + (am / 60.) + (as / 3600.));
 }
@@ -74,11 +74,11 @@ double dms2deg(const int d, const int am, const double as)
   \param s seconds
   \param d degrees
  */
-void deg2hms(int* h, int* m, double* s, const double d)
+void deg2hms(int* h, int* m, real_t* s, const real_t d)
 {
   // Make sure D = [0, 360)
-  const double D = (d >= 0 ? fmod(d, 360.) : 360. + fmod(d, 360.));
-  const double H = D * 12. / 180.;
+  const real_t D = (d >= 0 ? fmod(d, 360.) : 360. + fmod(d, 360.));
+  const real_t H = D * 12. / 180.;
 
   *h = (int)H;
   *m = (int)((H - *h) * 60.);
@@ -93,7 +93,7 @@ void deg2hms(int* h, int* m, double* s, const double d)
   \param s seconds
   \param deg degrees
  */
-void deg2dms(int* d, int* m, double* s, double deg)
+void deg2dms(int* d, int* m, real_t* s, real_t deg)
 {
   *d = (int)deg;
   deg -= *d;
@@ -111,7 +111,7 @@ void deg2dms(int* d, int* m, double* s, double deg)
   \param m minutes
   \param s seconds
  */
-double hms2rad(const int h, const int m, const double s)
+real_t hms2rad(const int h, const int m, const real_t s)
 {
   return (h + m / 60. + s / 3600.) * (M_PI / 12.);
 }
@@ -125,7 +125,7 @@ double hms2rad(const int h, const int m, const double s)
   \param am arcminutes
   \param as arcseconds
  */
-double dms2rad(const int d, const int am, const double as)
+real_t dms2rad(const int d, const int am, const real_t as)
 {
   return deg2rad((d + (am / 60.) + (as / 3600.)));
 }
@@ -138,9 +138,9 @@ double dms2rad(const int d, const int am, const double as)
   \param s seconds
   \param r radians
  */
-void rad2hms(int* h, int* m, double* s, const double r)
+void rad2hms(int* h, int* m, real_t* s, const real_t r)
 {
-  const double H = r * 12. / M_PI;
+  const real_t H = r * 12. / M_PI;
 
   *h = (int)H;
   *m = (int)((H - *h) * 60.);
@@ -157,9 +157,9 @@ void rad2hms(int* h, int* m, double* s, const double r)
   \param s seconds
   \param r radians
  */
-void rad2dms(int* d, int* m, double* s, const double r)
+void rad2dms(int* d, int* m, real_t* s, const real_t r)
 {
-  double deg = rad2deg(r);
+  real_t deg = rad2deg(r);
 
   *d = (int)deg;
   deg -= *d;
@@ -175,9 +175,9 @@ void rad2dms(int* d, int* m, double* s, const double r)
 
   \returns angle in range [0,2*pi)
  */
-double rad2circle(const double phi)
+real_t rad2circle(const real_t phi)
 {
-  double p = fmod(phi, 2*M_PI);
+  real_t p = fmod(phi, 2*M_PI);
   
   return p < 0 ? 2*M_PI + p : p;
 }
@@ -189,9 +189,9 @@ double rad2circle(const double phi)
 
   \returns angle in range [0,360)
  */
-double deg2circle(const double phi)
+real_t deg2circle(const real_t phi)
 {
-  double p = fmod(phi, 360.);
+  real_t p = fmod(phi, 360.);
   
   return p < 0 ? 360. + p : p;
 }

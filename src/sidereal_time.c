@@ -43,9 +43,9 @@
 
   \param jd Julian Date of UT1
  */
-double gmst(const double jd)
+real_t gmst(const real_t jd)
 {
-  const double T = (jd - 2451545.) / 36525.;
+  const real_t T = (jd - 2451545.) / 36525.;
 
   return 4.8949612127 + 6.3003880989850 * (jd - 2451545.0) + 0.00000677071 * T * T - (T * T * T / 675616.95);
 }
@@ -63,13 +63,13 @@ double gmst(const double jd)
   \param jd Julian Date of UT1
   \param jde Julian Date of TD (or equivalently TT)
  */
-double gast(const double jd, const double jde)
+real_t gast(const real_t jd, const real_t jde)
 {
   // Get true obliquity of the ecliptic
-  const double epsilon = trueobliquity(jde);
+  const real_t epsilon = trueobliquity(jde);
 
   // Get nutation of the ecliptic
-  const double Dphi = nutation(jde);
+  const real_t Dphi = nutation(jde);
 
   // Get Greenwhich Mean Siderial Time and add equation of the equinoxes
   return gmst(jd) + Dphi * cos(epsilon);
@@ -93,7 +93,7 @@ double gast(const double jd, const double jde)
   \param L observer's longitude (positive east, negative west
          from Greenwich)
  */
-double last(const double jd, const double jde, const double L)
+real_t last(const real_t jd, const real_t jde, const real_t L)
 {
   /* Get Greenwich Apparent Siderial Time
      and correct for observer's longitude */

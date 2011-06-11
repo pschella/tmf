@@ -39,8 +39,8 @@
   \param rho radius
   \param phi azimuth angle from x-axis
  */
-void spherical2cylindrical(double* r, double* h,
-    const double rho, const double phi)
+void spherical2cylindrical(real_t* r, real_t* h,
+    const real_t rho, const real_t phi)
 {
   *r = rho * sin(phi);
   *h = rho * cos(phi);
@@ -57,8 +57,8 @@ void spherical2cylindrical(double* r, double* h,
   \param r cylindrical radius
   \param h cylindrical height
  */
-void cylindrical2spherical(double* rho, double* phi,
-    const double r, const double h)
+void cylindrical2spherical(real_t* rho, real_t* phi,
+    const real_t r, const real_t h)
 {
   *rho = sqrt(r*r + h*h);
   *phi = atan(r/h);

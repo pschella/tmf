@@ -3,6 +3,11 @@ option (TMF_WITH_PYTHON_BINDINGS "Build TMF Python bindings." ON)
 find_package(SWIG)
 find_package(PythonLibs)
 
+if (${TMF_WITH_PYTHON_BINDINGS} AND ${TMF_SINGLE_PRECISION})
+    message (WARNING "Python bindings disabled, cannot build against single precision library.")
+    set (TMF_WITH_PYTHON_BINDINGS OFF)
+endif (${TMF_WITH_PYTHON_BINDINGS} AND ${TMF_SINGLE_PRECISION})
+
 if (${TMF_WITH_PYTHON_BINDINGS} AND ${PYTHONLIBS_FOUND})
   include(${SWIG_USE_FILE})
   

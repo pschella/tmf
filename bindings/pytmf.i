@@ -6,7 +6,7 @@
 %}
 
 /* Parse constants header file to generate wrappers */
-%include "constants.h"
+%include "tmf_constants.h"
 
 /* Strip prefix */
 %rename("%(strip:[tmf_])s") "";

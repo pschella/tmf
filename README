@@ -6,7 +6,7 @@
 #                                                                          #
 ############################################################################
 
-Transmogrify is a fast, accurate and easy to use C library for
+Transmogrify (TMF) is a fast, accurate and easy to use C library for
 astronomical coordinate and time transformations.
 
 Currently implemented are functions to:

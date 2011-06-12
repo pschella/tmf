@@ -55,7 +55,7 @@ install (FILES ${tmf_headers} ${PROJECT_BINARY_DIR}/tmf_config.h
   )
 
 ## Bindings
-add_subdirectory (bindings)
+add_subdirectory (pytmf)
 
 ## Tests
 add_subdirectory (test)

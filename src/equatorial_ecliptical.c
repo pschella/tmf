@@ -45,7 +45,7 @@
   \param delta declination in radians (B1950.0 equinox)
   \param jde Julian Date of TD (or equivalently TT)
  */
-void tmf_equatorial_to_ecliptic(real_t* lambda, real_t* beta,
+void tmf_equatorial2ecliptic(real_t* lambda, real_t* beta,
     const real_t alpha, const real_t delta,
     const real_t jde)
 {
@@ -79,7 +79,7 @@ void tmf_equatorial_to_ecliptic(real_t* lambda, real_t* beta,
          ecliptic, negative if south in radians
   \param jde Julian Date of TD (or equivalently TT)
  */
-void tmf_ecliptic_to_equatorial(real_t* alpha, real_t* delta,
+void tmf_ecliptic2equatorial(real_t* alpha, real_t* delta,
     const real_t lambda, const real_t beta,
     const real_t jde)
 {

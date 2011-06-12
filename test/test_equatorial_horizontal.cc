@@ -18,7 +18,7 @@ int main()
   cout << "L " << tmf_rad2deg(L) << " phi " << tmf_rad2deg(phi) << endl;
 
   // Calculate JD(UT1)
-  double ut = tmf_gregorian_to_jd(1987, 4, 10. + ((19. + 21. / 60.) / 24.));
+  double ut = tmf_gregorian2jd(1987, 4, 10. + ((19. + 21. / 60.) / 24.));
 
   cout.precision(9);
   cout << "JD(UT1) " << ut << endl;
@@ -35,8 +35,8 @@ int main()
   cout << s <<endl;
 
   // Calculate precession and nutation of the ecliptic
-  double dtt = tmf_delta_tt_utc(tmf_date_to_jd(1987, 4, 10. + ((19. + 21. / 60.) / 24.)));
-  double tt = tmf_gregorian_to_jd(1987, 4, 10. + ((19. + 21. / 60. + dtt / 3600.) / 24.));
+  double dtt = tmf_delta_tt_utc(tmf_date2jd(1987, 4, 10. + ((19. + 21. / 60.) / 24.)));
+  double tt = tmf_gregorian2jd(1987, 4, 10. + ((19. + 21. / 60. + dtt / 3600.) / 24.));
 
   cout.precision(9);
   cout << "JD(TT) " << tt << endl;
@@ -82,13 +82,13 @@ int main()
   // Calculate Altitude and Azimuth
   double A = 0.;
   double h2 = 0.;
-  tmf_equatorial_to_horizontal(&A, &h2, H, delta, phi);
+  tmf_equatorial2horizontal(&A, &h2, H, delta, phi);
 
   cout.precision(5);
   cout << "A " << tmf_rad2deg(A) << " h " << tmf_rad2deg(h2) << endl;
 
   // Test the inverse transformations
-  tmf_horizontal_to_equatorial(&H, &delta, A, h2, phi);
+  tmf_horizontal2equatorial(&H, &delta, A, h2, phi);
 
   cout.precision(9);
   cout << "H " << tmf_rad2deg(H) << endl;

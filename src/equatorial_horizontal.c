@@ -49,7 +49,7 @@
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf_equatorial_to_horizontal(real_t* A, real_t* h,
+void tmf_equatorial2horizontal(real_t* A, real_t* h,
     const real_t H, const real_t delta, const real_t phi)
 {
   const real_t sH = sin(H);
@@ -85,7 +85,7 @@ void tmf_equatorial_to_horizontal(real_t* A, real_t* h,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf_horizontal_to_equatorial(real_t* H, real_t* delta,
+void tmf_horizontal2equatorial(real_t* H, real_t* delta,
     const real_t A, const real_t h, const real_t phi)
 {
   const real_t sA = sin(A-M_PI);
@@ -129,7 +129,7 @@ void tmf_horizontal_to_equatorial(real_t* H, real_t* delta,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf_radec_to_azel(real_t* A, real_t* h, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
+void tmf_radec2azel(real_t* A, real_t* h, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Calculate Terestrial Time (TT)
   const real_t tt = utc + tmf_delta_tt_utc(utc) / SECONDS_PER_DAY;
@@ -144,7 +144,7 @@ void tmf_radec_to_azel(real_t* A, real_t* h, const real_t alpha, const real_t de
   const real_t H = tmf_rad2circle(theta_L - alpha);
 
   // Convert from equatorial to horizontal coordinates
-  tmf_equatorial_to_horizontal(A, h, H, delta, phi);
+  tmf_equatorial2horizontal(A, h, H, delta, phi);
 }
 
 /*!
@@ -175,7 +175,7 @@ void tmf_radec_to_azel(real_t* A, real_t* h, const real_t alpha, const real_t de
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void tmf_azel_to_radec(real_t* alpha, real_t* delta, const real_t A, const real_t h, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
+void tmf_azel2radec(real_t* alpha, real_t* delta, const real_t A, const real_t h, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Variables
   real_t H = 0; 
@@ -190,7 +190,7 @@ void tmf_azel_to_radec(real_t* alpha, real_t* delta, const real_t A, const real_
   const real_t theta_L = tmf_last(ut1, tt, L);
 
   // Convert from equatorial to horizontal coordinates
-  tmf_horizontal_to_equatorial(&H, delta, A, h, phi);
+  tmf_horizontal2equatorial(&H, delta, A, h, phi);
 
   // Calculate right ascention
   *alpha = tmf_rad2circle(theta_L - H);

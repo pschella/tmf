@@ -19,11 +19,11 @@ int main()
 
   cout << "alpha = " << alpha << " delta = " << delta << " (radians)" << endl;
 
-  tmf_equatorial_to_galactic(&l, &b, alpha, delta);
+  tmf_equatorial2galactic(&l, &b, alpha, delta);
 
   cout << "l = " << tmf_rad2deg(l) << " b = " << tmf_rad2deg(b) << endl;
 
-  tmf_galactic_to_equatorial(&alpha, &delta, l, b);
+  tmf_galactic2equatorial(&alpha, &delta, l, b);
 
   cout << "alpha = " << alpha << " delta = " << delta << " (radians)" << endl;
 
@@ -38,11 +38,11 @@ int main()
 
   cout << "(B1950) alpha = " << tmf_rad2deg(alpha) << " delta = " << tmf_rad2deg(delta) << " (degrees)" << endl;
 
-  tmf_b1950_to_j2000(&alpha_J, &delta_J, alpha, delta);
+  tmf_b19502j2000(&alpha_J, &delta_J, alpha, delta);
 
   cout << "(J2000) alpha = " << tmf_rad2deg(alpha_J) << " delta = " << tmf_rad2deg(delta_J) << " (degrees)" << endl;
 
-  tmf_j2000_to_b1950(&alpha, &delta, alpha_J, delta_J);
+  tmf_j20002b1950(&alpha, &delta, alpha_J, delta_J);
 
   cout << "(B1950) alpha = " << tmf_rad2deg(alpha) << " delta = " << tmf_rad2deg(delta) << " (degrees)" << endl;
 

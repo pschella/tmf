@@ -36,7 +36,7 @@
   \param r radius
   \param theta angle with x-axis
  */
-void tmf_polar_to_cartesian(real_t* x, real_t* y,
+void tmf_polar2cartesian(real_t* x, real_t* y,
     const real_t r, const real_t theta)
 {
   *x = r * cos(theta);
@@ -51,7 +51,7 @@ void tmf_polar_to_cartesian(real_t* x, real_t* y,
   \param x x-coordinate
   \param y y-coordinate
  */
-void tmf_cartesian_to_polar(real_t* r, real_t* theta,
+void tmf_cartesian2polar(real_t* r, real_t* theta,
     const real_t x, const real_t y)
 {
   *r = sqrt(x*x + y*y);

@@ -39,7 +39,7 @@
   \param rho radius
   \param phi azimuth angle from x-axis
  */
-void tmf_spherical_to_cylindrical(real_t* r, real_t* h,
+void tmf_spherical2cylindrical(real_t* r, real_t* h,
     const real_t rho, const real_t phi)
 {
   *r = rho * sin(phi);
@@ -57,7 +57,7 @@ void tmf_spherical_to_cylindrical(real_t* r, real_t* h,
   \param r cylindrical radius
   \param h cylindrical height
  */
-void tmf_cylindrical_to_spherical(real_t* rho, real_t* phi,
+void tmf_cylindrical2spherical(real_t* rho, real_t* phi,
     const real_t r, const real_t h)
 {
   *rho = sqrt(r*r + h*h);

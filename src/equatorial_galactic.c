@@ -41,7 +41,7 @@
   \param alpha right ascension in radians (B1950.0 equinox)
   \param delta declination in radians (B1950.0 equinox)
  */
-void tmf_equatorial_to_galactic(real_t* l, real_t* b,
+void tmf_equatorial2galactic(real_t* l, real_t* b,
     const real_t alpha, const real_t delta)
 {
   const real_t sdp = sin(tmf_deg2rad(27.4));
@@ -69,7 +69,7 @@ void tmf_equatorial_to_galactic(real_t* l, real_t* b,
   \param l galactic longitude in radians
   \param b galactic latitutde in radians
  */
-void tmf_galactic_to_equatorial(real_t* alpha, real_t* delta,
+void tmf_galactic2equatorial(real_t* alpha, real_t* delta,
     const real_t l, const real_t b)
 {
   const real_t sdp = sin(tmf_deg2rad(27.4));

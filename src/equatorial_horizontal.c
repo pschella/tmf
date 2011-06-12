@@ -49,7 +49,7 @@
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void equatorial2horizontal(real_t* A, real_t* h,
+void tmf_equatorial_to_horizontal(real_t* A, real_t* h,
     const real_t H, const real_t delta, const real_t phi)
 {
   const real_t sH = sin(H);
@@ -85,7 +85,7 @@ void equatorial2horizontal(real_t* A, real_t* h,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void horizontal2equatorial(real_t* H, real_t* delta,
+void tmf_horizontal_to_equatorial(real_t* H, real_t* delta,
     const real_t A, const real_t h, const real_t phi)
 {
   const real_t sA = sin(A-M_PI);
@@ -129,22 +129,22 @@ void horizontal2equatorial(real_t* H, real_t* delta,
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void radec2azel(real_t* A, real_t* h, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
+void tmf_radec_to_azel(real_t* A, real_t* h, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Calculate Terestrial Time (TT)
-  const real_t tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
+  const real_t tt = utc + tmf_delta_tt_utc(utc) / SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
   const real_t ut1 = utc + ut1_utc / SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
-  const real_t theta_L = last(ut1, tt, L);
+  const real_t theta_L = tmf_last(ut1, tt, L);
 
   // Calculate hour angle
-  const real_t H = rad2circle(theta_L - alpha);
+  const real_t H = tmf_rad2circle(theta_L - alpha);
 
   // Convert from equatorial to horizontal coordinates
-  equatorial2horizontal(A, h, H, delta, phi);
+  tmf_equatorial_to_horizontal(A, h, H, delta, phi);
 }
 
 /*!
@@ -175,24 +175,24 @@ void radec2azel(real_t* A, real_t* h, const real_t alpha, const real_t delta, co
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-void azel2radec(real_t* alpha, real_t* delta, const real_t A, const real_t h, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
+void tmf_azel_to_radec(real_t* alpha, real_t* delta, const real_t A, const real_t h, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Variables
   real_t H = 0; 
 
   // Calculate Terestrial Time (TT)
-  const real_t tt = utc + tt_utc(utc) / SECONDS_PER_DAY;
+  const real_t tt = utc + tmf_delta_tt_utc(utc) / SECONDS_PER_DAY;
 
   // Calculate Universal Time (UT1)
   const real_t ut1 = utc + ut1_utc / SECONDS_PER_DAY;
 
   // Calculate Local Apparant Sidereal Time (LAST)
-  const real_t theta_L = last(ut1, tt, L);
+  const real_t theta_L = tmf_last(ut1, tt, L);
 
   // Convert from equatorial to horizontal coordinates
-  horizontal2equatorial(&H, delta, A, h, phi);
+  tmf_horizontal_to_equatorial(&H, delta, A, h, phi);
 
   // Calculate right ascention
-  *alpha = rad2circle(theta_L - H);
+  *alpha = tmf_rad2circle(theta_L - H);
 }
 

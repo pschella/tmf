@@ -19,6 +19,10 @@
 #ifndef __TMF_CONFIG_H__
 #define __TMF_CONFIG_H__
 
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
 // Version information
 #define TMF_VERSION "${TMF_VERSION}"
 #define TMF_VERSION_MAJOR ${TMF_VERSION_MAJOR}
@@ -32,6 +36,10 @@
 typedef float real_t;
 #else
 typedef double real_t;
+#endif
+
+#ifdef __cplusplus
+} // extern "C"
 #endif
 
 #endif // __TMF_CONFIG_H__

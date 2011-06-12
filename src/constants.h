@@ -16,12 +16,20 @@
  *  along with this library. If not, see <http://www.gnu.org/licenses/>.  *
  **************************************************************************/
 
-#ifndef TMF_CONSTANTS_H
-#define TMF_CONSTANTS_H
+#ifndef __TMF_CONSTANTS_H__
+#define __TMF_CONSTANTS_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
 
 /* constants */
 #define SPEED_OF_LIGHT 299792458
 #define SECONDS_PER_DAY 86400
 
-#endif // TMF_CONSTANTS_H
+#ifdef __cplusplus
+} // extern "C"
+#endif
+
+#endif // __TMF_CONSTANTS_H__
 

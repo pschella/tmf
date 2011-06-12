@@ -28,6 +28,10 @@
 // FORWARD REFERENCES
 //
 
+real_t tmf_jd_to_mjd(const real_t jd) { return jd - 2400000.5; };
+
+real_t tmf_mjd_to_jd(const real_t mjd) { return mjd + 2400000.5; };
+
 /*!
   \brief Convert date in Gregorian calendar to Julian day.
 
@@ -37,7 +41,7 @@
   \param m month
   \param d day (with fraction)
  */
-real_t gregoriandate2jd(const int y, const int m, const real_t d)
+real_t tmf_gregorian_to_jd(const int y, const int m, const real_t d)
 {
   int Y;
   int M;
@@ -68,7 +72,7 @@ real_t gregoriandate2jd(const int y, const int m, const real_t d)
   \param m month
   \param d day (with fraction)
  */
-real_t juliandate2jd(const int y, const int m, const real_t d)
+real_t tmf_julian_to_jd(const int y, const int m, const real_t d)
 {
   int Y;
   int M;
@@ -96,39 +100,39 @@ real_t juliandate2jd(const int y, const int m, const real_t d)
   \param m month
   \param d day (with fraction)
  */
-real_t date2jd(const int y, const int m, const real_t d)
+real_t tmf_date_to_jd(const int y, const int m, const real_t d)
 {
   real_t jd = 0;
 
   // Gregorian calendar
   if (y > 1582)
   {
-    jd = gregoriandate2jd(y, m, d);
+    jd = tmf_gregorian_to_jd(y, m, d);
   }
   // Julian calendar
   else if (y < 1582)
   {
-    jd = juliandate2jd(y, m, d);
+    jd = tmf_julian_to_jd(y, m, d);
   }
   // Gregorian calendar
   else if (m > 10)
   {
-    jd = gregoriandate2jd(y, m, d);
+    jd = tmf_gregorian_to_jd(y, m, d);
   }
   // Julian calendar
   else if (m < 10)
   {
-    jd = juliandate2jd(y, m, d);
+    jd = tmf_julian_to_jd(y, m, d);
   }
   // Gregorian calendar
   else if (d >= 15)
   {
-    jd = gregoriandate2jd(y, m, d);
+    jd = tmf_gregorian_to_jd(y, m, d);
   }
   // Julian calendar
   else if (d <= 4)
   {
-    jd = juliandate2jd(y, m, d);
+    jd = tmf_julian_to_jd(y, m, d);
   }
 
   return jd;
@@ -142,7 +146,7 @@ real_t date2jd(const int y, const int m, const real_t d)
   \param d day (with fraction)
   \param jd Julian day
  */
-void jd2date(int* y, int* m, real_t* d, const real_t jd)
+void tmf_jd_to_date(int* y, int* m, real_t* d, const real_t jd)
 {
   int Z, A, alpha, B, C, D, E;
   real_t JD, F;

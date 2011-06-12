@@ -38,7 +38,7 @@
   \param theta inclination angle from z-axis
   \param phi azimuth angle from x-axis
  */
-void spherical2cartesian(real_t* x, real_t* y, real_t* z,
+void tmf_spherical_to_cartesian(real_t* x, real_t* y, real_t* z,
     const real_t rho, const real_t theta, const real_t phi)
 {
   const real_t st = sin(theta);
@@ -61,7 +61,7 @@ void spherical2cartesian(real_t* x, real_t* y, real_t* z,
   \param y y-coordinate
   \param z z-coordinate
  */
-void cartesian2spherical(real_t* rho, real_t* theta, real_t* phi,
+void tmf_cartesian_to_spherical(real_t* rho, real_t* theta, real_t* phi,
     const real_t x, const real_t y, const real_t z)
 {
   *rho = sqrt(x*x + y*y + z*z);

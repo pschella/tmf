@@ -39,7 +39,7 @@
 
   \return TAI - UTC in seconds
  */
-int tai_utc(const real_t utc)
+int tmf_delta_tai_utc(const real_t utc)
 {
   // Leap second table from the IERS Earth Orientation Centre bulletin C
   const real_t ls[24] = {
@@ -89,8 +89,8 @@ int tai_utc(const real_t utc)
 
   \return TT - UTC in seconds
  */
-real_t tt_utc(const real_t utc)
+real_t tmf_delta_tt_utc(const real_t utc)
 {
-  return 32.184 + (real_t)(tai_utc(utc));
+  return 32.184 + (real_t)(tmf_delta_tai_utc(utc));
 }
 

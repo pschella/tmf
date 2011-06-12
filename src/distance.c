@@ -54,7 +54,7 @@
   \param d2 either declination (delta) or ecliptical latitude (beta) of
             second object in radians
  */
-real_t angularseparation(const real_t a1, const real_t d1, const real_t a2, const real_t d2)
+real_t tmf_angular_separation(const real_t a1, const real_t d1, const real_t a2, const real_t d2)
 {
   const real_t cd1 = cos(d1);
   const real_t sd1 = sin(d1);

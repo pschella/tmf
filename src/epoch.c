@@ -41,7 +41,7 @@
   \param alpha_J right ascension reffered to the J2000 standard epoch
   \param delta_J declination reffered to the J2000 standard epoch
  */
-void j20002b1950(real_t* alpha_B, real_t* delta_B,
+void tmf_j2000_to_b1950(real_t* alpha_B, real_t* delta_B,
     const real_t alpha_J, const real_t delta_J)
 {
   // Rotation matrix J2000 -> B1950
@@ -74,7 +74,7 @@ void j20002b1950(real_t* alpha_B, real_t* delta_B,
   };
 
   // Extract right ascension and declination
-  *alpha_B = rad2circle(atan2(s[1], s[0]));
+  *alpha_B = tmf_rad2circle(atan2(s[1], s[0]));
   *delta_B = asin(s[2]);
 }
 
@@ -91,7 +91,7 @@ void j20002b1950(real_t* alpha_B, real_t* delta_B,
   \param alpha_B right ascension reffered to the B1950 standard epoch
   \param delta_B declination reffered to the B1950 standard epoch
  */
-void b19502j2000(real_t* alpha_J, real_t* delta_J,
+void tmf_b1950_to_j2000(real_t* alpha_J, real_t* delta_J,
     const real_t alpha_B, const real_t delta_B)
 {
   // Rotation matrix B1950 -> J2000
@@ -124,7 +124,7 @@ void b19502j2000(real_t* alpha_J, real_t* delta_J,
   };
 
   // Extract right ascension and declination
-  *alpha_J = rad2circle(atan2(s[1], s[0]));
+  *alpha_J = tmf_rad2circle(atan2(s[1], s[0]));
   *delta_J = asin(s[2]);
 }
 

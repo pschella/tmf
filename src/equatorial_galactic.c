@@ -41,19 +41,19 @@
   \param alpha right ascension in radians (B1950.0 equinox)
   \param delta declination in radians (B1950.0 equinox)
  */
-void equatorial2galactic(real_t* l, real_t* b,
+void tmf_equatorial_to_galactic(real_t* l, real_t* b,
     const real_t alpha, const real_t delta)
 {
-  const real_t sdp = sin(deg2rad(27.4));
-  const real_t cdp = cos(deg2rad(27.4));
-  const real_t sap = sin(deg2rad(192.25) - alpha);
-  const real_t cap = cos(deg2rad(192.25) - alpha);
+  const real_t sdp = sin(tmf_deg2rad(27.4));
+  const real_t cdp = cos(tmf_deg2rad(27.4));
+  const real_t sap = sin(tmf_deg2rad(192.25) - alpha);
+  const real_t cap = cos(tmf_deg2rad(192.25) - alpha);
 
-  *l = deg2rad(303.) - atan2(sap, (cap * sdp - tan(delta) * cdp));
+  *l = tmf_deg2rad(303.) - atan2(sap, (cap * sdp - tan(delta) * cdp));
   *b = asin(sin(delta) * sdp + cos(delta) * cdp * cap);
 
   // Ensure l is in the range [0,2*pi)
-  *l = rad2circle(*l);
+  *l = tmf_rad2circle(*l);
 }
 
 /*!
@@ -69,18 +69,18 @@ void equatorial2galactic(real_t* l, real_t* b,
   \param l galactic longitude in radians
   \param b galactic latitutde in radians
  */
-void galactic2equatorial(real_t* alpha, real_t* delta,
+void tmf_galactic_to_equatorial(real_t* alpha, real_t* delta,
     const real_t l, const real_t b)
 {
-  const real_t sdp = sin(deg2rad(27.4));
-  const real_t cdp = cos(deg2rad(27.4));
-  const real_t sap = sin(l - deg2rad(123.));
-  const real_t cap = cos(l - deg2rad(123.));
+  const real_t sdp = sin(tmf_deg2rad(27.4));
+  const real_t cdp = cos(tmf_deg2rad(27.4));
+  const real_t sap = sin(l - tmf_deg2rad(123.));
+  const real_t cap = cos(l - tmf_deg2rad(123.));
 
-  *alpha = deg2rad(12.25) + atan2(sap, (cap * sdp - tan(b) * cdp));
+  *alpha = tmf_deg2rad(12.25) + atan2(sap, (cap * sdp - tan(b) * cdp));
   *delta = asin(sin(b) * sdp + cos(b) * cdp * cap);
 
   // Ensure alpha is in the range [0,2*pi)
-  *alpha = rad2circle(*alpha);
+  *alpha = tmf_rad2circle(*alpha);
 }
 

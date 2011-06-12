@@ -28,13 +28,9 @@
 // FORWARD REFERENCES
 //
 
-real_t deg2rad(const real_t a) { return a * M_PI / 180.; };
+real_t tmf_deg2rad(const real_t a) { return a * M_PI / 180.; };
 
-real_t rad2deg(const real_t a) { return a * 180. / M_PI; };
-
-real_t jd2mjd(const real_t jd) { return jd - 2400000.5; };
-
-real_t mjd2jd(const real_t mjd) { return mjd + 2400000.5; };
+real_t tmf_rad2deg(const real_t a) { return a * 180. / M_PI; };
 
 /*!
   \brief Convert hours, min, sec to degrees
@@ -45,7 +41,7 @@ real_t mjd2jd(const real_t mjd) { return mjd + 2400000.5; };
   \param m minutes
   \param s seconds
  */
-real_t hms2deg(const int h, const int m, const real_t s)
+real_t tmf_hms2deg(const int h, const int m, const real_t s)
 {
   return (h + m / 60. + s / 3600.) * (180. / 12.);
 }
@@ -59,7 +55,7 @@ real_t hms2deg(const int h, const int m, const real_t s)
   \param am arcminutes
   \param as arcseconds
  */
-real_t dms2deg(const int d, const int am, const real_t as)
+real_t tmf_dms2deg(const int d, const int am, const real_t as)
 {
   return (d + (am / 60.) + (as / 3600.));
 }
@@ -74,7 +70,7 @@ real_t dms2deg(const int d, const int am, const real_t as)
   \param s seconds
   \param d degrees
  */
-void deg2hms(int* h, int* m, real_t* s, const real_t d)
+void tmf_deg2hms(int* h, int* m, real_t* s, const real_t d)
 {
   // Make sure D = [0, 360)
   const real_t D = (d >= 0 ? fmod(d, 360.) : 360. + fmod(d, 360.));
@@ -93,7 +89,7 @@ void deg2hms(int* h, int* m, real_t* s, const real_t d)
   \param s seconds
   \param deg degrees
  */
-void deg2dms(int* d, int* m, real_t* s, real_t deg)
+void tmf_deg2dms(int* d, int* m, real_t* s, real_t deg)
 {
   *d = (int)deg;
   deg -= *d;
@@ -111,7 +107,7 @@ void deg2dms(int* d, int* m, real_t* s, real_t deg)
   \param m minutes
   \param s seconds
  */
-real_t hms2rad(const int h, const int m, const real_t s)
+real_t tmf_hms2rad(const int h, const int m, const real_t s)
 {
   return (h + m / 60. + s / 3600.) * (M_PI / 12.);
 }
@@ -125,9 +121,9 @@ real_t hms2rad(const int h, const int m, const real_t s)
   \param am arcminutes
   \param as arcseconds
  */
-real_t dms2rad(const int d, const int am, const real_t as)
+real_t tmf_dms2rad(const int d, const int am, const real_t as)
 {
-  return deg2rad((d + (am / 60.) + (as / 3600.)));
+  return tmf_deg2rad((d + (am / 60.) + (as / 3600.)));
 }
 
 /*!
@@ -138,7 +134,7 @@ real_t dms2rad(const int d, const int am, const real_t as)
   \param s seconds
   \param r radians
  */
-void rad2hms(int* h, int* m, real_t* s, const real_t r)
+void tmf_rad2hms(int* h, int* m, real_t* s, const real_t r)
 {
   const real_t H = r * 12. / M_PI;
 
@@ -157,9 +153,9 @@ void rad2hms(int* h, int* m, real_t* s, const real_t r)
   \param s seconds
   \param r radians
  */
-void rad2dms(int* d, int* m, real_t* s, const real_t r)
+void tmf_rad2dms(int* d, int* m, real_t* s, const real_t r)
 {
-  real_t deg = rad2deg(r);
+  real_t deg = tmf_rad2deg(r);
 
   *d = (int)deg;
   deg -= *d;
@@ -175,7 +171,7 @@ void rad2dms(int* d, int* m, real_t* s, const real_t r)
 
   \returns angle in range [0,2*pi)
  */
-real_t rad2circle(const real_t phi)
+real_t tmf_rad2circle(const real_t phi)
 {
   real_t p = fmod(phi, 2*M_PI);
   
@@ -189,7 +185,7 @@ real_t rad2circle(const real_t phi)
 
   \returns angle in range [0,360)
  */
-real_t deg2circle(const real_t phi)
+real_t tmf_deg2circle(const real_t phi)
 {
   real_t p = fmod(phi, 360.);
   

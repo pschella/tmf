@@ -45,7 +45,7 @@
   \param phi observer's latitude, positive if in the northern hemisphere,
          negative in the southern one
  */
-real_t jd2hjd(const real_t jd, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
+real_t tmf_jd_to_hjd(const real_t jd, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
 {
   // Calculate Earth - Sun distance
   const real_t r = 1.;

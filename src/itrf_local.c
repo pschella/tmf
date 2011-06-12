@@ -43,7 +43,7 @@
   \param ref_lon reference longitude in radians
   \param ref_lat reference latitude in radians
  */
-void itrf2local(real_t* E, real_t* N, real_t* U,
+void tmf_itrf_to_local(real_t* E, real_t* N, real_t* U,
     const real_t x, const real_t y, const real_t z,
     const real_t ref_x, const real_t ref_y, const real_t ref_z,
     const real_t ref_lon, const real_t ref_lat)

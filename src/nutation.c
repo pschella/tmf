@@ -49,7 +49,7 @@
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-real_t nutation(const real_t jde)
+real_t tmf_nutation(const real_t jde)
 {
   int i = 0;
   real_t Dphi = 0.0;
@@ -221,7 +221,7 @@ real_t nutation(const real_t jde)
     Dphi += c[i] * sin(arg);
   }
 
-  return deg2rad(Dphi / 3.6e7);
+  return tmf_deg2rad(Dphi / 3.6e7);
 }
 
 /*!
@@ -245,7 +245,7 @@ real_t nutation(const real_t jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-real_t obliquity(const real_t jde)
+real_t tmf_obliquity(const real_t jde)
 {
   int i = 0;
   real_t Depsilon = 0.0;
@@ -367,7 +367,7 @@ real_t obliquity(const real_t jde)
     Depsilon += c[i] * cos(arg);
   }
 
-  return deg2rad(Depsilon / 3.6e7);
+  return tmf_deg2rad(Depsilon / 3.6e7);
 }
 
 /*!
@@ -383,7 +383,7 @@ real_t obliquity(const real_t jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-real_t meanobliquity(const real_t jde)
+real_t tmf_mean_obliquity(const real_t jde)
 {
   real_t epsilon_0 = (23. * 3600.) + (26. * 60.) + 21.448;
 
@@ -412,7 +412,7 @@ real_t meanobliquity(const real_t jde)
     epsilon_0 += a[i]*Ufac;
   }
 
-  return deg2rad(epsilon_0 / 3600);
+  return tmf_deg2rad(epsilon_0 / 3600);
 }
 
 /*!
@@ -428,10 +428,10 @@ real_t meanobliquity(const real_t jde)
   \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
          equivalently Terrestrial Time (TT))
  */
-real_t trueobliquity(const real_t jde)
+real_t tmf_true_obliquity(const real_t jde)
 {
-  const real_t epsilon_0 = meanobliquity(jde);
-  const real_t Depsilon = obliquity(jde);
+  const real_t epsilon_0 = tmf_mean_obliquity(jde);
+  const real_t Depsilon = tmf_obliquity(jde);
 
   return epsilon_0 + Depsilon;
 }

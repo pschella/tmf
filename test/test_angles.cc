@@ -3,7 +3,6 @@
 #include "../src/tmf.h"
 
 using namespace std;
-using namespace tmf;
 
 int main()
 {
@@ -13,25 +12,25 @@ int main()
 
   cout << h << " " << m << " " << s << endl;
 
-  double d = hms2deg(h, m, s);
+  double d = tmf_hms2deg(h, m, s);
 
   cout << "deg = " << d << endl;
 
-  deg2hms(h, m, s, d);
+  tmf_deg2hms(&h, &m, &s, d);
 
   cout << h << " " << m << " " << s << endl;
 
   // Test angles > 360
   d = 360 + 180;
 
-  deg2hms(h, m, s, d);
+  tmf_deg2hms(&h, &m, &s, d);
 
   cout << h << " " << m << " " << s << endl;
 
   // Test angles < 0
   d = -180;
 
-  deg2hms(h, m, s, d);
+  tmf_deg2hms(&h, &m, &s, d);
 
   cout << h << " " << m << " " << s << endl;
 
@@ -42,11 +41,11 @@ int main()
 
   cout << D << " " << m << " " << s << endl;
 
-  double deg = dms2deg(D, m, s);
+  double deg = tmf_dms2deg(D, m, s);
 
   cout << deg << endl;
 
-  deg2dms(D, m, s, deg);
+  tmf_deg2dms(&D, &m, &s, deg);
 
   cout << D << " " << m << " " << s << endl;
 

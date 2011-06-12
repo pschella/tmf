@@ -1,10 +1,9 @@
 #include <iostream>
 #include <cmath>
 
-#include "../src/ctmf.h"
+#include "../src/tmf.h"
 
 using namespace std;
-using namespace tmf;
 
 int main()
 {
@@ -17,25 +16,25 @@ int main()
 
   double jde = 2446895.5;
 
-  Dphi = nutation(jde);
+  Dphi = tmf_nutation(jde);
     
-  Depsilon = obliquity(jde);
+  Depsilon = tmf_obliquity(jde);
 
-  rad2dms(&d, &m, &s, Dphi);
+  tmf_rad2dms(&d, &m, &s, Dphi);
 
   cout<<"Dphi "<<d<<" "<<m<<" "<<s<<endl;
   cout<<"Expected:"<<endl;
   cout<<"Dphi 0 0 -3.788\n"<<endl;
 
-  rad2dms(&d, &m, &s, Depsilon);
+  tmf_rad2dms(&d, &m, &s, Depsilon);
 
   cout<<"Depsilon "<<d<<" "<<m<<" "<<s<<endl;
   cout<<"Expected:"<<endl;
   cout<<"Depsilon 0 0 9.443\n"<<endl;
 
-  epsilon_0 = meanobliquity(jde);
+  epsilon_0 = tmf_mean_obliquity(jde);
 
-  rad2dms(&d, &m, &s, epsilon_0);
+  tmf_rad2dms(&d, &m, &s, epsilon_0);
 
   cout<<"epsilon_0 "<<d<<" "<<m<<" "<<s<<endl;
   cout<<"Expected:"<<endl;
@@ -43,7 +42,7 @@ int main()
 
   epsilon = epsilon_0 + Depsilon;
 
-  rad2dms(&d, &m, &s, epsilon);
+  tmf_rad2dms(&d, &m, &s, epsilon);
 
   cout<<"epsilon "<<d<<" "<<m<<" "<<s<<endl;
   cout<<"Expected:"<<endl;

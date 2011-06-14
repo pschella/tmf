@@ -1,6 +1,6 @@
 option (TMF_WITH_TESTS "Build TMF test programs." OFF)
 
-if (${TMF_WITH_TESTS})
+if (TMF_WITH_TESTS)
   set (tests
       test_angles
       test_equatorial_galactic
@@ -14,5 +14,5 @@ if (${TMF_WITH_TESTS})
   
     target_link_libraries (${test} tmf)
   endforeach (test ${tests})
-endif (${TMF_WITH_TESTS})
+endif (TMF_WITH_TESTS)
 

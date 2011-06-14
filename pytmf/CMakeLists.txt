@@ -2,7 +2,10 @@ option (TMF_WITH_PYTHON_BINDINGS "Build TMF Python bindings." ON)
 
 # Find packages
 find_package(SWIG)
-find_package(PythonLibs)
+
+if (NOT ${PYTHONLIBS_FOUND})
+    find_package(PythonLibs)
+endif (NOT ${PYTHONLIBS_FOUND})
 
 # Find Python site-packages directory for installation
 execute_process (COMMAND python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)

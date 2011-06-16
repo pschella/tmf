@@ -14,7 +14,7 @@ endif (NOT PYTHON_SITE_PACKAGES)
 
 # Determine if build will work
 if (TMF_WITH_PYTHON_BINDINGS AND NOT PYTHONLIBS_FOUND)
-    message (STATUS "Python bindings disabled, cannot find Python libraries")
+    message (WARNING "Python bindings disabled, cannot find Python libraries")
     set (TMF_WITH_PYTHON_BINDINGS OFF)
 endif (TMF_WITH_PYTHON_BINDINGS AND NOT PYTHONLIBS_FOUND)
 

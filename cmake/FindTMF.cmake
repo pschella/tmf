@@ -64,7 +64,7 @@ if (NOT TMF_FOUND)
     set (TMF_VERSION "${TMF_VERSION_MAJOR}.${TMF_VERSION_MINOR}.${TMF_VERSION_PATCH}")
 
   else (TMF_INCLUDES AND EXISTS "${TMF_INCLUDES}/tmf_config.h")
-    message (ERROR "Cannot find tmf_config.h file")
+    message (WARNING "Cannot find tmf_config.h file to determine library version.")
   endif (TMF_INCLUDES AND EXISTS "${TMF_INCLUDES}/tmf_config.h")
 
   ## ---------------------------------------------------------------------

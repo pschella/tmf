@@ -3,6 +3,9 @@ option (TMF_WITH_PYTHON_BINDINGS "Build TMF Python bindings." ON)
 # Find packages
 find_package(SWIG)
 
+message (STATUS "OVERRIDE")
+message (STATUS ${OVERRIDE_PYTHON_LIBS})
+
 if (NOT PYTHONLIBS_FOUND)
     find_package(PythonLibs)
 endif (NOT PYTHONLIBS_FOUND)

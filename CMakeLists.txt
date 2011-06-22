@@ -7,7 +7,7 @@ project (TMF)
 ## Project release version
 set (TMF_VERSION_MAJOR 2)
 set (TMF_VERSION_MINOR 0)
-set (TMF_VERSION_PATCH 5)
+set (TMF_VERSION_PATCH 7)
 set (TMF_VERSION "${TMF_VERSION_MAJOR}.${TMF_VERSION_MINOR}.${TMF_VERSION_PATCH}")
 
 ## Add definitions

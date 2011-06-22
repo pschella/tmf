@@ -5,6 +5,9 @@
 #include "tmf.h"
 %}
 
+/* Set module version to library version */
+%constant char* __version__ = TMF_VERSION;
+
 /* Parse constants header file to generate wrappers */
 %include "tmf_constants.h"
 

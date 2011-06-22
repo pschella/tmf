@@ -14,17 +14,25 @@ endif (NOT PYTHON_SITE_PACKAGES)
 
 # Determine if build will work
 if (TMF_WITH_PYTHON_BINDINGS AND NOT PYTHONLIBS_FOUND)
-    message (WARNING "Python bindings disabled, cannot find Python libraries")
+    message (WARNING "[TMF] Python bindings disabled, cannot find Python libraries")
     set (TMF_WITH_PYTHON_BINDINGS OFF)
 endif (TMF_WITH_PYTHON_BINDINGS AND NOT PYTHONLIBS_FOUND)
 
 if (TMF_WITH_PYTHON_BINDINGS AND TMF_SINGLE_PRECISION)
-    message (WARNING "Python bindings disabled, cannot build against single precision library.")
+    message (WARNING "[TMF] Python bindings disabled, cannot build against single precision library.")
     set (TMF_WITH_PYTHON_BINDINGS OFF)
 endif (TMF_WITH_PYTHON_BINDINGS AND TMF_SINGLE_PRECISION)
 
 # Add target for build and installation
 if (TMF_WITH_PYTHON_BINDINGS)
+    message (STATUS "------------------------------------------------------------")
+    message (STATUS "[PyTMF] Configuration summary.")
+    message (STATUS "------------------------------------------------------------")
+    message (STATUS "PYTHON_LIBRARIES = ${PYTHON_LIBRARIES}")
+    message (STATUS "PYTHON_INCLUDE_PATH = ${PYTHON_INCLUDE_PATH}")
+    message (STATUS "PYTHON_SITE_PACKAGES = ${PYTHON_SITE_PACKAGES}")
+    message (STATUS "------------------------------------------------------------")
+
     include(${SWIG_USE_FILE})
 
     include_directories(${PYTHON_INCLUDE_PATH})

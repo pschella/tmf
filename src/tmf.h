@@ -27,6 +27,10 @@ extern "C" {
 #endif 
 
 /* angles.c */
+real_t tmf_hav(real_t theta);
+
+real_t tmf_ahav(real_t a);
+
 real_t tmf_deg2rad(real_t a);
 
 real_t tmf_rad2deg(real_t a);
@@ -50,6 +54,9 @@ void tmf_rad2dms(int* d, int* m, real_t* s, real_t r);
 real_t tmf_rad2circle(real_t phi);
 
 real_t tmf_deg2circle(real_t phi);
+
+/* angular_separation.c */
+real_t tmf_angular_separation(real_t lon_1, real_t lat_1, real_t lon_2, real_t lat_2);
 
 /* epoch.c */
 void tmf_j20002b1950(real_t* alpha_B, real_t* delta_B, real_t alpha_J, real_t delta_J);

@@ -28,8 +28,16 @@
 // FORWARD REFERENCES
 //
 
+/* Haversine */
+real_t tmf_hav(const real_t theta) { return (1 - cos(theta)) / 2; };
+
+/* Inverse haversine */
+real_t tmf_ahav(const real_t a) { return acos(1 - 2 * a); };
+
+/* Convert degrees to radians */
 real_t tmf_deg2rad(const real_t a) { return a * M_PI / 180.; };
 
+/* Convert radians to degrees */
 real_t tmf_rad2deg(const real_t a) { return a * 180. / M_PI; };
 
 /*!

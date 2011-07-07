@@ -17,6 +17,10 @@
 /* Generate wrappers for the following functions */
 
 /* angles.c */
+double tmf_hav(double theta);
+
+double tmf_ahav(double a);
+
 double tmf_deg2rad(double a);
 
 double tmf_rad2deg(double a);
@@ -40,6 +44,9 @@ void tmf_rad2dms(int* OUTPUT, int* OUTPUT, double* OUTPUT, double r);
 double tmf_rad2circle(double phi);
 
 double tmf_deg2circle(double phi);
+
+/* angular_separation.c */
+double tmf_angular_separation(double lon_1, double lat_1, double lon_2, double lat_2);
 
 /* epoch.c */
 void tmf_j20002b1950(double* OUTPUT, double* OUTPUT, double alpha_J, double delta_J);

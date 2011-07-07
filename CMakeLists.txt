@@ -26,7 +26,7 @@ configure_file (
     ${PROJECT_BINARY_DIR}/tmf_config.h
 )
 
-include_directories (src ${PROJECT_BINARY_DIR})
+include_directories (BEFORE src ${PROJECT_BINARY_DIR})
 
 ## List of source files
 FILE (GLOB tmf_sources src/*.c)

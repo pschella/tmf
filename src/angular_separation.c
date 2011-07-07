@@ -40,6 +40,6 @@
  */
 real_t tmf_angular_separation(const real_t lon_1, const real_t lat_1, const real_t lon_2, const real_t lat_2)
 {
-  return tmf_ahav(tmv_hav(lat_2-lat_1) + cos(lat_1) * cos(lat_2) * hav(lon_2 - lon_1));
+  return tmf_ahav(tmf_hav(lat_2-lat_1) + cos(lat_1) * cos(lat_2) * tmf_hav(lon_2 - lon_1));
 }
 

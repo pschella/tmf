@@ -1,18 +1,19 @@
-option (TMF_WITH_PYTHON_BINDINGS "Build TMF Python bindings." ON)
+## Set include directories
+include_directories (BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR})
 
-# Find packages
+## Find packages
 find_package(SWIG)
 
 if (NOT PYTHONLIBS_FOUND)
     find_package(PythonLibs)
 endif (NOT PYTHONLIBS_FOUND)
 
-# Find Python site-packages directory for installation
+## Find Python site-packages directory for installation
 if (NOT PYTHON_SITE_PACKAGES)
     execute_process (COMMAND python -c "from distutils.sysconfig import get_python_lib; print get_python_lib()" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES OUTPUT_STRIP_TRAILING_WHITESPACE)
 endif (NOT PYTHON_SITE_PACKAGES)
 
-# Determine if build will work
+## Determine if build will work
 if (TMF_WITH_PYTHON_BINDINGS AND NOT PYTHONLIBS_FOUND)
     message (WARNING "[TMF] Python bindings disabled, cannot find Python libraries")
     set (TMF_WITH_PYTHON_BINDINGS OFF)
@@ -23,7 +24,7 @@ if (TMF_WITH_PYTHON_BINDINGS AND TMF_SINGLE_PRECISION)
     set (TMF_WITH_PYTHON_BINDINGS OFF)
 endif (TMF_WITH_PYTHON_BINDINGS AND TMF_SINGLE_PRECISION)
 
-# Add target for build and installation
+## Add target for build and installation
 if (TMF_WITH_PYTHON_BINDINGS)
     message (STATUS "------------------------------------------------------------")
     message (STATUS "[PyTMF] Configuration summary.")

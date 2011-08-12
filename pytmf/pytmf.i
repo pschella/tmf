@@ -2,14 +2,14 @@
 %include "typemaps.i"
 %{
 /* Includes the header in the wrapper code */
-#include "tmf.h"
+#include <tmf/tmf.h>
 %}
 
 /* Set module version to library version */
 %constant char* __version__ = TMF_VERSION;
 
 /* Parse constants header file to generate wrappers */
-%include "tmf_constants.h"
+%include <tmf/constants.h>
 
 /* Strip prefix */
 %rename("%(strip:[tmf_])s") "";

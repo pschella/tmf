@@ -22,23 +22,6 @@
 // PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
-
-// FORWARD REFERENCES
-//
-
-/*!
-  \brief Calculate TAI - UTC in seconds
-
-  For dates before July 1 1972 a fixed value of 10s will be returned.
-
-  \todo Update this routine whenever a leap second is inserted.
-
-  \param utc Universal Time Coordinated as Julian day
-
-  \return TAI - UTC in seconds
- */
 int tmf_delta_tai_utc(const real_t utc)
 {
   // Leap second table from the IERS Earth Orientation Centre bulletin C
@@ -80,15 +63,6 @@ int tmf_delta_tai_utc(const real_t utc)
   return 10 + i;
 }
 
-/*!
-  \brief Calculate TT - UTC in seconds
-
-  For dates before July 1 1972 a fixed value of 10s + TT - TAI is returned.
-
-  \param utc Universal Time Coordinated as Julian day
-
-  \return TT - UTC in seconds
- */
 real_t tmf_delta_tt_utc(const real_t utc)
 {
   return 32.184 + (real_t)(tmf_delta_tai_utc(utc));

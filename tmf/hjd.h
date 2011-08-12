@@ -16,45 +16,29 @@
  *  along with this library. If not, see <http://www.gnu.org/licenses/>.  *
  **************************************************************************/
 
-// SYSTEM INCLUDES
-#include <math.h>
+#ifndef __TMF_HJD_H__
+#define __TMF_HJD_H__
 
-// PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
-
-// FORWARD REFERENCES
-//
-
 /*!
-  \brief Converts logpolar coordinates to Cartesian coordinates
+  \brief Convert Julian day to the Heliocentric frame by correcting for the
+  projected light travel time between the Earth and the Sun.
 
-  \param x x-coordinate
-  \param y y-coordinate
-  \param rho radius
-  \param theta angle with x-axis
+  \return hjd Julian day
+
+  \param jd year
+  \param alpha right ascension
+  \param delta declination, positive if north of the celestial equator,
+  \param utc (universal time coordinated) as Julian day
+  \param ut1_utc difference UT1-UTC (as obtained from IERS bullitin A)
+         if 0 a maximum error of 0.9 seconds is made.
+  \param L observer's longitude (positive east, negative west
+         from Greenwich)
+  \param phi observer's latitude, positive if in the northern hemisphere,
+         negative in the southern one
  */
-void tmf_logpolar2cartesian(real_t* x, real_t* y,
-    const real_t rho, const real_t theta)
-{
-  *x = exp(rho) * cos(theta);
-  *y = exp(rho) * sin(theta);
-}
+real_t tmf_jd2hjd(const real_t jd, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi);
 
-/*!
-  \brief Converts Cartesian coordinates to logpolar coordinates
-
-  \param rho radius
-  \param theta angle with x-axis
-  \param x x-coordinate
-  \param y y-coordinate
- */
-void tmf_cartesian2logpolar(real_t* rho, real_t* theta,
-    const real_t x, const real_t y)
-{
-  *rho = log(sqrt(x*x + y*y));
-  *theta = atan(x / y);
-}
+#endif // __TMF_HJD_H__
 

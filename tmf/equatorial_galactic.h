@@ -16,55 +16,29 @@
  *  along with this library. If not, see <http://www.gnu.org/licenses/>.  *
  **************************************************************************/
 
-// SYSTEM INCLUDES
-#include <stdlib.h>
-#include <math.h>
+#ifndef __TMF_EQUATORIAL_GALACTIC_H__
+#define __TMF_EQUATORIAL_GALACTIC_H__
 
-// PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
-
-// FORWARD REFERENCES
-//
-
 /*!
-  \brief Conversion of equatorial coordinates to ecliptical coordinates.
+  \brief Conversion of equatorial coordinates to galactic coordinates.
 
   Direct implementation of the method described in chapter 13 of
   Astronomical Algorithms by Jean Meeus, second edition, 2005
   Published by: Willman-Bell Inc.
   ISBN 0-943396-61-1
 
-  \param lambda ecliptical (or celestial) longitude, measured from the
-         vernal equinox along the ecliptic in radians
-  \param beta ecliptical (or celestial) latitude, positive if north of the
-         ecliptic, negative if south in radians
+  \param l galactic longitude in radians
+  \param b galactic latitutde in radians
   \param alpha right ascension in radians (B1950.0 equinox)
   \param delta declination in radians (B1950.0 equinox)
-  \param jde Julian Date of TD (or equivalently TT)
  */
-void tmf_equatorial2ecliptic(real_t* lambda, real_t* beta,
-    const real_t alpha, const real_t delta,
-    const real_t jde)
-{
-  // Get true obliquity of the ecliptic
-  real_t epsilon = tmf_true_obliquity(jde);
-
-  const real_t se = sin(epsilon);
-  const real_t sa = sin(alpha);
-  const real_t ca = cos(alpha);
-  const real_t sd = sin(delta);
-  const real_t cd = cos(delta);
-  const real_t td = tan(delta);
-
-  *lambda = atan2(sa * cd + td * se, ca);
-  *beta = asin(sd * ca - cd * se * sa);
-}
+void tmf_equatorial2galactic(real_t* l, real_t* b,
+    const real_t alpha, const real_t delta);
 
 /*!
-  \brief Conversion of ecliptical coordinates to equatorial coordinates.
+  \brief Conversion of galactic coordinates to equatorial coordinates.
 
   Direct implementation of the method described in chapter 13 of
   Astronomical Algorithms by Jean Meeus, second edition, 2005
@@ -73,28 +47,11 @@ void tmf_equatorial2ecliptic(real_t* lambda, real_t* beta,
 
   \param alpha right ascension in radians (B1950.0 equinox)
   \param delta declination in radians (B1950.0 equinox)
-  \param lambda ecliptical (or celestial) longitude, measured from the
-         vernal equinox along the ecliptic in radians
-  \param beta ecliptical (or celestial) latitude, positive if north of the
-         ecliptic, negative if south in radians
-  \param jde Julian Date of TD (or equivalently TT)
+  \param l galactic longitude in radians
+  \param b galactic latitutde in radians
  */
-void tmf_ecliptic2equatorial(real_t* alpha, real_t* delta,
-    const real_t lambda, const real_t beta,
-    const real_t jde)
-{
-  // Get true obliquity of the ecliptic
-  real_t epsilon = tmf_true_obliquity(jde);
+void tmf_galactic2equatorial(real_t* alpha, real_t* delta,
+    const real_t l, const real_t b);
 
-  const real_t se = sin(epsilon);
-  const real_t ce = cos(epsilon);
-  const real_t sl = sin(lambda);
-  const real_t cl = cos(lambda);
-  const real_t sb = sin(beta);
-  const real_t cb = cos(beta);
-  const real_t tb = tan(beta);
-
-  *alpha = atan2(sl * ce - tb * se, cl);
-  *delta = asin(sb * ce + cb * se * sl);
-}
+#endif // __TMF_EQUATORIAL_GALACTIC_H__
 

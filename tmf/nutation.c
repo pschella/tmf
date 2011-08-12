@@ -22,33 +22,6 @@
 // PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
-
-// FORWARD REFERENCES
-//
-
-/*!
-  \brief Get Nutation and Obliquity of the Ecliptic at given instant
-
-  The nutation is due to the action of the Moon and can be described as
-  a sum of periodic terms.
-  Nutation is partioned into a component parallel to and one perpendicular
-  to the ecliptic.
-  The component allong the ecliptic is called the ``nutation in longitude''
-  and affects the celestial longitude of all heavenly bodies.
-  The component perpendicular to the ecliptic is called the ``nutation of
-  obliquity'' and affects the obliquity of the equator to the ecliptic,
-  it does not affect the longitude of heavenly bodies.
-
-  Direct implementation of the method described in chapter 22 of
-  Astronomical Algorithms by Jean Meeus, second edition, 2005
-  Published by: Willman-Bell Inc.
-  ISBN 0-943396-61-1
-
-  \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
-         equivalently Terrestrial Time (TT))
- */
 real_t tmf_nutation(const real_t jde)
 {
   int i = 0;
@@ -224,27 +197,6 @@ real_t tmf_nutation(const real_t jde)
   return tmf_deg2rad(Dphi / 3.6e7);
 }
 
-/*!
-  \brief Get Obliquity of the Ecliptic at given instant
-
-  The nutation is due to the action of the Moon and can be described as
-  a sum of periodic terms.
-  Nutation is partioned into a component parallel to and one perpendicular
-  to the ecliptic.
-  The component allong the ecliptic is called the ``nutation in longitude''
-  and affects the celestial longitude of all heavenly bodies.
-  The component perpendicular to the ecliptic is called the ``nutation of
-  obliquity'' and affects the obliquity of the equator to the ecliptic,
-  it does not affect the longitude of heavenly bodies.
-
-  Direct implementation of the method described in chapter 22 of
-  Astronomical Algorithms by Jean Meeus, second edition, 2005
-  Published by: Willman-Bell Inc.
-  ISBN 0-943396-61-1
-
-  \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
-         equivalently Terrestrial Time (TT))
- */
 real_t tmf_obliquity(const real_t jde)
 {
   int i = 0;
@@ -370,19 +322,6 @@ real_t tmf_obliquity(const real_t jde)
   return tmf_deg2rad(Depsilon / 3.6e7);
 }
 
-/*!
-  \brief Get mean obliquity of the ecliptic
-
-  Direct implementation of the method described in chapter 22 of
-  Astronomical Algorithms by Jean Meeus, second edition, 2005
-  Published by: Willman-Bell Inc.
-  ISBN 0-943396-61-1
-
-  \return epsilon_0 mean obliquity of the ecliptic in radians
-
-  \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
-         equivalently Terrestrial Time (TT))
- */
 real_t tmf_mean_obliquity(const real_t jde)
 {
   real_t epsilon_0 = (23. * 3600.) + (26. * 60.) + 21.448;
@@ -415,19 +354,6 @@ real_t tmf_mean_obliquity(const real_t jde)
   return tmf_deg2rad(epsilon_0 / 3600);
 }
 
-/*!
-  \brief Get true obliquity of the ecliptic
-
-  Direct implementation of the method described in chapter 22 of
-  Astronomical Algorithms by Jean Meeus, second edition, 2005
-  Published by: Willman-Bell Inc.
-  ISBN 0-943396-61-1
-
-  \return epsilon true obliquity of the ecliptic in radians
-
-  \param jde Julian Ephemeris Day (e.g. Julian Day of Dynamical Time (TD) or
-         equivalently Terrestrial Time (TT))
- */
 real_t tmf_true_obliquity(const real_t jde)
 {
   const real_t epsilon_0 = tmf_mean_obliquity(jde);

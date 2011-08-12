@@ -22,25 +22,10 @@
 // PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
-
-// FORWARD REFERENCES
-//
-
 real_t tmf_jd2mjd(const real_t jd) { return jd - 2400000.5; };
 
 real_t tmf_mjd2jd(const real_t mjd) { return mjd + 2400000.5; };
 
-/*!
-  \brief Convert date in Gregorian calendar to Julian day.
-
-  \return jd Julian day
-
-  \param y year
-  \param m month
-  \param d day (with fraction)
- */
 real_t tmf_gregorian2jd(const int y, const int m, const real_t d)
 {
   int Y;
@@ -63,15 +48,6 @@ real_t tmf_gregorian2jd(const int y, const int m, const real_t d)
   return (int)(365.25 * (Y + 4716)) + (int)(30.6001 * (M + 1)) + d + b - 1524.5;
 }
 
-/*!
-  \brief Convert date in Julian calendar to Julian day.
-
-  \return jd Julian day
-
-  \param y year
-  \param m month
-  \param d day (with fraction)
- */
 real_t tmf_julian2jd(const int y, const int m, const real_t d)
 {
   int Y;
@@ -91,15 +67,6 @@ real_t tmf_julian2jd(const int y, const int m, const real_t d)
   return (int)(365.25 * (Y + 4716)) + (int)(30.6001 * (M + 1)) + d - 1524.5;
 }
 
-/*!
-  \brief Convert date in Gregorian or Julian calendar to Julian day.
-
-  \return jd Julian day
-
-  \param y year
-  \param m month
-  \param d day (with fraction)
- */
 real_t tmf_date2jd(const int y, const int m, const real_t d)
 {
   real_t jd = 0;
@@ -138,14 +105,6 @@ real_t tmf_date2jd(const int y, const int m, const real_t d)
   return jd;
 }
 
-/*!
-  \brief Convert Julian day to calendar date.
-
-  \param y year
-  \param m month
-  \param d day (with fraction)
-  \param jd Julian day
- */
 void tmf_jd2date(int* y, int* m, real_t* d, const real_t jd)
 {
   int Z, A, alpha, B, C, D, E;

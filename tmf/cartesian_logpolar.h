@@ -16,30 +16,32 @@
  *  along with this library. If not, see <http://www.gnu.org/licenses/>.  *
  **************************************************************************/
 
-// SYSTEM INCLUDES
-#include <math.h>
+#ifndef __TMF_CARTESIAN_LOGPOLAR_H__
+#define __TMF_CARTESIAN_LOGPOLAR_H__
 
-// PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
+/*!
+  \brief Converts logpolar coordinates to Cartesian coordinates
 
-// FORWARD REFERENCES
-//
+  \param x x-coordinate
+  \param y y-coordinate
+  \param rho radius
+  \param theta angle with x-axis
+ */
+void tmf_logpolar2cartesian(real_t* x, real_t* y,
+    const real_t rho, const real_t theta);
 
 /*!
-  \brief Calculate angular separation
+  \brief Converts Cartesian coordinates to logpolar coordinates
 
-  \return angular separation in radians
-
-  \param lon_1 longitude of point 1 in radians
-  \param lat_1 latitude of point 1 in radians
-  \param lon_2 longitude of point 2 in radians
-  \param lat_2 latitude of point 2 in radians
+  \param rho radius
+  \param theta angle with x-axis
+  \param x x-coordinate
+  \param y y-coordinate
  */
-real_t tmf_angular_separation(const real_t lon_1, const real_t lat_1, const real_t lon_2, const real_t lat_2)
-{
-  return tmf_ahav(tmf_hav(lat_2-lat_1) + cos(lat_1) * cos(lat_2) * tmf_hav(lon_2 - lon_1));
-}
+void tmf_cartesian2logpolar(real_t* rho, real_t* theta,
+    const real_t x, const real_t y);
+
+#endif // __TMF_CARTESIAN_LOGPOLAR_H__
 

@@ -22,39 +22,24 @@
 // PROJECT INCLUDES
 #include <tmf.h>
 
-// LOCAL INCLUDES
-//
-
-// FORWARD REFERENCES
-//
-
-/*!
-  \brief Convert Julian day to the Heliocentric frame by correcting for the
-  projected light travel time between the Earth and the Sun.
-
-  \return hjd Julian day
-
-  \param jd year
-  \param alpha right ascension
-  \param delta declination, positive if north of the celestial equator,
-  \param utc (universal time coordinated) as Julian day
-  \param ut1_utc difference UT1-UTC (as obtained from IERS bullitin A)
-         if 0 a maximum error of 0.9 seconds is made.
-  \param L observer's longitude (positive east, negative west
-         from Greenwich)
-  \param phi observer's latitude, positive if in the northern hemisphere,
-         negative in the southern one
- */
-real_t tmf_jd2hjd(const real_t jd, const real_t alpha, const real_t delta, const real_t utc, const real_t ut1_utc, const real_t L, const real_t phi)
+void tmf_spherical2cartesian(real_t* x, real_t* y, real_t* z,
+    const real_t rho, const real_t theta, const real_t phi)
 {
-  // Calculate Earth - Sun distance
-  const real_t r = 1.;
+  const real_t st = sin(theta);
+  const real_t sp = sin(phi);
+  const real_t cp = cos(phi);
+  const real_t ct = cos(theta);
 
-  // Calculate right ascension and declination of the sun
-  const real_t alpha_sun = 0.;
-  const real_t delta_sun = 0.;
+  *x = rho * st * cp;
+  *y = rho * st * sp;
+  *z = rho * ct;
+}
 
-  return jd - (r / SPEED_OF_LIGHT) * (sin(delta) * sin(delta_sun)
-      + cos(delta) * cos(delta_sun) * cos(alpha - alpha_sun));
+void tmf_cartesian2spherical(real_t* rho, real_t* theta, real_t* phi,
+    const real_t x, const real_t y, const real_t z)
+{
+  *rho = sqrt(x*x + y*y + z*z);
+  *theta = acos(z / *rho);
+  *phi = atan2(y,x);
 }
 

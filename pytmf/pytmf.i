@@ -15,6 +15,7 @@
 %rename("%(strip:[tmf_])s") "";
 
 /* Enable docstrings */
+%include "tmf_doc.i"
 %feature("autodoc", "1");
 
 /* Generate wrappers for the following functions */

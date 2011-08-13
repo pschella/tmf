@@ -2,7 +2,7 @@
 %include "typemaps.i"
 %{
 /* Includes the header in the wrapper code */
-#include <tmf/tmf.h>
+#include <tmf.h>
 %}
 
 /* Set module version to library version */

@@ -27,6 +27,11 @@ configure_file (
     ${PROJECT_BINARY_DIR}/tmf_config.h
 )
 
+## Install header files
+install (FILES ${PROJECT_SOURCE_DIR}/tmf.h ${PROJECT_BINARY_DIR}/tmf_config.h
+  DESTINATION include
+  )
+
 ## Library
 add_subdirectory (tmf)
 

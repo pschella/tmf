@@ -24,7 +24,7 @@ install (TARGETS tmf
   )
 
 ## Install header files
-install (FILES ${tmf_headers} ${PROJECT_BINARY_DIR}/tmf_config.h
-  DESTINATION include
+install (FILES ${tmf_headers}
+  DESTINATION include/tmf
   )
 

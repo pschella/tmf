@@ -41,3 +41,6 @@ add_subdirectory (pytmf)
 ## Tests
 add_subdirectory (test)
 
+## Documentation
+add_subdirectory (doc)
+

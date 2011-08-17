@@ -20,7 +20,6 @@
 #define __TMF_H__
 
 #include <tmf_config.h>
-#include <tmf_constants.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,4 +1,3 @@
-# Set include directories
 ## Set include directories
 include_directories (BEFORE ${PROJECT_BINARY_DIR} ${PROJECT_SOURCE_DIR})
 

@@ -13,7 +13,6 @@ set (TMF_VERSION "${TMF_VERSION_MAJOR}.${TMF_VERSION_MINOR}.${TMF_VERSION_PATCH}
 ## Add definitions
 add_definitions (-fPIC)
 add_definitions (-Wall)
-add_definitions (-Werror)
 add_definitions (-g)
 
 ## Options

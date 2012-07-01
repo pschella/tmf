@@ -50,6 +50,7 @@ int tmf_delta_tai_utc(const real_t utc)
       2451179.5,  // 1999  Jan.   1              - 1s
       2453736.5,  // 2006  Jan.   1              - 1s
       2454832.5,  // 2009  Jan.   1              - 1s
+      2456109.5,  // 2012  Jul.   1              - 1s
    };
 
   // Loop through the leap seconds table

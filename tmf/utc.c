@@ -25,7 +25,7 @@
 int tmf_delta_tai_utc(const real_t utc)
 {
   // Leap second table from the IERS Earth Orientation Centre bulletin C
-  const real_t ls[24] = {
+  const real_t ls[25] = {
       2441499.5,  // 1972  Jul.   1              - 1s
       2441683.5,  // 1973  Jan.   1              - 1s
       2442048.5,  // 1974  Jan.   1              - 1s

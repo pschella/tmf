@@ -36,7 +36,7 @@ extern "C" {
 #include <tmf/equatorial_ecliptical.h>
 #include <tmf/equatorial_galactic.h>
 #include <tmf/equatorial_horizontal.h>
-#include <tmf/hjd.h>
+// #include <tmf/hjd.h>
 #include <tmf/itrf_local.h>
 #include <tmf/jd_date.h>
 #include <tmf/nutation.h>

@@ -639,36 +639,6 @@ phi:  observer's latitude, positive if in the northern hemisphere,
 negative in the southern one ";
 
 
-// File: hjd_8h.xml
-%feature("docstring")  tmf_jd2hjd "real_t tmf_jd2hjd(const real_t jd,
-const real_t alpha, const real_t delta, const real_t utc, const real_t
-ut1_utc, const real_t L, const real_t phi)
-
-Convert Julian day to the Heliocentric frame by correcting for the
-projected light travel time between the Earth and the Sun.
-
-hjd Julian day
-
-Parameters:
------------
-
-jd:  year
-
-alpha:  right ascension
-
-delta:  declination, positive if north of the celestial equator,
-
-utc:  (universal time coordinated) as Julian day
-
-ut1_utc:  difference UT1-UTC (as obtained from IERS bullitin A) if 0 a
-maximum error of 0.9 seconds is made.
-
-L:  observer's longitude (positive east, negative west from Greenwich)
-
-phi:  observer's latitude, positive if in the northern hemisphere,
-negative in the southern one ";
-
-
 // File: itrf__local_8h.xml
 %feature("docstring")  tmf_itrf2local "void tmf_itrf2local(real_t *E,
 real_t *N, real_t *U, const real_t x, const real_t y, const real_t z,

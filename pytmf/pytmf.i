@@ -136,6 +136,3 @@ void tmf_itrf2local(double* OUTPUT, double* OUTPUT, double* OUTPUT, double x, do
 /* distance.c */
 double tmf_angular_separation(double a1, double d1, double a2, double d2);
 
-/* hjd.c */
-double tmf_jd2hjd(double jd, double alpha, double delta, double utc, double ut1_utc, double L, double phi);
-
